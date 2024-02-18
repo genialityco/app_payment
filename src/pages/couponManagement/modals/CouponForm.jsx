@@ -61,7 +61,11 @@ export const CouponForm = ({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <Card color="transparent" shadow={false} className='border'>
+      <Card
+        color="transparent"
+        shadow={false}
+        className="h-96 border text-center absolute z-10 left-1/3 top-10 overflow-y-scroll bg-blue-gray-50 "
+      >
         <Typography variant="h4" color="blue-gray">
           {isEditMode ? 'Editar Cupón' : 'Crear Cupón'}
         </Typography>
@@ -143,7 +147,12 @@ export const CouponForm = ({
             <Button type="button" onClick={onClose} className="mt-6" fullWidth>
               Cerrar
             </Button>
-            <Button type="submit" onClick={handleFormSubmit} className="mt-6" fullWidth>
+            <Button
+              type="submit"
+              onClick={handleFormSubmit}
+              className="mt-6"
+              fullWidth
+            >
               {isEditMode ? 'Actualizar' : 'Crear'}
             </Button>
           </div>

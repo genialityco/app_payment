@@ -1,3 +1,4 @@
+import { Select, Option } from "@material-tailwind/react";
 
 export const CountrySelector = ({
   countries,
@@ -5,15 +6,15 @@ export const CountrySelector = ({
   handleCountryChange,
 }) => {
   return (
-    <select
+    <Select
       value={selectedCountry?.countryCode || ""}
       onChange={handleCountryChange}
     >
       {countries.map((country) => (
-        <option key={country.countryCode} value={country.countryCode}>
+        <Option key={country.countryCode} value={country.countryCode}>
           {country.name}
-        </option>
+        </Option>
       ))}
-    </select>
+    </Select>
   );
 };

@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useCurrency } from "../contexts/CurrencyContext";
+import React, { useState } from 'react';
 import {
   ListItem,
   Menu,
@@ -10,23 +9,22 @@ import {
   Collapse,
 } from '@material-tailwind/react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
-
+import { useCurrency } from '../contexts/CurrencyContext';
 
 export const CurrencySelector = () => {
   const { currency, handleCurrencyChange, listCurrencies } = useCurrency();
-  console.log(currency)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
 
   const availableCurrencies = [...new Set(listCurrencies)].map((cur) => ({
     value: cur,
     label: cur,
   }));
-console.log(availableCurrencies)
 
   const handleChange = (selectedOption) => {
-    handleCurrencyChange(selectedOption ? selectedOption.value : "");
+    handleCurrencyChange(selectedOption ? selectedOption.value : '');
+    setIsMenuOpen(false);
+    setIsMobileMenuOpen(false);
   };
 
   const selectedCurrency = availableCurrencies.find(
@@ -34,32 +32,23 @@ console.log(availableCurrencies)
   );
 
   const renderCurrency = availableCurrencies.map((cur) => (
-    <MenuItem className="flex items-center gap-3 rounded-lg" key={`country-value-${cur.value}`}>
-      {/* Icono Bandera */}
-      {/*  <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
-            {" "}
-            {React.createElement(icon, {
-              strokeWidth: 2,
-              className: "h-6 text-gray-900 w-6",
-            })}
-          </div> */}
-      <div>
-        {/* Name Currency */}
-        <Typography
-          variant="h6"
-          color="blue-gray"
-          className="flex items-center text-sm font-bold"
-        >
-          {cur.label}
-        </Typography>
-      </div>
+    <MenuItem
+      key={`currency-value-${cur.value}`}
+      onClick={() => handleChange(cur)}
+    >
+      <Typography
+        variant="h6"
+        color="blue-gray"
+        className="flex items-center text-sm font-bold"
+      >
+        {cur.label}
+      </Typography>
     </MenuItem>
   ));
-     
 
   return (
     <>
-     <Menu
+      <Menu
         open={isMenuOpen}
         handler={setIsMenuOpen}
         offset={{ mainAxis: 20 }}
@@ -76,7 +65,7 @@ console.log(availableCurrencies)
               onChange={handleChange}
               options={availableCurrencies}
             >
-              Moneda
+              {currency ? currency : 'Moneda'}
               <ChevronDownIcon
                 strokeWidth={2.5}
                 className={`hidden h-3 w-3 transition-transform lg:block ${

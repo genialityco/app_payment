@@ -104,16 +104,16 @@ export const MenuContainer = () => {
 
   return (
     <Navbar className="mx-auto max-w-screen-xl px-4 py-2">
-      <div className="flex items-center justify-between text-blue-gray-900">
+      <div className="flex items-center justify-between ">
         <Typography
           as="a"
           href="#"
           variant="h6"
-          className="mr-4 cursor-pointer py-1.5 lg:ml-2"
+          className="mr-4 cursor-pointer py-1.5 lg:ml-2 text-text-nav"
         >
           PROCESO DE PAGO
         </Typography>
-        <div className="hidden lg:block">
+        <div className="hidden lg:block ">
           <NavList />
         </div>
         <IconButton

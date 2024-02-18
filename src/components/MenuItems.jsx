@@ -2,7 +2,6 @@ import { Typography, ListItem } from '@material-tailwind/react';
 import { useNavigate } from 'react-router-dom';
 
 const MenuItems = ({ name, icon, route }) => {
-  
   const navigate = useNavigate();
 
   const handleClickLink = (routeLink) => {
@@ -11,10 +10,14 @@ const MenuItems = ({ name, icon, route }) => {
 
   return (
     <>
-      <Typography variant="small" color="blue-gray" className="font-medium">
+      <Typography
+        variant="small"
+        color="blue-gray"
+        className="font-medium text-text-nav "
+      >
         <ListItem
           onClick={() => handleClickLink(route)}
-          className="flex items-center gap-2 py-2 pr-4"
+          className="flex items-center gap-2 py-2 pr-4 "
         >
           {' '}
           {icon} {name}

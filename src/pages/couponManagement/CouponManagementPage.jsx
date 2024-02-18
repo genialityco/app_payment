@@ -100,7 +100,7 @@ export const CouponManagement = () => {
   };
 
   return (
-    <div>
+    <div className="mx-3 md:mx-5 relative">
       <CouponForm
         isOpen={isModalOpen}
         onClose={handleCloseModal}
@@ -114,7 +114,11 @@ export const CouponManagement = () => {
         <div className="flex flex-col justify-center p-5">
           <div className="flex justify-start m-auto ">
             {!showUsedCoupons ? (
-              <Typography variant="h2" className="p-2" color="blue-gray">
+              <Typography
+                variant="h2"
+                className="p-4 text-3xl lg:text-4xl"
+                color="blue-gray"
+              >
                 Cupones
               </Typography>
             ) : (
@@ -123,15 +127,20 @@ export const CouponManagement = () => {
               </Typography>
             )}
           </div>
-          <div className="flex justify-end gap-2 ">
+          <div className="flex justify-end gap-2 m-0">
             {!showUsedCoupons ? (
-              <Button color="green" onClick={() => setIsModalOpen(true)}>
+              <Button
+                color="green"
+                onClick={() => setIsModalOpen(true)}
+                className="w-20 p-0"
+              >
                 Crear
               </Button>
             ) : null}
             <Button
               color="blue-gray"
               onClick={() => setShowUsedCoupons(!showUsedCoupons)}
+              className="w-28 p-3"
             >
               {showUsedCoupons ? 'Ver cupones' : 'Ver usos'}
             </Button>

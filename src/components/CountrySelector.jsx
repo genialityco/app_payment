@@ -1,6 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
-import { useCurrency } from '../contexts/CurrencyContext';
+import React, { useState } from 'react';
 import {
   ListItem,
   Menu,
@@ -11,10 +9,11 @@ import {
   Collapse,
 } from '@material-tailwind/react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { useCurrency } from '../contexts/CurrencyContext';
 
 export const CountrySelector = () => {
   const { countries, selectedCountry, handleCountryChange } = useCurrency();
-  console.log(countries);
+  console.log(selectedCountry)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -23,39 +22,25 @@ export const CountrySelector = () => {
     label: country.name,
   }));
 
-  console.log(options);
-
-  const handleChange = (selectedOption) => {
-    console.log('funciona!');
-    handleCountryChange(selectedOption.value);
-  };
-
-  const selectedOption = options.find(
-    (option) => option.value === selectedCountry?.countryCode
-  );
-
-  console.log('Seleccion Pais:', selectedOption);
+  const handleChange = (countrySelected) => {
+    console.log(countrySelected)
+    handleCountryChange(countrySelected.value);
+    setIsMenuOpen(false);
+    setIsMobileMenuOpen(false);
+  }
 
   const renderItems = options.map((country) => (
-    <MenuItem className="flex items-center gap-3 rounded-lg" key={`country-value-${country.value}`}>
-      {/* Icono Bandera */}
-      {/*  <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
-            {" "}
-            {React.createElement(icon, {
-              strokeWidth: 2,
-              className: "h-6 text-gray-900 w-6",
-            })}
-          </div> */}
-      <div>
-        {/* Name Country */}
-        <Typography
-          variant="h6"
-          color="blue-gray"
-          className="flex items-center text-sm font-bold"
-        >
-          {country.label}
-        </Typography>
-      </div>
+    <MenuItem
+      key={`country-value-${country.value}`}
+      onClick={() => handleChange(country)}
+    >
+      <Typography
+        variant="h6"
+        color="blue-gray"
+        className="flex items-center text-sm font-bold"
+      >
+        {country.label}
+      </Typography>
     </MenuItem>
   ));
 
@@ -74,11 +59,8 @@ export const CountrySelector = () => {
               className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
-              value={selectedOption}
-              onChange={handleChange}
-              options={options}
             >
-              Seleccionar País
+              {selectedCountry.name ? selectedCountry.name : 'Seleccionar País'}
               <ChevronDownIcon
                 strokeWidth={2.5}
                 className={`hidden h-3 w-3 transition-transform lg:block ${

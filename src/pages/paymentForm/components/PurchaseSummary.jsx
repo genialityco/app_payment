@@ -1,11 +1,13 @@
+import { Typography } from "@material-tailwind/react";
+
 export const PurchaseSummary = ({ memberShip, currency, price }) => {
   return (
     <div>
-      <h2>Resumen de la Compra</h2>
-      <p>{memberShip}</p>
-      <p>
+      <Typography variant="h6" color="blue-gray">Resumen de la Compra</Typography>
+      <Typography variant="h6" color="blue-gray">{memberShip}</Typography>
+      <Typography variant="h6" color="blue-gray">
         Total: {currency} {price}
-      </p>
+      </Typography>
     </div>
   );
 };

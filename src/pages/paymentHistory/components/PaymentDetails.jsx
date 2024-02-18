@@ -1,7 +1,11 @@
 import { Typography, Chip, Button } from '@material-tailwind/react';
 
-export const PaymentDetails = ({ payment, formatDate, handlePayment, classes }) => {
-  
+export const PaymentDetails = ({
+  payment,
+  formatDate,
+  handlePayment,
+  classes,
+}) => {
   return (
     <tr>
       <td className={classes}>
@@ -38,7 +42,9 @@ export const PaymentDetails = ({ payment, formatDate, handlePayment, classes }) 
             variant="ghost"
             value={payment.status}
             color={
-              payment.status === 'PAID'
+              payment.status === 'PENDING'
+                ? 'blue'
+                : payment.status === 'PAID'
                 ? 'green'
                 : payment.status === 'REJECT'
                 ? 'amber'
@@ -48,20 +54,24 @@ export const PaymentDetails = ({ payment, formatDate, handlePayment, classes }) 
         </div>
       </td>
 
-      {payment.status === 'PENDING' && (
-        <Button
-          size="md"
-          className="pay-button"
-          onClick={() => handlePayment(payment.redirect_url)}
-        >
-          Pagar
-        </Button>
-      )}
-      {payment.status === 'Procesando' && (
-        <Typography variant="h6" color="blue-gray">
-          Procesando...
-        </Typography>
-      )}
+      <td className={classes}>
+        {payment.status === 'PENDING' && (
+          <div className="flex justify-center items-center">
+            <Button
+              size="sm"
+              onClick={() => handlePayment(payment.redirect_url)}
+            >
+              Pagar
+            </Button>
+          </div>
+        )}
+
+        {payment.status === 'Procesando' && (
+          <Typography variant="h6" color="blue-gray">
+            Procesando...
+          </Typography>
+        )}
+      </td>
     </tr>
   );
 };

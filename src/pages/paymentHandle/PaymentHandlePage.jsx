@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { getPaymentByOrderId } from "../../services/paymentDbService";
-import { Link } from "react-router-dom";
-// import "../../styles/PaymentHandlePage.css";
+import React, { useState, useEffect } from 'react';
+import { getPaymentByOrderId } from '../../services/paymentDbService';
+import { Link } from 'react-router-dom';
+import {
+  List,
+ Button,
+  Card,
+  Typography,
+} from '@material-tailwind/react';
 
 const PaymentHandlePage = () => {
   const [payment, setPayment] = useState(null);
@@ -12,7 +17,7 @@ const PaymentHandlePage = () => {
     const fetchPayment = async () => {
       try {
         setLoading(true);
-        const orderId = sessionStorage.getItem("paymentId");
+        const orderId = sessionStorage.getItem('paymentId');
         const paymentData = await getPaymentByOrderId(orderId);
         setPayment(paymentData.data);
 
@@ -40,21 +45,21 @@ const PaymentHandlePage = () => {
   // Función para determinar el mensaje según el estado del pago
   const paymentStatusMessage = () => {
     switch (payment.status) {
-      case "PAID":
+      case 'PAID':
         return `Estimado ${payment.payer.name}, el pago de su ${payment.description} ha sido efectuado correctamente.`;
-      case "PENDING":
+      case 'PENDING':
         return (
           <>
             {`Estimado ${payment.payer.name}, el pago de su ${payment.description} está procesando, por favor valide mas tarde o en la sección `}
             <Link to="/payment-history">historial de pagos</Link>
-            {"."}
+            {'.'}
           </>
         );
-      case "REJECTED":
+      case 'REJECTED':
         return `Estimado ${payment.payer.name}, el pago de su ${payment.description} ha sido rechazado.`;
-      case "CANCELLED":
+      case 'CANCELLED':
         return `Estimado ${payment.payer.name}, el pago de su ${payment.description} ha sido cancelado.`;
-      case "EXPIRED":
+      case 'EXPIRED':
         return `Estimado ${payment.payer.name}, el pago de su ${payment.description} ha expirado.`;
       default:
         return `Estimado ${payment.payer.name}, el estado de su pago (${payment.status}) es desconocido.`;
@@ -62,28 +67,32 @@ const PaymentHandlePage = () => {
   };
 
   return (
-    <div className="payment-container">
-      <h1 className="center-text">Detalles del Pago</h1>
-      <div className="payment-details">
-        <p>{paymentStatusMessage()}</p>
-        <p>
-          Referencia del pago:{" "}
-          <span className="strong-text">{payment.order_id}</span>
-          {" - "}Id del pago: <span className="strong-text">{payment.payment_id}</span>
-        </p>
-        <p>
-          Total pagado:{" "}
-          <span className="strong-text">
+    <Card className="w-96 border-2">
+        <Typography variant='h2'>Detalles del Pago</Typography>
+      <List>
+      <div>
+        <Typography variant="h6" color="blue-gray">{paymentStatusMessage()}</Typography>
+        <Typography variant="h6" color="blue-gray">
+          Referencia del pago:{' '}
+          <Typography variant="small" color="gray" className="font-normal">{payment.order_id}</Typography>
+          {' - '}Id del pago:{' '}
+          <Typography cvariant="small" color="gray" className="font-normal">{payment.payment_id}</Typography>
+        </Typography>
+        <Typography variant="h6" color="blue-gray">
+          Total pagado:{' '}
+          <Typography variant="small" color="gray" className="font-normal">
             {payment.currency} {payment.amount}
-          </span>
-        </p>
-        <div className="home-button">
-          <Link to="/" className="btn btn-primary">
+          </Typography>
+        </Typography>
+        
+        <Button size='sm'>
+          <Link to="/">
             Ir al Inicio
           </Link>
-        </div>
+        </Button>
       </div>
-    </div>
+      </List>
+    </Card>
   );
 };
 

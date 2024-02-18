@@ -110,7 +110,7 @@ const MembershipsPage = () => {
           <Card
             color="gray"
             variant="gradient"
-            className="w-full  max-w-[18rem] p-8"
+            className="w-full  max-w-[18rem] p-8 "
             key={membership._id}
           >
             <CardHeader

@@ -1,69 +1,110 @@
+import { Input, Typography, Select, Option } from '@material-tailwind/react';
+
 export const PaymentForm = ({ formData, handleChange, countries }) => {
   return (
-    <>
-      <input
+    <article>
+      <Typography variant="h6" color="blue-gray" className="py-2.5">
+        Primer nombre y apellidos
+      </Typography>
+      <Input
         placeholder="Primer nombre y apellidos"
         type="text"
         name="name"
         value={formData.name}
         onChange={handleChange}
+        size="lg"
+        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+        labelProps={{
+          className: 'before:content-none after:content-none',
+        }}
       />
-      <input
+      <Typography variant="h6" color="blue-gray" className="py-2.5">
+        Numero de Identificación
+      </Typography>
+      <Input
         placeholder="Numero de identificación"
         type="number"
         name="document"
         value={formData.document}
         onChange={handleChange}
+        size="lg"
+        className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+        labelProps={{
+          className: 'before:content-none after:content-none',
+        }}
       />
-      <input
+      <Typography variant="h6" color="blue-gray" className="py-2.5">
+        Profesión
+      </Typography>
+      <Input
         placeholder="Profesión"
         type="text"
         name="profession"
         value={formData.profession}
         onChange={handleChange}
       />
-      <input
-        placeholder="Correo Electrónico"
+      <Typography variant="h6" color="blue-gray" className="py-2.5">
+        Correo Electrónico
+      </Typography>
+      <Input
+        placeholder="name@mail.com"
         type="email"
         name="email"
         value={formData.email}
         onChange={handleChange}
+        className=" mb-5 !border-t-blue-gray-200 focus:!border-t-gray-900"
+        labelProps={{
+          className: 'before:content-none after:content-none',
+        }}
       />
-      <select
-        name="country"
-        value={formData.country || ""}
-        onChange={handleChange}
-      >
-        <option value="">Selecciona un país</option>
-        {countries.map((country) => (
-          <option key={country.countryCode} value={country.name}>
-            {country.name}
-          </option>
-        ))}
-      </select>
-      <div>
-        <select
-          name="prefix"
-          value={formData.prefix || ""}
+      <div className="mt-5 flex flex-row-reverse">
+        <Select
+          name="country"
+          value={formData.country || ''}
           onChange={handleChange}
-          style={{ width: "30%" }}
+          label="Selecciona un País"
+          className='min-w-full'
+          size='md'
+          
         >
-          <option value="">Código</option>
+          {/* <option value=""></option> */}
           {countries.map((country) => (
-            <option key={country.countryCode} value={country.prefix}>
-              {country.prefix}
-            </option>
+            <Option key={country.countryCode} value={country.name}>
+              {country.name}
+            </Option>
           ))}
-        </select>
-        <input
-          placeholder="Número de teléfono"
-          type="number"
-          name="phone"
-          value={formData.phone}
+        </Select>
+
+        <Select
+          name="prefix"
+          value={formData.prefix || ''}
           onChange={handleChange}
-          style={{ width: "66.9%" }}
-        />
+          label="Código País"
+          size='md'
+          className='min-w-full'
+        >
+          {/* <option value="">Código</option> */}
+          {countries.map((country) => (
+            <Option key={country.countryCode} value={country.prefix}>
+              {country.prefix}
+            </Option>
+          ))}
+        </Select>
       </div>
-    </>
+      <Typography variant="h6" color="blue-gray" className="py-2.5">
+        Numero de Identificación
+      </Typography>
+      <Input
+        placeholder="Número de teléfono"
+        type="number"
+        name="phone"
+        value={formData.phone}
+        onChange={handleChange}
+        className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+        labelProps={{
+          className: 'before:content-none after:content-none',
+        }}
+      />
+    </article>
   );
 };

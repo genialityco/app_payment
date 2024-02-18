@@ -1,41 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 // import "../../styles/PaymentFormPage.css";
-import { useLocation } from "react-router-dom";
-import { createPayment } from "../../services/paymentService";
-import { createPaymentDb } from "../../services/paymentDbService";
-import { PaymentForm } from "./components/PaymentForm";
-import { PurchaseSummary } from "./components/PurchaseSummary";
-import { useCurrency } from "../../contexts/CurrencyContext";
-import { CouponInput } from "./components/CouponInput";
-import { getCoupons } from "../../services/couponService";
+import { useLocation } from 'react-router-dom';
+import { createPayment } from '../../services/paymentService';
+import { createPaymentDb } from '../../services/paymentDbService';
+import { PaymentForm } from './components/PaymentForm';
+import { PurchaseSummary } from './components/PurchaseSummary';
+import { useCurrency } from '../../contexts/CurrencyContext';
+import { CouponInput } from './components/CouponInput';
+import { getCoupons } from '../../services/couponService';
+import { Card, CardHeader, Button, Typography } from '@material-tailwind/react';
+import { CreditCardIcon } from '@heroicons/react/24/solid';
 
 const PaymentFormPage = () => {
   const { currency, selectedCountry, countries } = useCurrency();
   const location = useLocation();
   const [membership, setMembership] = useState(
     () =>
-      JSON.parse(sessionStorage.getItem("membership")) ||
+      JSON.parse(sessionStorage.getItem('membership')) ||
       location.state?.membership ||
-      ""
+      ''
   );
   const [convertedPrice, setConvertedPrice] = useState(0);
   const [formData, setFormData] = useState(() => {
-    const savedFormData = sessionStorage.getItem("formData");
+    const savedFormData = sessionStorage.getItem('formData');
     return savedFormData
       ? JSON.parse(savedFormData)
       : {
-          name: "",
-          document: "",
-          email: "",
-          profession: "",
-          phone: "",
+          name: '',
+          document: '',
+          email: '',
+          profession: '',
+          phone: '',
         };
   });
-  const [coupon, setCoupon] = useState("");
-  const [couponId, setCouponId] = useState("");
+  const [coupon, setCoupon] = useState('');
+  const [couponId, setCouponId] = useState('');
 
   useEffect(() => {
-    const paymentCreated = sessionStorage.getItem("paymentCreated");
+    const paymentCreated = sessionStorage.getItem('paymentCreated');
     if (paymentCreated) {
       window.location.href = `${window.location.origin}/payment-handle`;
     }
@@ -48,7 +50,7 @@ const PaymentFormPage = () => {
   }, [membership.price, currency]);
 
   useEffect(() => {
-    sessionStorage.setItem("formData", JSON.stringify(formData));
+    sessionStorage.setItem('formData', JSON.stringify(formData));
   }, [formData]);
 
   const convertCurrency = async (amount, fromCurrency, toCurrency) => {
@@ -63,7 +65,7 @@ const PaymentFormPage = () => {
       const rate = data.rates[toCurrency];
       setConvertedPrice((amount * rate).toFixed(2));
     } catch (error) {
-      console.error("Error al convertir la moneda: ", error);
+      console.error('Error al convertir la moneda: ', error);
     }
   };
 
@@ -99,7 +101,7 @@ const PaymentFormPage = () => {
       setCouponId(couponData[0]._id);
       setConvertedPrice(newPrice);
     } else {
-      alert("El cupón no es válido o a vencido.");
+      alert('El cupón no es válido o a vencido.');
     }
   };
 
@@ -114,7 +116,7 @@ const PaymentFormPage = () => {
       payer: formData,
       description: membership.name,
       redirect_url: payment.redirect_url,
-      coupon: couponId != "" ? couponId : null,
+      coupon: couponId != '' ? couponId : null,
     };
     try {
       const response = await createPaymentDb(paymentDataDb);
@@ -138,10 +140,10 @@ const PaymentFormPage = () => {
     console.log(infoPayment);
     try {
       const response = await createPayment(infoPayment);
-      sessionStorage.setItem("paymentId", response.id);
-      sessionStorage.setItem("memberShip", JSON.stringify(membership));
+      sessionStorage.setItem('paymentId', response.id);
+      sessionStorage.setItem('memberShip', JSON.stringify(membership));
       await handlePaymentDb(response);
-      sessionStorage.setItem("paymentCreated", "true");
+      sessionStorage.setItem('paymentCreated', 'true');
       window.location.href = response.redirect_url;
     } catch (error) {
       console.error(error);
@@ -149,28 +151,61 @@ const PaymentFormPage = () => {
   };
 
   return (
-    <div className="paymentFormPage">
-      <h2>Datos del comprador</h2>
-      <form onSubmit={handleSubmit} className="paymentForm">
-        <PaymentForm
-          formData={formData}
-          countries={countries}
-          handleChange={handleChange}
-        />
-        <PurchaseSummary
-          memberShip={membership.name}
-          currency={currency}
-          price={convertedPrice}
-        />
-        <CouponInput
-          handleChange={handleChangeCoupon}
-          applyCoupon={applyCoupon}
-        />
-        <button type="submit" className="button">
-          Pagar
-        </button>
-      </form>
-    </div>
+    <section className="flex justify-center p-4">
+      <Card color="transparent" className="w-96 border-2 text-center ">
+        <CardHeader
+          color="gray"
+          floated={false}
+          shadow={false}
+          className="m-0 grid place-items-center px-4 py-8 text-center"
+        >
+          <div className="mb-4 h-20 p-6 text-white">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="h-10 w-10 text-white"
+            >
+              <path
+                fillRule="evenodd"
+                d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                clipRule="evenodd"
+              />
+            </svg>
+            {/*  <CreditCardIcon className="h-10 w-10 text-white" /> */}
+          </div>
+          <Typography variant="h5" color="white">
+            Datos del Comprador
+          </Typography>
+        </CardHeader>
+
+        <form
+          onSubmit={handleSubmit}
+          className="mt-2 mb-3 w-80 max-w-screen-lg sm:w-96 p-6"
+          // className="mt-2 mb-3 w-full p-6"
+        >
+          <div className="mb-1 flex flex-col gap-6">
+            <PaymentForm
+              formData={formData}
+              countries={countries}
+              handleChange={handleChange}
+            />
+            <PurchaseSummary
+              memberShip={membership.name}
+              currency={currency}
+              price={convertedPrice}
+            />
+            <CouponInput
+              handleChange={handleChangeCoupon}
+              applyCoupon={applyCoupon}
+            />
+          </div>
+          <Button type="submit" className="mt-6" fullWidth>
+            Pagar
+          </Button>
+        </form>
+      </Card>
+    </section>
   );
 };
 

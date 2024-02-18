@@ -11,23 +11,25 @@ import {
   CardBody,
 } from '@material-tailwind/react';
 
-const user ={
-  description:"kdjksjd",
-  order_id:1234,
-  payment_id:445,
-  approved_date:'',
-  amount:200,
-  currency:8090,
-  status:'PENDING'
-}
-
+const user = {
+  description: 'kdjksjd',
+  order_id: 1234,
+  payment_id: 445,
+  approved_date: '',
+  amount: 200,
+  currency: 8090,
+  status: 'PENDING',
+};
 
 const PaymentHistoryPage = () => {
-
   const [document, setDocument] = useState('');
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  //Estado para mostrar el mensaje si no hay historial
+  const [showNoPaymentsMessage, setShowNoPaymentsMessage] = useState(false);
+  //Estado para cambiar a un boton de loading cuando haga la consulta
+  const [loadingButton, setLoadingButton] = useState(false);
 
   const TABLE_HEAD = [
     'Descripción',
@@ -47,20 +49,22 @@ const PaymentHistoryPage = () => {
   const handleSearch = useCallback(
     async (e) => {
       e.preventDefault();
+      setLoadingButton(true);
       setLoading(true);
       setError(null);
 
       try {
         const results = await getPaymentsByPayerDocument(document);
-        results.data.push(user)
+        // results.data.push(user);
         setPayments(results.data);
-        setDocument("")
+        setDocument('');
+        setShowNoPaymentsMessage(results.data.length === 0);
       } catch (err) {
         setError('Error al buscar los pagos');
         console.error(err);
       } finally {
         setLoading(false);
-
+        setLoadingButton(false);
       }
     },
     [document]
@@ -99,18 +103,18 @@ const PaymentHistoryPage = () => {
   }, []);
 
   return (
-    <section className=" flex flex-col justify-center items-center ">
+    <section className=" flex flex-col justify-center items-center py-10 ">
       <Card
         color="transparent"
         shadow={true}
-        className=" m-5 w-72 flex flex-col items-center md:w-5/12  text-center border-blue-gray-50"
+        className=" m-5 w-72 p-2 flex flex-col items-center md:w-5/12  text-center border-blue-gray-50 border-2"
       >
         <Typography color="blue-gray" className="text-2xl font-bold mt-3">
           Historial de Pagos
         </Typography>
         <form
           onSubmit={handleSearch}
-          className="mt-8 mb-2 w-11/12  max-w-screen-lg sm:w-96 "
+          className="mt-8 mb-2 w-11/12  max-w-screen-lg"
         >
           <div className="mb-1 flex flex-col gap-6">
             <Typography variant="h6" color="blue-gray" className="-mb-3">
@@ -121,69 +125,77 @@ const PaymentHistoryPage = () => {
               value={document}
               onChange={(e) => setDocument(e.target.value)}
               placeholder="Número de documento"
-              size="lg"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900    sm:w-4/5 lg:w-3/5"
               labelProps={{
                 className: 'before:content-none after:content-none',
               }}
             />
           </div>
-          <Button type="submit" className="mt-6" fullWidth disabled={!document}>
-            Buscar
-          </Button>
+
+          {loadingButton ? (
+            <Button className="mt-3 w-2/5" loading={true}>Cargando...</Button>
+          ) : (
+            <Button
+              type="submit"
+              className="mt-3 w-2/5"
+              disabled={!document || loadingButton}
+            >
+              {' '}
+              Buscar
+            </Button>
+          )}
+
         </form>
-        {!loading && !error && payments.length === 0 && (
+        {!loading && !error && showNoPaymentsMessage && (
           <Typography variant="paragraph">
             No hay pagos para el número de documento ingresado.
           </Typography>
         )}
       </Card>
 
-      {
-        payments.length ?  <Card className="w-11/12">
-        <CardBody className="px-0">
-          <table className="w-full min-w-max table-auto text-left">
-            <thead>
-              <tr>
-                {/* Encabezados */}
-                {TABLE_HEAD.map((head) => (
-                  <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal leading-none opacity-70"
-                    >
-                      {head}
-                    </Typography>
-                  </th>
-                ))}
-              </tr>
-            </thead>
+      {payments.length ? (
+        <Card className="w-11/12 border-2 mt-3">
+          <CardBody className="overflow-x-scroll px-0">
+            <table className="w-full min-w-max table-auto text-left ">
+              <thead>
+                <tr>
+                  {/* Encabezados */}
+                  {TABLE_HEAD.map((head) => (
+                    <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal leading-none opacity-70"
+                      >
+                        {head}
+                      </Typography>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
 
-            <tbody>
-              {/* Información Table */}
-              {payments.map((payment, index) => {
-                const isLast = index === payments.length - 1;
-                const classes = isLast
-                  ? "p-4"
-                  : "p-4 border-b border-blue-gray-50";
-                return (
-                  <PaymentDetails
-                    payment={payment}
-                    formatDate={formatDate}
-                    handlePayment={handlePayment}
-                    key={payment.payment_id}
-                    classes={classes}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
-        </CardBody>
-      </Card>:
-      null
-      }
-     
+              <tbody>
+                {/* Información Table */}
+                {payments.map((payment, index) => {
+                  const isLast = index === payments.length - 1;
+                  const classes = isLast
+                    ? 'p-4'
+                    : 'p-4 border-b border-blue-gray-50';
+                  return (
+                    <PaymentDetails
+                      payment={payment}
+                      formatDate={formatDate}
+                      handlePayment={handlePayment}
+                      key={payment.payment_id}
+                      classes={classes}
+                    />
+                  );
+                })}
+              </tbody>
+            </table>
+          </CardBody>
+        </Card>
+      ) : null}
     </section>
   );
 };
