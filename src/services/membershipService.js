@@ -1,15 +1,10 @@
-import axios from "axios";
-
-const API_BASE_URL = "https://api-payment-gateway.vercel.app/api";
+import { apiItemToPayment } from "./index.js";
 
 const createMembership = async (membership) => {
   try {
-    const response = await axios.post(
-      `${API_BASE_URL}/memberships/createmembership`,
-      {
-        data: membership,
-      }
-    );
+    const response = await apiItemToPayment.post(`/createmembership`, {
+      data: membership,
+    });
     return response.data;
   } catch (error) {
     console.error("Error al crear el pago:", error);
@@ -19,9 +14,7 @@ const createMembership = async (membership) => {
 
 const getMemberships = async () => {
   try {
-    const response = await axios.get(
-      `${API_BASE_URL}/memberships/getmemberships`
-    );
+    const response = await apiItemToPayment.get(`/getmemberships`);
     return response.data;
   } catch (error) {
     console.error("Error al obtener el pago:", error);

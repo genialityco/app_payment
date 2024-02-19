@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const API_BASE_URL = "https://api-payment-gateway.vercel.app/api";
+import { apiDlocalGo } from "./index.js";
 
 const createPayment = async (paymentData) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/payments/createpayment`, {
+    const response = await apiDlocalGo.post(`/createpayment`, {
       data: paymentData,
     });
     return response.data;
@@ -16,7 +14,7 @@ const createPayment = async (paymentData) => {
 
 const getPayment = async (paymentId) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/payments/getpayment/${paymentId}`);
+    const response = await apiDlocalGo.get(`/getpayment/${paymentId}`);
     return response.data;
   } catch (error) {
     console.error("Error al obtener el pago:", error);

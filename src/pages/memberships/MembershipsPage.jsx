@@ -100,7 +100,7 @@ const MembershipsPage = () => {
   }
 
   return (
-    <main className=" w-full">
+    <main className="w-full">
       <Typography variant="h2" className="text-center py-6">
         MEMBERSHIPS
       </Typography>

@@ -1,15 +1,10 @@
-import axios from "axios";
-
-const API_BASE_URL = "https://api-payment-gateway.vercel.app/api";
+import { apiPaymentsDb } from "./index.js";
 
 const createPaymentDb = async (paymentData) => {
   try {
-    const response = await axios.post(
-      `${API_BASE_URL}/paymentsdb/createpaymentdb`,
-      {
-        data: paymentData,
-      }
-    );
+    const response = await apiPaymentsDb.post(`/createpaymentdb`, {
+      data: paymentData,
+    });
     return response.data;
   } catch (error) {
     console.error("Error al crear el pago:", error);
@@ -19,19 +14,17 @@ const createPaymentDb = async (paymentData) => {
 
 const getPayments = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/paymentsdb/getpaymentsdb`);
+    const response = await apiPaymentsDb.get(`/getpaymentsdb`);
     return response.data;
   } catch (error) {
     console.error("Error al obtener los pagos:", error);
     throw error;
   }
-}
+};
 
 const getPaymentByOrderId = async (orderId) => {
   try {
-    const response = await axios.get(
-      `${API_BASE_URL}/paymentsdb/getpaymentdb/${orderId}`
-    );
+    const response = await apiPaymentsDb.get(`/getpaymentdb/${orderId}`);
     return response.data;
   } catch (error) {
     console.error("Error al obtener el pago:", error);
@@ -41,9 +34,7 @@ const getPaymentByOrderId = async (orderId) => {
 
 const getPaymentsByPayerDocument = async (payerDocument) => {
   try {
-    const response = await axios.get(
-      `${API_BASE_URL}/paymentsdb/getpaymentsdb/${payerDocument}`
-    );
+    const response = await apiPaymentsDb.get(`/getpaymentsdb/${payerDocument}`);
     return response.data;
   } catch (error) {
     console.error("Error al obtener el pago:", error);
@@ -51,4 +42,9 @@ const getPaymentsByPayerDocument = async (payerDocument) => {
   }
 };
 
-export { createPaymentDb, getPayments, getPaymentByOrderId, getPaymentsByPayerDocument };
+export {
+  createPaymentDb,
+  getPayments,
+  getPaymentByOrderId,
+  getPaymentsByPayerDocument,
+};

@@ -5,7 +5,7 @@ module.exports = withMT({
   theme: {
     extend: {
       backgroundColor: {
-        nav: '#6699cc',
+        nav: '#3063F0',
         card: '#ffffff',
         btnCard: '#F49E4C',
         history: '#CCE477',
