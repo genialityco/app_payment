@@ -64,12 +64,12 @@ export const CouponForm = ({
       <Card
         color="transparent"
         shadow={false}
-        className="h-96 border text-center absolute z-10 left-1/3 top-10 overflow-y-scroll bg-blue-gray-50 "
+        className="h-96 p-4 border text-center absolute z-10 inset-x-1/3 top-10 overflow-y-scroll bg-blue-gray-50 "
       >
         <Typography variant="h4" color="blue-gray">
           {isEditMode ? 'Editar Cupón' : 'Crear Cupón'}
         </Typography>
-        <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+        <form className="mt-8 mb-2 w-80 sm:w-96 lg:w-full">
           <div className="mb-1 flex flex-col gap-6">
             <Typography variant="h6" color="blue-gray" className="-mb-3">
               Nombre

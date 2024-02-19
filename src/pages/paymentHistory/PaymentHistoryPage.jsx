@@ -55,7 +55,7 @@ const PaymentHistoryPage = () => {
 
       try {
         const results = await getPaymentsByPayerDocument(document);
-        // results.data.push(user);
+        results.data.push(user);
         setPayments(results.data);
         setDocument('');
         setShowNoPaymentsMessage(results.data.length === 0);
@@ -107,7 +107,7 @@ const PaymentHistoryPage = () => {
       <Card
         color="transparent"
         shadow={true}
-        className=" m-5 w-72 p-2 flex flex-col items-center md:w-5/12  text-center border-blue-gray-50 border-2"
+        className=" m-5 w-72 p-2 flex flex-col items-center md:w-5/12  text-center  border-blue-gray-50 border-2"
       >
         <Typography color="blue-gray" className="text-2xl font-bold mt-3">
           Historial de Pagos
@@ -131,6 +131,8 @@ const PaymentHistoryPage = () => {
               }}
             />
           </div>
+
+    
 
           {loadingButton ? (
             <Button className="mt-3 w-2/5" loading={true}>Cargando...</Button>

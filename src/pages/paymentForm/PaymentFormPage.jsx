@@ -152,7 +152,7 @@ const PaymentFormPage = () => {
 
   return (
     <section className="flex justify-center p-4">
-      <Card color="transparent" className="w-96 border-2 text-center ">
+      <Card color="transparent" className="w-96 border-2 text-center lg:w-5/12 ">
         <CardHeader
           color="gray"
           floated={false}
@@ -164,7 +164,7 @@ const PaymentFormPage = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="h-10 w-10 text-white"
+              className="h-14 w-14 text-white"
             >
               <path
                 fillRule="evenodd"
@@ -181,7 +181,7 @@ const PaymentFormPage = () => {
 
         <form
           onSubmit={handleSubmit}
-          className="mt-2 mb-3 w-80 max-w-screen-lg sm:w-96 p-6"
+          className="mt-2 mb-3 w-80 sm:w-96 lg:w-full p-6"
           // className="mt-2 mb-3 w-full p-6"
         >
           <div className="mb-1 flex flex-col gap-6">

@@ -13,7 +13,7 @@ import { useCurrency } from '../contexts/CurrencyContext';
 
 export const CountrySelector = () => {
   const { countries, selectedCountry, handleCountryChange } = useCurrency();
-  console.log(selectedCountry)
+  console.log(selectedCountry);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -23,11 +23,11 @@ export const CountrySelector = () => {
   }));
 
   const handleChange = (countrySelected) => {
-    console.log(countrySelected)
+    console.log(countrySelected);
     handleCountryChange(countrySelected.value);
     setIsMenuOpen(false);
     setIsMobileMenuOpen(false);
-  }
+  };
 
   const renderItems = options.map((country) => (
     <MenuItem
@@ -54,9 +54,9 @@ export const CountrySelector = () => {
         allowHover={true}
       >
         <MenuHandler>
-          <Typography variant="small" className="font-medium">
+          <Typography variant="small" className="font-medium ">
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
+              className="flex items-center gap-2 py-2 pr-4 font-medium text-primaryText "
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >

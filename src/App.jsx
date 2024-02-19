@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MembershipsPage from './pages/memberships/MembershipsPage';
 import PaymentFormPage from './pages/paymentForm/PaymentFormPage';
@@ -18,7 +18,7 @@ function App() {
       <CurrencyProvider setIsLoading={setIsLoading}>
         <BrowserRouter>
           {isLoading ? (
-            <Spinner className="w-16 m-auto text-gray-900/50" />
+            <Spinner className="w-16 m-auto h-screen text-gray-900/50 " />
           ) : (
             <>
               {/* <Trial /> */}

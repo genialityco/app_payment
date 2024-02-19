@@ -75,7 +75,7 @@ const itemsMenu = [
 
 function NavList() {
   return (
-    <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 lg:items-center">
+    <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 lg:items-center hover:bg-secundaryText">
       {itemsMenu.map((item) => (
         <MenuItems
           key={`country-name-${item.name}`}
@@ -103,13 +103,14 @@ export const MenuContainer = () => {
   }, []);
 
   return (
-    <Navbar className="mx-auto max-w-screen-xl px-4 py-2">
+    <Navbar className="mx-auto max-w-screen-xl px-4 py-2 bg-nav rounded-none">
       <div className="flex items-center justify-between ">
         <Typography
           as="a"
           href="#"
           variant="h6"
-          className="mr-4 cursor-pointer py-1.5 lg:ml-2 text-text-nav"
+          /* color="blue-gray" */
+          className="mr-4 cursor-pointer py-1.5 lg:ml-2 text-primaryText "
         >
           PROCESO DE PAGO
         </Typography>

@@ -9,7 +9,7 @@ import {
   CardFooter,
   Typography,
   Button,
-  Spinner
+  Spinner,
 } from '@material-tailwind/react';
 
 function CheckIcon() {
@@ -50,7 +50,6 @@ const MembershipsPage = () => {
   const navigate = useNavigate();
   const [memberships, setMemberships] = useState([]);
   const [convertedMemberships, setConvertedMemberships] = useState([]);
-
 
   useEffect(() => {
     const init = async () => {
@@ -97,7 +96,7 @@ const MembershipsPage = () => {
   };
 
   if (memberships.length === 0) {
-    return <Spinner className="w-16 m-auto h-screen text-gray-900/50"  />;
+    return <Spinner className="w-16 m-auto h-screen text-gray-900/50" />;
   }
 
   return (
@@ -106,11 +105,11 @@ const MembershipsPage = () => {
         MEMBERSHIPS
       </Typography>
       <section className="flex flex-col items-center pb-4 gap-y-5  lg:flex-row lg:justify-evenly lg:gap-y-0 ">
-         {convertedMemberships.map((membership) => (
+        {convertedMemberships.map((membership) => (
           <Card
-            color="gray"
+            // color="gray"
             variant="gradient"
-            className="w-full  max-w-[18rem] p-8 "
+            className="w-full  max-w-[18rem] p-8 bg-card border-4 border-cyan-50 "
             key={membership._id}
           >
             <CardHeader
@@ -121,8 +120,8 @@ const MembershipsPage = () => {
             >
               <Typography
                 variant="small"
-                color="white"
-                className="font-normal uppercase"
+                // color="white"
+                className="uppercase font-bold text-cardText"
               >
                 {membership.name}
               </Typography>
@@ -131,14 +130,16 @@ const MembershipsPage = () => {
                 color="white"
                 className="mt-6 flex justify-center gap-1 text-7xl font-normal"
               >
-                <span className="mt-2 text-sm">{currency}</span>
-                <span className="text-4xl">{membership.price} </span>
+                <span className="mt-2 text-sm text-cardText">{currency}</span>
+                <span className="text-4xl text-cardText font-bold border-b-4 hover:border-b-yellow-300">
+                  {membership.price}{' '}
+                </span>
               </Typography>
             </CardHeader>
             <CardBody className="p-0">
               <ul className="flex flex-col gap-4">
                 <li className="flex items-center gap-4">
-                  <span className="rounded-full border border-white/20 bg-white/20 p-1">
+                  <span className="rounded-full border border-black/50 bg-white/20 p-1 hover:bg-yellow-100">
                     <CheckIcon />
                   </span>
                   <Typography className="font-normal">
@@ -146,7 +147,7 @@ const MembershipsPage = () => {
                   </Typography>
                 </li>
                 <li className="flex items-center gap-4">
-                  <span className="rounded-full border border-white/20 bg-white/20 p-1">
+                  <span className="rounded-full border border-black/50 bg-white/20 p-1">
                     <CheckIcon />
                   </span>
                   <Typography className="font-normal">
@@ -154,27 +155,11 @@ const MembershipsPage = () => {
                   </Typography>
                 </li>
                 <li className="flex items-center gap-4">
-                  <span className="rounded-full border border-white/20 bg-white/20 p-1">
+                  <span className="rounded-full border border-black/50 bg-white/20 p-1">
                     <CheckIcon />
                   </span>
                   <Typography className="font-normal">
                     40+ built-in pages
-                  </Typography>
-                </li>
-                <li className="flex items-center gap-4">
-                  <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                    <CheckIcon />
-                  </span>
-                  <Typography className="font-normal">
-                    1 year free updates
-                  </Typography>
-                </li>
-                <li className="flex items-center gap-4">
-                  <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                    <CheckIcon />
-                  </span>
-                  <Typography className="font-normal">
-                    Life time technical support
                   </Typography>
                 </li>
               </ul>
@@ -184,8 +169,8 @@ const MembershipsPage = () => {
               <Button
                 onClick={() => handlePaymentClick(membership)}
                 size="lg"
-                color="white"
-                className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100"
+                // color="black"
+                className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100  text-primaryText bg-btnCard"
                 ripple={false}
                 fullWidth={true}
               >
@@ -194,7 +179,6 @@ const MembershipsPage = () => {
             </CardFooter>
           </Card>
         ))}
-       
       </section>
     </main>
   );

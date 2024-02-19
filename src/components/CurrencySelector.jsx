@@ -38,8 +38,7 @@ export const CurrencySelector = () => {
     >
       <Typography
         variant="h6"
-        color="blue-gray"
-        className="flex items-center text-sm font-bold"
+        className="flex items-center text-sm font-bold "
       >
         {cur.label}
       </Typography>
@@ -58,7 +57,7 @@ export const CurrencySelector = () => {
         <MenuHandler>
           <Typography variant="small" className="font-medium">
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
+              className="flex items-center gap-2 py-2 pr-4 font-medium text-primaryText "
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
               value={selectedCurrency}

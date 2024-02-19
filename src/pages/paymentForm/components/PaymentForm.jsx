@@ -57,15 +57,13 @@ export const PaymentForm = ({ formData, handleChange, countries }) => {
           className: 'before:content-none after:content-none',
         }}
       />
-      <div className="mt-5 flex flex-row-reverse">
+      <div className="mt-5 flex flex-col gap-5 lg:flex-row-reverse lg:gap-0">
         <Select
           name="country"
           value={formData.country || ''}
           onChange={handleChange}
           label="Selecciona un País"
-          className='min-w-full'
-          size='md'
-          
+          size="md"
         >
           {/* <option value=""></option> */}
           {countries.map((country) => (
@@ -80,8 +78,7 @@ export const PaymentForm = ({ formData, handleChange, countries }) => {
           value={formData.prefix || ''}
           onChange={handleChange}
           label="Código País"
-          size='md'
-          className='min-w-full'
+          size="md"
         >
           {/* <option value="">Código</option> */}
           {countries.map((country) => (
