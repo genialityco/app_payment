@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import "../../styles/PaymentFormPage.css";
 import { useLocation } from 'react-router-dom';
 import { createPayment } from '../../services/paymentService';
 import { createPaymentDb } from '../../services/paymentDbService';
@@ -9,7 +8,7 @@ import { useCurrency } from '../../contexts/CurrencyContext';
 import { CouponInput } from './components/CouponInput';
 import { getCoupons } from '../../services/couponService';
 import { Card, CardHeader, Button, Typography } from '@material-tailwind/react';
-import { CreditCardIcon } from '@heroicons/react/24/solid';
+
 
 const PaymentFormPage = () => {
   const { currency, selectedCountry, countries } = useCurrency();
@@ -72,6 +71,13 @@ const PaymentFormPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleSelectChange = (name, value) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -189,6 +195,7 @@ const PaymentFormPage = () => {
               formData={formData}
               countries={countries}
               handleChange={handleChange}
+              handleSelectChange={handleSelectChange}
             />
             <PurchaseSummary
               memberShip={membership.name}

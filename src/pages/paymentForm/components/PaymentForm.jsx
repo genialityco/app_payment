@@ -1,6 +1,11 @@
 import { Input, Typography, Select, Option } from '@material-tailwind/react';
 
-export const PaymentForm = ({ formData, handleChange, countries }) => {
+export const PaymentForm = ({
+  formData,
+  handleChange,
+  handleSelectChange,
+  countries,
+}) => {
   return (
     <article>
       <Typography variant="h6" color="blue-gray" className="py-2.5">
@@ -61,7 +66,8 @@ export const PaymentForm = ({ formData, handleChange, countries }) => {
         <Select
           name="country"
           value={formData.country || ''}
-          onChange={handleChange}
+          // onChange={handleChange}
+          onChange={(value) => handleSelectChange('country', value)}
           label="Selecciona un País"
           size="md"
         >
@@ -76,7 +82,8 @@ export const PaymentForm = ({ formData, handleChange, countries }) => {
         <Select
           name="prefix"
           value={formData.prefix || ''}
-          onChange={handleChange}
+          // onChange={handleChange}
+          onChange={(value) => handleSelectChange('prefix', value)}
           label="Código País"
           size="md"
         >
