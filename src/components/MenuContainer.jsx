@@ -95,7 +95,7 @@ function NavList() {
   const { currentUser, logout } = useAuth();
 
   return (
-    <div className="flex lg:flex-row lg:items-center justify-between w-full" style={{width: "95vw"}}>
+    <div className="flex lg:flex-row lg:items-center justify-between w-full">
       <div>
       <List className="flex flex-row mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:p-1 lg:items-center hover:bg-secundaryText">
         {itemsMenu.map((item) => {
@@ -156,7 +156,7 @@ export const MenuContainer = () => {
     // <Navbar className="mx-auto w-full px-4 py-2 bg-nav rounded-none">
        <Navbar className="max-w-none px-4 py-2 bg-nav rounded-none border-none">
       <div className="flex items-center justify-between">
-        <div className="hidden lg:block ">
+        <div className="hidden lg:block w-full">
           <NavList />
         </div>
         <IconButton
