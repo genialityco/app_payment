@@ -104,7 +104,7 @@ const MembershipsPage = () => {
       <Typography variant="h2" className="text-center py-6">
         MEMBERSHIPS
       </Typography>
-      <section className="flex flex-col items-center pb-4 gap-y-5  lg:flex-row lg:justify-evenly lg:gap-y-0 ">
+      <section className="flex flex-col items-center pb-4 gap-y-5 h-screen xl:h-[calc(100vh-161px)] lg:flex-row lg:justify-evenly lg:gap-y-0 ">
         {convertedMemberships.map((membership) => (
           <Card
             // color="gray"

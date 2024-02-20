@@ -153,7 +153,8 @@ export const MenuContainer = () => {
   const toggleNav = () => setIsOpen(!isOpen);
 
   return (
-    <Navbar className="mx-auto w-full px-4 py-2 bg-nav rounded-none">
+    // <Navbar className="mx-auto w-full px-4 py-2 bg-nav rounded-none">
+       <Navbar className="max-w-none px-4 py-2 bg-nav rounded-none border-none">
       <div className="flex items-center justify-between">
         <div className="hidden lg:block ">
           <NavList />

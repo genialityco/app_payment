@@ -16,7 +16,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className="container m-auto h-screen w-full">
+    <div>
       <CurrencyProvider setIsLoading={setIsLoading}>
         <AuthProvider>
           <BrowserRouter>

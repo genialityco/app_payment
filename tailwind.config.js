@@ -23,7 +23,7 @@ module.exports = withMT({
       },
       fontFamily:{
         sans: ['Graphik', 'sans-serif'],
-      }
+      },
     },
   },
   plugins: [],
