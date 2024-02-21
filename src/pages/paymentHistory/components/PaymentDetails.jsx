@@ -1,77 +1,91 @@
-import { Typography, Chip, Button } from '@material-tailwind/react';
+import { Typography, Chip, Button } from "@material-tailwind/react";
+
+const STATUS_COLORS = {
+  PENDING: "blue",
+  PAID: "green",
+  REJECT: "red",
+  DEFAULT: "amber",
+};
+
+const STATUS_TEXT_SPANISH = {
+  PENDING: "PENDIENTE",
+  PAID: "PAGADO",
+  REJECT: "RECHAZADA",
+  DEFAULT: "SIN INFORMACIÓN",
+}
+
+const getStatusColor = (status) =>
+  STATUS_COLORS[status] || STATUS_COLORS.DEFAULT;
+
+  const getStatusTextSpanish = (status) => STATUS_TEXT_SPANISH[status]
 
 export const PaymentDetails = ({
-  payment,
+  payment: {
+    description,
+    order_id,
+    payment_id,
+    approved_date,
+    amount,
+    currency,
+    status,
+    redirect_url,
+  },
   formatDate,
   handlePayment,
   classes,
-}) => {
-  return (
-    <tr>
-      <td className={classes}>
-        <div className="flex items-center gap-3">
-          <Typography variant="small" color="blue-gray" className="font-bold">
-            {payment.description}
-          </Typography>
+}) => (
+  <tr>
+    <td className={classes}>
+      <div className="flex items-center gap-3">
+        <Typography variant="small" color="blue-gray" className="font-bold">
+          {description}
+        </Typography>
+      </div>
+    </td>
+    <td className={classes}>
+      <Typography variant="small" color="blue-gray" className="font-normal">
+        {order_id}
+      </Typography>
+    </td>
+    <td className={classes}>
+      <Typography variant="small" color="blue-gray" className="font-normal">
+        {payment_id}
+      </Typography>
+    </td>
+    <td className={classes}>
+      <Typography variant="small" color="blue-gray" className="font-normal">
+        {approved_date ? formatDate(approved_date) : "Pendiente de pago"}
+      </Typography>
+    </td>
+    <td className={classes}>
+      <Typography variant="small" color="blue-gray" className="font-normal">
+        {`${amount} ${currency}`}
+      </Typography>
+    </td>
+    <td className={classes}>
+      <div className="w-max">
+        <Chip
+          size="sm"
+          variant="ghost"
+          value={getStatusTextSpanish(status)}
+          color={getStatusColor(status)}
+        />
+      </div>
+    </td>
+    <td className={classes}>
+      {status === "PENDING" && (
+        <div className="flex justify-center items-center">
+          <Button size="sm" onClick={() => handlePayment(redirect_url)}>
+            Pagar
+          </Button>
         </div>
-      </td>
-      <td className={classes}>
-        <Typography variant="small" color="blue-gray" className="font-normal">
-          {payment.order_id}
-        </Typography>
-      </td>
-      <td className={classes}>
-        <Typography variant="small" color="blue-gray" className="font-normal">
-          {payment.payment_id}
-        </Typography>
-      </td>
-      <td className={classes}>
-        <Typography variant="small" color="blue-gray" className="font-normal">
-          {formatDate(payment.approved_date)}
-        </Typography>
-      </td>
-      <td className={classes}>
-        <Typography variant="small" color="blue-gray" className="font-normal">
-          {payment.amount} {payment.currency}
-        </Typography>
-      </td>
-      <td className={classes}>
-        <div className="w-max">
-          <Chip
-            size="sm"
-            variant="ghost"
-            value={payment.status}
-            color={
-              payment.status === 'PENDING'
-                ? 'blue'
-                : payment.status === 'PAID'
-                ? 'green'
-                : payment.status === 'REJECT'
-                ? 'amber'
-                : 'red'
-            }
-          />
-        </div>
-      </td>
+      )}
 
-      <td className={classes}>
-        {payment.status === 'PENDING' && (
-          <div className="flex justify-center items-center">
-            <Button
-              size="sm"
-              onClick={() => handlePayment(payment.redirect_url)}
-            >
-              Pagar
-            </Button>
-          </div>
-        )}
-
-        {payment.status === 'Procesando' && (
-          <Typography variant="h6" color="blue-gray">
-            Procesando...
-          </Typography>
-        )}
-      </td>
-    </tr>
-  );
-};
+      {status === "Procesando" && (
+        <Typography variant="h6" color="blue-gray">
+          Procesando...
+        </Typography>
+      )}
+    </td>
+  </tr>
+);

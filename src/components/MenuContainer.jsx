@@ -15,7 +15,7 @@ import {CurrencyDollarIcon} from '@heroicons/react/24/solid';
 
 const itemsMenu = [
   {
-    route: "/memberships",
+    route: "/itemtopay",
     name: "Home",
     icon: (
       <svg

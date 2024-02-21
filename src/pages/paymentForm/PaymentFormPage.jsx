@@ -15,7 +15,7 @@ const PaymentFormPage = () => {
   const location = useLocation();
   const [membership, setMembership] = useState(
     () =>
-      JSON.parse(sessionStorage.getItem('membership')) ||
+      JSON.parse(sessionStorage.getItem('item')) ||
       location.state?.membership ||
       ''
   );
@@ -125,8 +125,7 @@ const PaymentFormPage = () => {
       coupon: couponId != '' ? couponId : null,
     };
     try {
-      const response = await createPaymentDb(paymentDataDb);
-      console.log(response);
+      await createPaymentDb(paymentDataDb);
     } catch (error) {
       console.error(error);
     }
@@ -143,7 +142,6 @@ const PaymentFormPage = () => {
       success_url: `${window.location.origin}/payment-handle`,
       back_url: `${window.location.origin}/payment`,
     };
-    console.log(infoPayment);
     try {
       const response = await createPayment(infoPayment);
       sessionStorage.setItem('paymentId', response.id);
