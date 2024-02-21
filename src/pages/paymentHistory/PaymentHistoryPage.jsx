@@ -1,20 +1,20 @@
-import { useState, useCallback } from "react";
-import { getPaymentsByPayerDocument } from "../../services/paymentDbService";
-import { format } from "date-fns";
-import { PaymentDetails } from "./components/PaymentDetails";
+import { useState, useCallback } from 'react';
+import { getPaymentsByPayerDocument } from '../../services/paymentDbService';
+import { format } from 'date-fns';
+import { PaymentDetails } from './components/PaymentDetails';
 import {
   Card,
   Input,
   Button,
   Typography,
   CardBody,
-} from "@material-tailwind/react";
+} from '@material-tailwind/react';
 
 const PaymentHistoryPage = () => {
-  const [document, setDocument] = useState("");
+  const [document, setDocument] = useState('');
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [showNoPaymentsMessage, setShowNoPaymentsMessage] = useState(false);
   const [loadingButton, setLoadingButton] = useState(false);
 
@@ -23,13 +23,13 @@ const PaymentHistoryPage = () => {
 
     setLoading(true);
     setLoadingButton(true);
-    setError("");
+    setError('');
     try {
       const results = await getPaymentsByPayerDocument(document);
       setPayments(results.data);
       setShowNoPaymentsMessage(results.data.length === 0);
     } catch (err) {
-      setError("Error al buscar los pagos");
+      setError('Error al buscar los pagos');
       console.error(err);
     } finally {
       setLoading(false);
@@ -43,11 +43,11 @@ const PaymentHistoryPage = () => {
   };
 
   const handlePayment = useCallback((redirectUrl) => {
-    window.open(redirectUrl, "_blank");
+    window.open(redirectUrl, '_blank');
   }, []);
 
   const formatDate = useCallback(
-    (dateString) => format(new Date(dateString), "dd/MM/yy HH:mm"),
+    (dateString) => format(new Date(dateString), 'dd/MM/yy HH:mm'),
     []
   );
 
@@ -56,7 +56,7 @@ const PaymentHistoryPage = () => {
       <Card
         color="transparent"
         shadow={true}
-        className=" m-5 w-72 p-2 flex flex-col items-center md:w-5/12  text-center border-2"
+        className=" m-5 w-72 p-2 flex flex-col items-center md:w-5/12  text-center border-2 bg-card"
       >
         <Typography color="blue-gray" className="text-2xl font-bold mt-3">
           Historial de Pagos
@@ -75,21 +75,24 @@ const PaymentHistoryPage = () => {
               value={document}
               onChange={(e) => setDocument(e.target.value)}
               placeholder="Número de documento"
-              className="  !border-blue-gray-900 focus:!border-t-gray-900 sm:w-4/5 lg:w-3/5"
+              className=" !border-blue-gray-900 focus:!border-t-gray-900 sm:w-4/5 lg:w-3/5"
               labelProps={{
-                className: "before:content-none after:content-none",
+                className: 'before:content-none after:content-none',
               }}
             />
           </div>
 
           {loadingButton ? (
-            <Button className="mt-3 w-2/5 mx-auto flex justify-center" loading={true}>
+            <Button
+              className="mt-3 w-2/5 mx-auto flex justify-center"
+              loading={true}
+            >
               Cargando...
             </Button>
           ) : (
             <Button
               type="submit"
-              className="mt-3 w-2/5"
+              className="mt-3 w-2/5 "
               disabled={!document || loadingButton}
             >
               Buscar
@@ -110,14 +113,14 @@ const PaymentHistoryPage = () => {
               <thead>
                 <tr>
                   {[
-                    "Descripción",
-                    "Referencia de pago",
-                    "Id del pago",
-                    "Fecha de pago",
-                    "Monto",
-                    "Estado",
-                    ...(payments.some((pay) => pay.status === "PENDING")
-                      ? ["Acción"]
+                    'Descripción',
+                    'Referencia de pago',
+                    'Id del pago',
+                    'Fecha de pago',
+                    'Monto',
+                    'Estado',
+                    ...(payments.some((pay) => pay.status === 'PENDING')
+                      ? ['Acción']
                       : []),
                   ].map((head) => (
                     <th
@@ -127,7 +130,7 @@ const PaymentHistoryPage = () => {
                       <Typography
                         variant="small"
                         color="blue-gray"
-                        className="font-normal leading-none opacity-70"
+                        className="font-openSans font-bold leading-none opacity-70"
                       >
                         {head}
                       </Typography>
@@ -144,8 +147,8 @@ const PaymentHistoryPage = () => {
                     key={payment.payment_id}
                     classes={`p-4 ${
                       index !== payments.length - 1
-                        ? "border-b border-blue-gray-50"
-                        : ""
+                        ? 'border-b border-blue-gray-50'
+                        : ''
                     }`}
                   />
                 ))}

@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getPaymentByOrderId } from '../../services/paymentDbService';
 import { Link } from 'react-router-dom';
-import {
-  List,
- Button,
-  Card,
-  Typography,
-} from '@material-tailwind/react';
+import { List, Button, Card, Typography } from '@material-tailwind/react';
 
 const PaymentHandlePage = () => {
   const [payment, setPayment] = useState(null);
@@ -40,7 +35,15 @@ const PaymentHandlePage = () => {
 
   if (loading) return <div>Cargando detalles del pago...</div>;
   if (error) return <div>Error al cargar el pago: {error.message}</div>;
-  if (!payment) return <div>No se encontró el pago</div>;
+  if (!payment)
+    return (
+      <Typography
+        variant="lead"
+        className="text-secundaryText text-center font-openSans font-semibold"
+      >
+        No se encontró el pago
+      </Typography>
+    );
 
   // Función para determinar el mensaje según el estado del pago
   const paymentStatusMessage = () => {
@@ -50,7 +53,7 @@ const PaymentHandlePage = () => {
       case 'PENDING':
         return (
           <>
-            {`Estimado ${payment.payer.name}, el pago de su ${payment.description} está procesando, por favor valide mas tarde o en la sección `}
+            {`Estimado ${payment.payer.name}, el pago de su ${payment.description} está procesando, por favor valide más tarde o en la sección `}
             <Link to="/payment-history">historial de pagos</Link>
             {'.'}
           </>
@@ -67,30 +70,54 @@ const PaymentHandlePage = () => {
   };
 
   return (
-    <Card className="w-96 border-2">
-        <Typography variant='h2'>Detalles del Pago</Typography>
+    <Card className="m-auto w-96 border-2 border-dashed border-cyan-300">
+      <Typography
+        variant="h2"
+        className="text-center text-secundaryText font-openSans font-bold"
+      >
+        Detalles del Pago
+      </Typography>
       <List>
-      <div>
-        <Typography variant="h6" color="blue-gray">{paymentStatusMessage()}</Typography>
-        <Typography variant="h6" color="blue-gray">
-          Referencia del pago:{' '}
-          <Typography variant="small" color="gray" className="font-normal">{payment.order_id}</Typography>
-          {' - '}Id del pago:{' '}
-          <Typography cvariant="small" color="gray" className="font-normal">{payment.payment_id}</Typography>
-        </Typography>
-        <Typography variant="h6" color="blue-gray">
-          Total pagado:{' '}
-          <Typography variant="small" color="gray" className="font-normal">
-            {payment.currency} {payment.amount}
+        <div>
+          <Typography variant="h6" color="blue-gray">
+            {paymentStatusMessage()}
           </Typography>
-        </Typography>
-        
-        <Button size='sm'>
-          <Link to="/">
-            Ir al Inicio
-          </Link>
-        </Button>
-      </div>
+          <Typography variant="h6" color="blue-gray">
+            Referencia del pago:{' '}
+            <Typography
+              variant="small"
+              color="gray"
+              className="font-openSans font-semibold"
+            >
+              {payment.order_id}
+            </Typography>
+            {' - '}Id del pago:{' '}
+            <Typography
+              cvariant="small"
+              color="gray"
+              className="font-openSans font-semibold"
+            >
+              {payment.payment_id}
+            </Typography>
+          </Typography>
+          <Typography variant="h6" color="blue-gray">
+            Total pagado:{' '}
+            <Typography
+              variant="small"
+              color="gray"
+              className="font-openSans font-semibold"
+            >
+              {payment.currency} {payment.amount}
+            </Typography>
+          </Typography>
+
+          <Button
+            size="lg"
+            className=" text-center bg-btnCard text-primaryText"
+          >
+            <Link to="/">Ir al Inicio</Link>
+          </Button>
+        </div>
       </List>
     </Card>
   );

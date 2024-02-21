@@ -107,9 +107,8 @@ const MembershipsPage = () => {
       <section className="flex flex-col items-center pb-4 gap-y-5 h-screen xl:h-[calc(100vh-161px)] lg:flex-row lg:justify-evenly lg:gap-y-0 ">
         {convertedMemberships.map((membership) => (
           <Card
-            // color="gray"
             variant="gradient"
-            className="w-full  max-w-[18rem] p-8 bg-card border-2  shadow-2xl "
+            className="w-full max-w-[18rem] p-8 bg-card border-2  shadow-2xl"
             key={membership._id}
           >
             <CardHeader
@@ -169,7 +168,6 @@ const MembershipsPage = () => {
               <Button
                 onClick={() => handlePaymentClick(membership)}
                 size="lg"
-                // color="black"
                 className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100  text-primaryText bg-btnCard"
                 ripple={false}
                 fullWidth={true}

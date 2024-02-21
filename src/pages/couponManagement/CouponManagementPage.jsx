@@ -116,14 +116,13 @@ export const CouponManagement = () => {
             {!showUsedCoupons ? (
               <Typography
                 variant="h2"
-                className="p-4 text-3xl lg:text-4xl"
-                color="blue-gray"
+                className="p-4 text-3xl text-primaryText font-openSans font-bold lg:text-4xl"
               >
                 Cupones
               </Typography>
             ) : (
-              <Typography variant="h2" className="p-2" color="blue-gray">
-                Historial de usos
+              <Typography variant="h2" className="p-4 text-3xl text-primaryText font-openSans font-bold lg:text-4xl" >
+                Historial de Usos
               </Typography>
             )}
           </div>

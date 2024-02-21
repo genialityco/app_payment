@@ -165,7 +165,7 @@ const PaymentFormPage = () => {
           color="white"
           floated={false}
           shadow={false}
-          className="m-0 grid place-items-center px-4 py-8 text-center bg-[url(/src/assets/graph.png)] bg-center bg-contain bg-no-repeat  "
+          className="m-0 grid place-items-center px-4 py-8 text-center bg-[url(/src/assets/graph.png)]  bg-[center_right_45%] bg-contain bg-no-repeat  "
         >
           <div className="mb-4 h-20 p-6 text-white ">
             <UserCircleIcon className="h-14 w-14 text-secundaryText" />
@@ -175,12 +175,7 @@ const PaymentFormPage = () => {
           </Typography>
         </CardHeader>
 
-        <form
-          onSubmit={handleSubmit}
-          className="mt-2 mb-3 p-6 w-full"
-          // className="mt-2 mb-3 w-80 sm:w-96 lg:w-full p-6"
-          // className="mt-2 mb-3 w-full p-6"
-        >
+        <form onSubmit={handleSubmit} className="mt-2 mb-3 p-6 w-full">
           <div className="mb-1 flex flex-col gap-6">
             <PaymentForm
               formData={formData}
@@ -198,7 +193,7 @@ const PaymentFormPage = () => {
               applyCoupon={applyCoupon}
             />
           </div>
-          <Button type="submit" className="mt-6 bg-btnFormUser" fullWidth >
+          <Button type="submit" className="mt-6 bg-btnFormUser" fullWidth>
             Pagar
           </Button>
         </form>

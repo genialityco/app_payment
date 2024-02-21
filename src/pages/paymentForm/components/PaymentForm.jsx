@@ -1,4 +1,4 @@
-import { Input, Typography, Select, Option } from "@material-tailwind/react";
+import { Input, Select, Option } from "@material-tailwind/react";
 
 export const PaymentForm = ({
   formData,
@@ -8,9 +8,6 @@ export const PaymentForm = ({
 }) => {
   return (
     <article className='flex flex-col gap-4'>
-      {/*   <Typography variant="h6" color="blue-gray" className="py-2.5">
-        Primer nombre y apellidos
-      </Typography> */}
       <Input
         variant="standard"
         placeholder="Primer nombre y apellidos"
@@ -25,9 +22,6 @@ export const PaymentForm = ({
           className: "before:content-none after:content-none",
         }}
       />
-      {/*   <Typography variant="h6" color="blue-gray" className="py-2.5">
-        Numero de Identificación
-      </Typography> */}
       <Input
         variant="standard"
         placeholder="Numero de identificación"
@@ -42,9 +36,6 @@ export const PaymentForm = ({
           className: "before:content-none after:content-none",
         }}
       />
-      {/* <Typography variant="h6" color="blue-gray" className="py-2.5">
-        Profesión
-      </Typography> */}
       <Input
         variant="standard"
         placeholder="Profesión"
@@ -54,9 +45,6 @@ export const PaymentForm = ({
         value={formData.profession}
         onChange={handleChange}
       />
-      {/* <Typography variant="h6" color="blue-gray" className="py-2.5">
-        Correo Electrónico
-      </Typography> */}
       <Input
         variant="standard"
         label="Correo Electrónico"
@@ -74,12 +62,10 @@ export const PaymentForm = ({
         <Select
           name="country"
           value={formData.country || ""}
-          // onChange={handleChange}
           onChange={(value) => handleSelectChange("country", value)}
           label="Selecciona un País"
           size="md"
         >
-          {/* <option value=""></option> */}
           {countries.map((country) => (
             <Option key={country.countryCode} value={country.name}>
               {country.name}
@@ -90,12 +76,10 @@ export const PaymentForm = ({
         <Select
           name="prefix"
           value={formData.prefix || ""}
-          // onChange={handleChange}
           onChange={(value) => handleSelectChange("prefix", value)}
           label="Código País"
           size="md"
         >
-          {/* <option value="">Código</option> */}
           {countries.map((country) => (
             <Option key={country.countryCode} value={country.prefix}>
               {country.prefix}
@@ -103,9 +87,6 @@ export const PaymentForm = ({
           ))}
         </Select>
       </div>
-      {/* <Typography variant="h6" color="blue-gray" className="py-2.5">
-        Numero de Identificación
-      </Typography> */}
       <Input
       variant='standard'
         placeholder="Número de teléfono"

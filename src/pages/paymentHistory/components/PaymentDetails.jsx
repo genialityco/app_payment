@@ -43,7 +43,7 @@ export const PaymentDetails = ({
       </div>
     </td>
     <td className={classes}>
-      <Typography variant="small" color="blue-gray" className="font-normal">
+      <Typography variant="small" color="blue-gray" className="font-openSans">
         {order_id}
       </Typography>
     </td>

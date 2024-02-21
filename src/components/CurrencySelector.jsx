@@ -35,6 +35,7 @@ export const CurrencySelector = () => {
     <MenuItem
       key={`currency-value-${cur.value}`}
       onClick={() => handleChange(cur)}
+      className='hover:shadow-2xl hover:bg-gradient-to-t hover:to-blue-200 hover:from-cyan-200 '
     >
       <Typography
         variant="h6"
@@ -89,8 +90,8 @@ export const CurrencySelector = () => {
           </ul>
         </MenuList>
       </Menu>
-      <div className="block lg:hidden">
-        <Collapse open={isMobileMenuOpen} className='absolute bg-card shadow-2xl w-28 rounded-lg'>{renderCurrency}</Collapse>
+      <div className="block z-50 lg:hidden">
+        <Collapse open={isMobileMenuOpen} className='absolute bg-card shadow-2xl 0 w-28 rounded-lg '>{renderCurrency}</Collapse>
       </div>
     </>
   );

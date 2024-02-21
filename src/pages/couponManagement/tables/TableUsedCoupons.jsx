@@ -36,7 +36,7 @@ export const TableUsedCoupons = ({ getAllPayments, payments, formatDate }) => {
                 <Typography
                   variant="small"
                   color="blue-gray"
-                  className="font-normal leading-none opacity-70"
+                  className="font-openSans font-semibold leading-none opacity-70"
                 >
                   {head}
                 </Typography>
@@ -48,13 +48,13 @@ export const TableUsedCoupons = ({ getAllPayments, payments, formatDate }) => {
           {payments.length === 0 && (
             <tr>
               <td colSpan="7">
-              <Typography
-                variant="paragraph"
-                color="blue-gray"
-                className="font-normal text-center"
-              >
-                No hay pagos con cupones registrados.
-              </Typography>
+                <Typography
+                  variant="paragraph"
+                  color="blue-gray"
+                  className=" font-openSans font-semibold text-center"
+                >
+                  No hay pagos con cupones registrados.
+                </Typography>
               </td>
             </tr>
           )}

@@ -39,7 +39,7 @@ export const TableCupons = ({
                 <Typography
                   variant="small"
                   color="blue-gray"
-                  className="font-normal leading-none opacity-70"
+                  className="font-openSans font-semibold leading-none opacity-70"
                 >
                   {head}
                 </Typography>
@@ -54,7 +54,7 @@ export const TableCupons = ({
               <Typography
                 variant="small"
                 color="blue-gray"
-                className="font-normal text-center"
+                className="font-openSans font-semibold text-center"
               >
                 No hay cupones registrados.
               </Typography>

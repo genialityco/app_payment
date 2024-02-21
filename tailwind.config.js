@@ -11,6 +11,7 @@ module.exports = withMT({
         history: '#CCE477',
         btnFormUser:'#F49E4C',
         btnFormUserApply:'#02DBDB',
+        memberCard:'#000000'
       },
       textColor: {
         primaryText: '#ffffff',
