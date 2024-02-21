@@ -88,12 +88,14 @@ function NavList() {
         {itemsMenu.map((item) => {
           if (!item.isAdminModule || (item.isAdminModule && currentUser)) {
             return (
+              <div>
               <MenuItems
                 key={`country-name-${item.name}`}
                 name={item.name}
                 icon={item.icon}
                 route={item.route}
               />
+              </div>
             );
           }
           return null;
