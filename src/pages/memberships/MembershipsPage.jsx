@@ -101,7 +101,7 @@ const MembershipsPage = () => {
 
   return (
     <main className="w-full">
-      <Typography variant="h2" className="text-center py-6">
+      <Typography variant="h2" className="text-center py-6 text-primaryText">
         MEMBERSHIPS
       </Typography>
       <section className="flex flex-col items-center pb-4 gap-y-5 h-screen xl:h-[calc(100vh-161px)] lg:flex-row lg:justify-evenly lg:gap-y-0 ">
@@ -109,7 +109,7 @@ const MembershipsPage = () => {
           <Card
             // color="gray"
             variant="gradient"
-            className="w-full  max-w-[18rem] p-8 bg-card border-4 border-cyan-50 "
+            className="w-full  max-w-[18rem] p-8 bg-card border-2  shadow-2xl "
             key={membership._id}
           >
             <CardHeader
