@@ -38,7 +38,7 @@ export const CurrencySelector = () => {
     >
       <Typography
         variant="h6"
-        className="flex items-center text-sm font-bold "
+        className="flex justify-center text-sm font-bold text-secundaryText "
       >
         {cur.label}
       </Typography>
@@ -55,9 +55,12 @@ export const CurrencySelector = () => {
         allowHover={true}
       >
         <MenuHandler>
-          <Typography variant="small" className="font-medium">
+          <Typography
+            variant="small"
+            className="font-semibold text-primaryText font-openSans"  
+          >
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-primaryText "
+              className="flex items-center gap-2 py-2 pr-4 font-medium  "
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
               value={selectedCurrency}
@@ -80,8 +83,8 @@ export const CurrencySelector = () => {
             </ListItem>
           </Typography>
         </MenuHandler>
-        <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
-          <ul className="grid grid-cols-3 gap-y-2 outline-none outline-0">
+        <MenuList className="hidden max-w-screen-xl rounded-xl lg:block text-secundaryText">
+          <ul className="grid grid-cols-2 gap-y-2 outline-none outline-0">
             {renderCurrency}
           </ul>
         </MenuList>

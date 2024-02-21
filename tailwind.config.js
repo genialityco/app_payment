@@ -12,7 +12,7 @@ module.exports = withMT({
       },
       textColor: {
         primaryText: '#ffffff',
-        secundaryText: '#59ffa0',
+        secundaryText: '#000000',
         cardText: '#000000',
       },
       boders: {
@@ -21,8 +21,8 @@ module.exports = withMT({
       hovers: {
         hight: '#32936f',
       },
-      fontFamily:{
-        sans: ['Graphik', 'sans-serif'],
+      fontFamily: {
+        openSans: ['Open Sans', 'sans-serif'],
       },
     },
   },

@@ -10,14 +10,10 @@ const MenuItems = ({ name, icon, route }) => {
 
   return (
     <>
-      <Typography
-        variant="small"
-        /*   color="blue-gray" */
-        className="font-medium text-primaryText "
-      >
+      <Typography variant="small" className="font-semibold text-primaryText font-openSans">
         <ListItem
           onClick={() => handleClickLink(route)}
-          className="flex items-center gap-2 py-2 pr-4 hover:bg-secundaryText "
+          className="flex items-center gap-2 py-2 pr-4"
         >
           {' '}
           {icon} {name}

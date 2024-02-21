@@ -13,7 +13,7 @@ import { useCurrency } from '../contexts/CurrencyContext';
 
 export const CountrySelector = () => {
   const { countries, selectedCountry, handleCountryChange } = useCurrency();
-  console.log(selectedCountry);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -23,7 +23,6 @@ export const CountrySelector = () => {
   }));
 
   const handleChange = (countrySelected) => {
-    console.log(countrySelected);
     handleCountryChange(countrySelected.value);
     setIsMenuOpen(false);
     setIsMobileMenuOpen(false);
@@ -37,7 +36,7 @@ export const CountrySelector = () => {
       <Typography
         variant="h6"
         color="blue-gray"
-        className="flex items-center text-sm font-bold"
+        className="flex items-center text-sm font-bold text-secundaryText"
       >
         {country.label}
       </Typography>
@@ -54,13 +53,18 @@ export const CountrySelector = () => {
         allowHover={true}
       >
         <MenuHandler>
-          <Typography variant="small" className="font-medium ">
+          <Typography
+            variant="small"
+            className="font-semibold text-primaryText font-openSans"
+          >
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-primaryText "
+              className="flex items-center gap-2 py-2 pr-4 font-medium  "
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
-              {selectedCountry?.name ? selectedCountry?.name : 'Seleccionar País'}
+              {selectedCountry?.name
+                ? selectedCountry?.name
+                : 'Seleccionar País'}
               <ChevronDownIcon
                 strokeWidth={2.5}
                 className={`hidden h-3 w-3 transition-transform lg:block ${
@@ -76,7 +80,7 @@ export const CountrySelector = () => {
             </ListItem>
           </Typography>
         </MenuHandler>
-        <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
+        <MenuList className="hidden max-w-screen-xl rounded-xl lg:block text-primaryText font-openSans ">
           <ul className="grid grid-cols-3 gap-y-2 outline-none outline-0">
             {renderItems}
           </ul>
