@@ -1,6 +1,6 @@
 import React, { Suspense, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import MembershipsPage from "./pages/memberships/MembershipsPage";
+import ItemToPayPage from "./pages/itemToPay/ItemToPayPage";
 import PaymentFormPage from "./pages/paymentForm/PaymentFormPage";
 import PaymentHandlePage from "./pages/paymentHandle/PaymentHandlePage";
 import PaymentHistoryPage from "./pages/paymentHistory/PaymentHistoryPage";
@@ -8,7 +8,6 @@ import LoginPage from "./pages/authentication/LoginPage"
 import { CurrencyProvider } from "./contexts/CurrencyContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CouponManagement } from "./pages/couponManagement/CouponManagementPage";
-// import Trial from './Trial';
 import { MenuContainer } from "./components/MenuContainer";
 import { Spinner } from "@material-tailwind/react";
 
@@ -28,10 +27,10 @@ function App() {
                 <Routes>
                   <Route
                     path="/"
-                    element={<Navigate replace to="/memberships" />}
+                    element={<Navigate replace to="/itemtopay" />}
                   />
 
-                  <Route path="/memberships" element={<MembershipsPage />} />
+                  <Route path="/itemtopay" element={<ItemToPayPage />} />
                   <Route path="/payment" element={<PaymentFormPage />} />
                   <Route
                     path="/payment-handle"

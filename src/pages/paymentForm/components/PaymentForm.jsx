@@ -1,4 +1,4 @@
-import { Input, Typography, Select, Option } from '@material-tailwind/react';
+import { Input, Typography, Select, Option } from "@material-tailwind/react";
 
 export const PaymentForm = ({
   formData,
@@ -20,7 +20,7 @@ export const PaymentForm = ({
         size="lg"
         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
         labelProps={{
-          className: 'before:content-none after:content-none',
+          className: "before:content-none after:content-none",
         }}
       />
       <Typography variant="h6" color="blue-gray" className="py-2.5">
@@ -35,7 +35,7 @@ export const PaymentForm = ({
         size="lg"
         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
         labelProps={{
-          className: 'before:content-none after:content-none',
+          className: "before:content-none after:content-none",
         }}
       />
       <Typography variant="h6" color="blue-gray" className="py-2.5">
@@ -59,15 +59,15 @@ export const PaymentForm = ({
         onChange={handleChange}
         className=" mb-5 !border-t-blue-gray-200 focus:!border-t-gray-900"
         labelProps={{
-          className: 'before:content-none after:content-none',
+          className: "before:content-none after:content-none",
         }}
       />
       <div className="mt-5 flex flex-col gap-5 lg:flex-row-reverse lg:gap-0">
         <Select
           name="country"
-          value={formData.country || ''}
+          value={formData.country || ""}
           // onChange={handleChange}
-          onChange={(value) => handleSelectChange('country', value)}
+          onChange={(value) => handleSelectChange("country", value)}
           label="Selecciona un País"
           size="md"
         >
@@ -81,9 +81,9 @@ export const PaymentForm = ({
 
         <Select
           name="prefix"
-          value={formData.prefix || ''}
+          value={formData.prefix || ""}
           // onChange={handleChange}
-          onChange={(value) => handleSelectChange('prefix', value)}
+          onChange={(value) => handleSelectChange("prefix", value)}
           label="Código País"
           size="md"
         >
@@ -96,7 +96,7 @@ export const PaymentForm = ({
         </Select>
       </div>
       <Typography variant="h6" color="blue-gray" className="py-2.5">
-        Numero de Identificación
+        Número de teléfono
       </Typography>
       <Input
         placeholder="Número de teléfono"
@@ -106,7 +106,7 @@ export const PaymentForm = ({
         onChange={handleChange}
         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
         labelProps={{
-          className: 'before:content-none after:content-none',
+          className: "before:content-none after:content-none",
         }}
       />
     </article>

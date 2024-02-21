@@ -14,7 +14,7 @@ import MenuItems from "./MenuItems";
 
 const itemsMenu = [
   {
-    route: "/memberships",
+    route: "/itemtopay",
     name: "Home",
     icon: (
       <svg

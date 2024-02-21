@@ -13,7 +13,6 @@ import { useCurrency } from '../contexts/CurrencyContext';
 
 export const CountrySelector = () => {
   const { countries, selectedCountry, handleCountryChange } = useCurrency();
-  console.log(selectedCountry);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -23,7 +22,6 @@ export const CountrySelector = () => {
   }));
 
   const handleChange = (countrySelected) => {
-    console.log(countrySelected);
     handleCountryChange(countrySelected.value);
     setIsMenuOpen(false);
     setIsMobileMenuOpen(false);
