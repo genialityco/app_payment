@@ -81,13 +81,13 @@ export const CountrySelector = () => {
           </Typography>
         </MenuHandler>
         <MenuList className="hidden max-w-screen-xl rounded-xl lg:block text-primaryText font-openSans ">
-          <ul className="grid grid-cols-3 gap-y-2 outline-none outline-0">
+          <ul className=" grid grid-cols-3 gap-y-2 outline-none outline-0">
             {renderItems}
           </ul>
         </MenuList>
       </Menu>
       <div className="block lg:hidden">
-        <Collapse open={isMobileMenuOpen}>{renderItems}</Collapse>
+        <Collapse open={isMobileMenuOpen} className='absolute bg-card shadow-2xl w-28 rounded-lg' >{renderItems}</Collapse>
       </div>
     </>
   );

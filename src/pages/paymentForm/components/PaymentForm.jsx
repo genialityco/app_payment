@@ -7,27 +7,31 @@ export const PaymentForm = ({
   countries,
 }) => {
   return (
-    <article>
-      <Typography variant="h6" color="blue-gray" className="py-2.5">
+    <article className='flex flex-col gap-4'>
+      {/*   <Typography variant="h6" color="blue-gray" className="py-2.5">
         Primer nombre y apellidos
-      </Typography>
+      </Typography> */}
       <Input
+        variant="standard"
         placeholder="Primer nombre y apellidos"
+        label="Primer nombre y apellidos"
         type="text"
         name="name"
         value={formData.name}
         onChange={handleChange}
         size="lg"
-        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+        className="focus:!border-t-gray-900 "
         labelProps={{
           className: 'before:content-none after:content-none',
         }}
       />
-      <Typography variant="h6" color="blue-gray" className="py-2.5">
+      {/*   <Typography variant="h6" color="blue-gray" className="py-2.5">
         Numero de Identificación
-      </Typography>
+      </Typography> */}
       <Input
+        variant="standard"
         placeholder="Numero de identificación"
+        label="Numero de identificación"
         type="number"
         name="document"
         value={formData.document}
@@ -38,20 +42,24 @@ export const PaymentForm = ({
           className: 'before:content-none after:content-none',
         }}
       />
-      <Typography variant="h6" color="blue-gray" className="py-2.5">
+      {/* <Typography variant="h6" color="blue-gray" className="py-2.5">
         Profesión
-      </Typography>
+      </Typography> */}
       <Input
+        variant="standard"
         placeholder="Profesión"
+        label="Profesión"
         type="text"
         name="profession"
         value={formData.profession}
         onChange={handleChange}
       />
-      <Typography variant="h6" color="blue-gray" className="py-2.5">
+      {/* <Typography variant="h6" color="blue-gray" className="py-2.5">
         Correo Electrónico
-      </Typography>
+      </Typography> */}
       <Input
+        variant="standard"
+        label="Correo Electrónico"
         placeholder="name@mail.com"
         type="email"
         name="email"
@@ -62,7 +70,7 @@ export const PaymentForm = ({
           className: 'before:content-none after:content-none',
         }}
       />
-      <div className="mt-5 flex flex-col gap-5 lg:flex-row-reverse lg:gap-0">
+      <div className="mt-5 flex flex-col gap-5">
         <Select
           name="country"
           value={formData.country || ''}
@@ -95,11 +103,13 @@ export const PaymentForm = ({
           ))}
         </Select>
       </div>
-      <Typography variant="h6" color="blue-gray" className="py-2.5">
+      {/* <Typography variant="h6" color="blue-gray" className="py-2.5">
         Numero de Identificación
-      </Typography>
+      </Typography> */}
       <Input
+      variant='standard'
         placeholder="Número de teléfono"
+        label='Número de teléfono'
         type="number"
         name="phone"
         value={formData.phone}

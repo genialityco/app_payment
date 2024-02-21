@@ -9,6 +9,8 @@ module.exports = withMT({
         card: '#ffffff',
         btnCard: '#F49E4C',
         history: '#CCE477',
+        btnFormUser:'#F49E4C',
+        btnFormUserApply:'#02DBDB',
       },
       textColor: {
         primaryText: '#ffffff',
@@ -24,6 +26,9 @@ module.exports = withMT({
       fontFamily: {
         openSans: ['Open Sans', 'sans-serif'],
       },
+      blur: {
+        sm: '2px',
+      }
     },
   },
   plugins: [],

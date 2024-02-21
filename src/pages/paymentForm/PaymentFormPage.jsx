@@ -8,7 +8,7 @@ import { useCurrency } from '../../contexts/CurrencyContext';
 import { CouponInput } from './components/CouponInput';
 import { getCoupons } from '../../services/couponService';
 import { Card, CardHeader, Button, Typography } from '@material-tailwind/react';
-
+import { UserCircleIcon } from '@heroicons/react/24/solid';
 
 const PaymentFormPage = () => {
   const { currency, selectedCountry, countries } = useCurrency();
@@ -158,36 +158,29 @@ const PaymentFormPage = () => {
 
   return (
     <section className="flex justify-center p-4">
-      <Card color="transparent" className="w-96 border-2 text-center lg:w-5/12 ">
+      <Card
+        color="transparent"
+        // className="w-96 border-2 text-center lg:w-5/12 bg-card "
+        className="w-96 border-2 text-center lg:w-2/5 xl:w-2/6 bg-card "
+      >
         <CardHeader
-          color="gray"
+          color="white"
           floated={false}
           shadow={false}
-          className="m-0 grid place-items-center px-4 py-8 text-center"
+          className="m-0 grid place-items-center px-4 py-8 text-center bg-[url(/src/assets/graph.png)] bg-center bg-contain bg-no-repeat  "
         >
-          <div className="mb-4 h-20 p-6 text-white">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="h-14 w-14 text-white"
-            >
-              <path
-                fillRule="evenodd"
-                d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            {/*  <CreditCardIcon className="h-10 w-10 text-white" /> */}
+          <div className="mb-4 h-20 p-6 text-white ">
+            <UserCircleIcon className="h-14 w-14 text-secundaryText" />
           </div>
-          <Typography variant="h5" color="white">
+          <Typography variant="h5" color="blue-gray">
             Datos del Comprador
           </Typography>
         </CardHeader>
 
         <form
           onSubmit={handleSubmit}
-          className="mt-2 mb-3 w-80 sm:w-96 lg:w-full p-6"
+          className="mt-2 mb-3 p-6 w-full"
+          // className="mt-2 mb-3 w-80 sm:w-96 lg:w-full p-6"
           // className="mt-2 mb-3 w-full p-6"
         >
           <div className="mb-1 flex flex-col gap-6">
@@ -207,7 +200,7 @@ const PaymentFormPage = () => {
               applyCoupon={applyCoupon}
             />
           </div>
-          <Button type="submit" className="mt-6" fullWidth>
+          <Button type="submit" className="mt-6 bg-btnFormUser" fullWidth >
             Pagar
           </Button>
         </form>

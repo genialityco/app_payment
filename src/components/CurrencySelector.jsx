@@ -90,7 +90,7 @@ export const CurrencySelector = () => {
         </MenuList>
       </Menu>
       <div className="block lg:hidden">
-        <Collapse open={isMobileMenuOpen}>{renderCurrency}</Collapse>
+        <Collapse open={isMobileMenuOpen} className='absolute bg-card shadow-2xl w-28 rounded-lg'>{renderCurrency}</Collapse>
       </div>
     </>
   );

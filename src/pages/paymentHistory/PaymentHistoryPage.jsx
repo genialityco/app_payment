@@ -107,7 +107,7 @@ const PaymentHistoryPage = () => {
       <Card
         color="transparent"
         shadow={true}
-        className=" m-5 w-72 p-2 flex flex-col items-center md:w-5/12  text-center  border-blue-gray-50 border-2"
+        className=" m-5 w-72 p-2 flex flex-col items-center md:w-5/12  text-center border-2"
       >
         <Typography color="blue-gray" className="text-2xl font-bold mt-3">
           Historial de Pagos
@@ -122,20 +122,21 @@ const PaymentHistoryPage = () => {
             </Typography>
             <Input
               type="text"
+              variant="standard"
               value={document}
               onChange={(e) => setDocument(e.target.value)}
               placeholder="Número de documento"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900    sm:w-4/5 lg:w-3/5"
+              className="  !border-blue-gray-900 focus:!border-t-gray-900 sm:w-4/5 lg:w-3/5"
               labelProps={{
                 className: 'before:content-none after:content-none',
               }}
             />
           </div>
 
-    
-
           {loadingButton ? (
-            <Button className="mt-3 w-2/5" loading={true}>Cargando...</Button>
+            <Button className="mt-3 w-2/5 mx-auto flex justify-center" loading={true}>
+              Cargando...
+            </Button>
           ) : (
             <Button
               type="submit"
@@ -146,7 +147,6 @@ const PaymentHistoryPage = () => {
               Buscar
             </Button>
           )}
-
         </form>
         {!loading && !error && showNoPaymentsMessage && (
           <Typography variant="paragraph">
