@@ -12,7 +12,7 @@ import {
 export const CouponForm = ({
   isOpen,
   onClose,
-  memberships,
+  items,
   createNewCoupon,
   updatedCreatedCoupon,
   couponEdit,
@@ -46,7 +46,7 @@ export const CouponForm = ({
     setCoupon({ ...coupon, [e.target.name]: e.target.value });
   };
 
-  const handleMembershipChange = (e) => {
+  const handleItemChange = (e) => {
     const selectedOptions = Array.from(e.target.selectedOptions).map(
       (option) => option.value
     );
@@ -134,11 +134,11 @@ export const CouponForm = ({
               placeholder="Aplicable a..."
               name="applicable"
               value={coupon.applicable}
-              onChange={handleMembershipChange}
+              onChange={handleItemChange}
             >
-              {memberships.map((membership) => (
-                <Option key={membership._id} value={membership.id}>
-                  {membership.name}
+              {items.map((item) => (
+                <Option key={item._id} value={item.id}>
+                  {item.name}
                 </Option>
               ))}
             </Select>

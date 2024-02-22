@@ -13,10 +13,10 @@ import { UserCircleIcon } from '@heroicons/react/24/solid';
 const PaymentFormPage = () => {
   const { currency, selectedCountry, countries } = useCurrency();
   const location = useLocation();
-  const [membership, setMembership] = useState(
+  const [item, setItem] = useState(
     () =>
       JSON.parse(sessionStorage.getItem('item')) ||
-      location.state?.membership ||
+      location.state?.item ||
       ''
   );
   const [convertedPrice, setConvertedPrice] = useState(0);
@@ -43,10 +43,10 @@ const PaymentFormPage = () => {
   }, []);
 
   useEffect(() => {
-    if (membership.price && currency) {
-      convertCurrency(membership.price, membership.currency, currency);
+    if (item.price && currency) {
+      convertCurrency(item.price, item.currency, currency);
     }
-  }, [membership.price, currency]);
+  }, [item.price, currency]);
 
   useEffect(() => {
     sessionStorage.setItem('formData', JSON.stringify(formData));
@@ -120,7 +120,7 @@ const PaymentFormPage = () => {
       country: formData.country,
       status: payment.status,
       payer: formData,
-      description: membership.name,
+      description: item.name,
       redirect_url: payment.redirect_url,
       coupon: couponId != '' ? couponId : null,
     };
@@ -138,14 +138,14 @@ const PaymentFormPage = () => {
       currency: currency,
       country: selectedCountry.countryCode,
       payer: formData,
-      description: membership.name,
+      description: item.name,
       success_url: `${window.location.origin}/payment-handle`,
       back_url: `${window.location.origin}/payment`,
     };
     try {
       const response = await createPayment(infoPayment);
       sessionStorage.setItem('paymentId', response.id);
-      sessionStorage.setItem('memberShip', JSON.stringify(membership));
+      sessionStorage.setItem('item', JSON.stringify(item));
       await handlePaymentDb(response);
       sessionStorage.setItem('paymentCreated', 'true');
       window.location.href = response.redirect_url;
@@ -183,7 +183,7 @@ const PaymentFormPage = () => {
               handleSelectChange={handleSelectChange}
             />
             <PurchaseSummary
-              memberShip={membership.name}
+              item={item.name}
               currency={currency}
               price={convertedPrice}
             />

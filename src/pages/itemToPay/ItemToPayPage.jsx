@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getMemberships } from '../../services/membershipService';
+import { getItemsToPay } from '../../services/itemToPayService';
 import { useCurrency } from '../../contexts/CurrencyContext';
 import {
   Card,
@@ -33,7 +33,7 @@ const ItemToPayPage = () => {
   const [convertedItems, setConvertedItems] = useState([]);
 
   const init = useCallback(async () => {
-    const itemsData = await getMemberships();
+    const itemsData = await getItemsToPay();
     setItems(itemsData.data);
     setConvertedItems(itemsData.data);
   }, []);

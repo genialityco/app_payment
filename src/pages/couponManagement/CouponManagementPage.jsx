@@ -6,7 +6,7 @@ import {
   updateCoupon,
   deleteCoupon,
 } from '../../services/couponService';
-import { getMemberships } from '../../services/membershipService';
+import { getItemsToPay } from '../../services/itemToPayService';
 import { getPayments } from '../../services/paymentDbService';
 import { format } from 'date-fns';
 import { TableCupons } from './tables/TableCoupons';
@@ -24,15 +24,15 @@ export const CouponManagement = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [couponEdit, setCouponEdit] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
-  const [memberships, setMemberships] = useState([]);
+  const [items, setItems] = useState([]);
   const [payments, setPayments] = useState([]);
   const [showUsedCoupons, setShowUsedCoupons] = useState(false);
 
   useEffect(() => {
     const init = async () => {
       const couponsData = await getAllCoupons();
-      const membershipsData = await getMemberships();
-      setMemberships(membershipsData.data);
+      const itemsData = await getItemsToPay();
+      setItems(itemsData.data);
       setCoupons(couponsData);
     };
     init();
@@ -104,7 +104,7 @@ export const CouponManagement = () => {
       <CouponForm
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        memberships={memberships}
+        items={items}
         createNewCoupon={createNewCoupon}
         updatedCreatedCoupon={updatedCreatedCoupon}
         couponEdit={couponEdit}

@@ -27,10 +27,10 @@ function App() {
                 <Routes>
                   <Route
                     path="/"
-                    element={<Navigate replace to="/itemtopay" />}
+                    element={<Navigate replace to="/items-to-pay" />}
                   />
 
-                  <Route path="/itemtopay" element={<ItemToPayPage />} />
+                  <Route path="/items-to-pay" element={<ItemToPayPage />} />
                   <Route path="/payment" element={<PaymentFormPage />} />
                   <Route
                     path="/payment-handle"
@@ -45,7 +45,7 @@ function App() {
                     element={<PaymentHistoryPage />}
                   />
                   <Route
-                    path="/loginadmin"
+                    path="/login-admin"
                     element={<LoginPage />}
                   />
                 </Routes>

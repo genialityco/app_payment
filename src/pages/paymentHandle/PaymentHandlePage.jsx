@@ -17,7 +17,7 @@ const PaymentHandlePage = () => {
         setPayment(paymentData.data);
 
         // localStorage.removeItem("formData");
-        // localStorage.removeItem("membership");
+        // localStorage.removeItem("item");
         // localStorage.removeItem("price");
         // localStorage.removeItem("paymentId");
         // localStorage.removeItem("selectedCountryCode");

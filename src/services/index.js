@@ -10,11 +10,11 @@ const createAxiosInstance = (baseURL) => {
   return api;
 };
 
-const apiCoupon = createAxiosInstance(`${API_BASE_URL}/coupons`);
+const apiCoupon = createAxiosInstance(`${API_BASE_URL}/coupon`);
 
-const apiItemToPayment = createAxiosInstance(`${API_BASE_URL}/memberships`);
+const apiItemToPayment = createAxiosInstance(`${API_BASE_URL}/item`);
 
-const apiPaymentsDb = createAxiosInstance(`${API_BASE_URL}/paymentsdb`);
+const apiPaymentsDb = createAxiosInstance(`${API_BASE_URL}/paymentdb`);
 
 const apiDlocalGo = createAxiosInstance(`${API_BASE_URL}/dlocalgo`);
 
