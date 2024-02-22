@@ -1,22 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   Navbar,
   Collapse,
   Typography,
   IconButton,
   List,
-} from "@material-tailwind/react";
-import { useAuth } from "../contexts/AuthContext";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { CountrySelector } from "./CountrySelector";
-import { CurrencySelector } from "./CurrencySelector";
-import MenuItems from "./MenuItems";
-import {CurrencyDollarIcon} from '@heroicons/react/24/solid';
+} from '@material-tailwind/react';
+import { useAuth } from '../contexts/AuthContext';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { CountrySelector } from './CountrySelector';
+import { CurrencySelector } from './CurrencySelector';
+import MenuItems from './MenuItems';
+import { CurrencyDollarIcon } from '@heroicons/react/24/solid';
 
 const itemsMenu = [
   {
-    route: "/itemtopay",
-    name: "Home",
+    route: '/itemtopay',
+    name: 'Home',
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -30,13 +30,13 @@ const itemsMenu = [
     ),
   },
   {
-    route: "/payment-history",
-    name: "Consultar pagos",
-    icon: <CurrencyDollarIcon className="h-7"/>,
+    route: '/payment-history',
+    name: 'Consultar pagos',
+    icon: <CurrencyDollarIcon className="h-7" />,
   },
   {
-    route: "/items-management",
-    name: "Administrar Pagos",
+    route: '/items-management',
+    name: 'Administrar Pagos',
     isAdminModule: true,
     icon: (
       <svg
@@ -56,8 +56,8 @@ const itemsMenu = [
     ),
   },
   {
-    route: "/coupon-management",
-    name: "Administrar cupones",
+    route: '/coupon-management',
+    name: 'Administrar cupones',
     isAdminModule: true,
     icon: (
       <svg
@@ -84,38 +84,38 @@ function NavList() {
   return (
     <div className="flex lg:flex-row lg:items-center justify-between w-full">
       <div>
-      <List className="flex flex-row mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:p-1 lg:items-center ">
-        {itemsMenu.map((item) => {
-          if (!item.isAdminModule || (item.isAdminModule && currentUser)) {
-            return (
-              <div>
-              <MenuItems
-                key={`country-name-${item.name}`}
-                name={item.name}
-                icon={item.icon}
-                route={item.route}
-              />
-              </div>
-            );
-          }
-          return null;
-        })}
-        {currentUser ? (
-          <div className="flex flex-row">
-            <button
-              onClick={logout}
-              className="flex items-center gap-2 py-2 pr-4 hover:bg-secundaryText"
-            >
-              <Typography
-                variant="small"
-                className="font-medium text-primaryText "
+        <List className="flex flex-row mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:p-1 lg:items-center ">
+          {itemsMenu.map((item) => {
+            if (!item.isAdminModule || (item.isAdminModule && currentUser)) {
+              return (
+                <div>
+                  <MenuItems
+                    key={`country-name-${item.name}`}
+                    name={item.name}
+                    icon={item.icon}
+                    route={item.route}
+                  />
+                </div>
+              );
+            }
+            return null;
+          })}
+          {currentUser ? (
+            <div className="flex flex-row">
+              <button
+                onClick={logout}
+                className="flex items-center gap-2 py-2 pr-4 hover:bg-secundaryText"
               >
-                Cerrar Sesión
-              </Typography>
-            </button>
-          </div>
-        ) : null}
-      </List>
+                <Typography
+                  variant="small"
+                  className="font-medium text-primaryText "
+                >
+                  Cerrar Sesión
+                </Typography>
+              </button>
+            </div>
+          ) : null}
+        </List>
       </div>
     </div>
   );
@@ -131,21 +131,25 @@ export const MenuContainer = () => {
       }
     }
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [isOpen]);
 
   const toggleNav = () => setIsOpen(!isOpen);
 
   return (
-       <Navbar shadow={false} className="max-w-none px-4 py-2 bg-[url('/src/assets/wave.png')] rounded-none border-none">
+    //  <Navbar shadow={false} className="max-w-none px-4 py-2 bg-[url('/src/assets/wave.png')] rounded-none border-none">
+    <Navbar
+      shadow={false}
+      className="max-w-none px-4 py-2 bg-[url('/src/assets/wave.png')] rounded-none border-none relative z-50"
+    >
       <div className="flex items-center justify-between">
-      <IconButton
+        <IconButton
           onClick={toggleNav}
           variant="text"
           color="white"
           className="lg:hidden"
-          aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
         >
           {isOpen ? (
             <XMarkIcon className="h-6 w-6" />
@@ -157,10 +161,9 @@ export const MenuContainer = () => {
           <NavList />
         </div>
         <div className="flex flex-col lg:flex-row ">
-        <CountrySelector />
-        <CurrencySelector />
-      </div>
-        
+          <CountrySelector />
+          <CurrencySelector />
+        </div>
       </div>
       <Collapse open={isOpen}>
         <NavList />

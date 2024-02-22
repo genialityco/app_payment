@@ -31,7 +31,7 @@ export const CountrySelector = () => {
     <MenuItem
       key={`country-value-${country.value}`}
       onClick={() => handleChange(country)}
-      className='hover:shadow-2xl hover:bg-gradient-to-t hover:to-blue-200 hover:from-cyan-200 '
+      className="hover:shadow-2xl hover:bg-gradient-to-t hover:to-blue-200 hover:from-cyan-200 "
     >
       <Typography
         variant="h6"
@@ -86,10 +86,11 @@ export const CountrySelector = () => {
           </ul>
         </MenuList>
       </Menu>
-      <div className=" block z-50 lg:hidden">
+      {/* <div className=" block z-50 lg:hidden"> */}
+      <div className="block z-50 lg:hidden absolute top-12">
         <Collapse
           open={isMobileMenuOpen}
-          className="absolute w-28 rounded-lg bg-card"
+          className="shadow-2xl w-28 rounded-lg bg-card"
         >
           {renderItems}
         </Collapse>
