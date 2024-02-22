@@ -27,7 +27,8 @@ export const TableCupons = ({
     deleteCreatedCoupon(couponId);
   };
   return (
-    <Card className="h-full w-full overflow-scroll">
+    <Card className="h-full w-full overflow-hidden">
+       <div className="w-full max-h-96 overflow-x-auto overflow-y-auto">
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
@@ -98,6 +99,7 @@ export const TableCupons = ({
           ))}
         </tbody>
       </table>
+      </div>
     </Card>
   );
 };

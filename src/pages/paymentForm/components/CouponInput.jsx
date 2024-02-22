@@ -1,10 +1,7 @@
-import { Input, Typography, Button } from '@material-tailwind/react';
+import { Input, Button } from '@material-tailwind/react';
 export const CouponInput = ({ handleChange, applyCoupon }) => {
   return (
     <>
-      {/* <Typography variant="h6" color="blue-gray" className="-mb-3">
-        Código de cupón
-      </Typography> */}
       <Input
         variant="standard"
         name="coupon"

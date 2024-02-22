@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Card, Button, Typography, IconButton } from '@material-tailwind/react';
+import { Card, Typography,} from '@material-tailwind/react';
 
 const TABLE_HEAD = [
   'Código',
@@ -24,7 +24,8 @@ export const TableUsedCoupons = ({ getAllPayments, payments, formatDate }) => {
   };
 
   return (
-    <Card className="h-full w-full overflow-scroll">
+    <Card className="h-full w-full overflow-hidden">
+      <div className="w-full max-h-96 overflow-x-auto overflow-y-auto">
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
@@ -76,6 +77,7 @@ export const TableUsedCoupons = ({ getAllPayments, payments, formatDate }) => {
           ))}
         </tbody>
       </table>
+      </div>
     </Card>
   );
 };

@@ -113,7 +113,7 @@ const PaymentHandlePage = () => {
 
           <Button
             size="lg"
-            className=" text-center bg-btnCard text-primaryText"
+            className=" m-auto bg-btnCard text-primaryText"
           >
             <Link to="/">Ir al Inicio</Link>
           </Button>

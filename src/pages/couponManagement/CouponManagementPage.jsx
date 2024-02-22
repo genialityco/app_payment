@@ -131,15 +131,14 @@ export const CouponManagement = () => {
               <Button
                 color="green"
                 onClick={() => setIsModalOpen(true)}
-                className="w-20 p-0"
+                className="w-20 p-0 bg-btnTableCoupon"
               >
                 Crear
               </Button>
             ) : null}
             <Button
-              color="blue-gray"
               onClick={() => setShowUsedCoupons(!showUsedCoupons)}
-              className=" md:w-28 p-3"
+              className=" md:w-28 p-3 bg-btnCard"
             >
               {showUsedCoupons ? 'Ver cupones' : 'Ver usos'}
             </Button>

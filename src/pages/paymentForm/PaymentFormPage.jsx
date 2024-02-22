@@ -158,7 +158,6 @@ const PaymentFormPage = () => {
     <section className="flex justify-center p-4">
       <Card
         color="transparent"
-        // className="w-96 border-2 text-center lg:w-5/12 bg-card "
         className="w-96 border-2 text-center lg:w-2/5 xl:w-2/6 bg-card "
       >
         <CardHeader

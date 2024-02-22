@@ -117,10 +117,6 @@ function NavList() {
         ) : null}
       </List>
       </div>
-      {/* <div className="flex flex-row">
-        <CountrySelector />
-        <CurrencySelector />
-      </div> */}
     </div>
   );
 }
@@ -142,7 +138,6 @@ export const MenuContainer = () => {
   const toggleNav = () => setIsOpen(!isOpen);
 
   return (
-    // <Navbar className="mx-auto w-full px-4 py-2 bg-nav rounded-none">
        <Navbar shadow={false} className="max-w-none px-4 py-2 bg-[url('/src/assets/wave.png')] rounded-none border-none">
       <div className="flex items-center justify-between">
       <IconButton

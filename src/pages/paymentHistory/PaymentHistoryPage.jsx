@@ -84,7 +84,7 @@ const PaymentHistoryPage = () => {
 
           {loadingButton ? (
             <Button
-              className="mt-3 w-2/5 mx-auto flex justify-center"
+              className="mt-3 w-2/5 mx-auto flex justify-center bg-btnCard"
               loading={true}
             >
               Cargando...
@@ -92,7 +92,7 @@ const PaymentHistoryPage = () => {
           ) : (
             <Button
               type="submit"
-              className="mt-3 w-2/5 "
+              className="mt-3 w-2/5 bg-btnCard"
               disabled={!document || loadingButton}
             >
               Buscar

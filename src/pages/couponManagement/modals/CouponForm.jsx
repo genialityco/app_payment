@@ -64,18 +64,18 @@ export const CouponForm = ({
       <Card
         color="transparent"
         shadow={false}
-        className="h-96 p-4 border text-center absolute z-10 inset-x-1/3 top-10 overflow-y-scroll bg-card"
+        className="h-96 p-4 border text-center absolute z-10 inset-x-1/3 top-5 overflow-y-scroll bg-card"
       >
-        <Typography variant="h4" color="blue-gray" className='font-openSans font-semibold'>
+        <Typography
+          variant="h4"
+          color="blue-gray"
+          className="font-openSans font-bold"
+        >
           {isEditMode ? 'Editar Cupón' : 'Crear Cupón'}
         </Typography>
         <form className="mt-8 mb-2 w-80 sm:w-96 lg:w-full">
           <div className="mb-1 flex flex-col gap-6">
-            {/*  <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Nombre
-            </Typography> */}
             <Input
-              variant="standard"
               placeholder="Nombre"
               label="Nombre"
               type="text"
@@ -84,11 +84,7 @@ export const CouponForm = ({
               onChange={handleFormChange}
             />
 
-            {/* <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Código
-            </Typography> */}
             <Input
-              variant="standard"
               placeholder="Código"
               label="Código"
               type="text"
@@ -97,18 +93,16 @@ export const CouponForm = ({
               onChange={handleFormChange}
             />
 
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Descuento
-            </Typography>
             <Input
               placeholder="Descuento"
+              label="Descuento"
               type="number"
               name="discount"
               value={coupon.discount}
               onChange={handleFormChange}
             />
 
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
+            <Typography variant="h6" color="blue-gray" className="font-openSans font-bold">
               Fecha de Expiración
             </Typography>
             <Input
@@ -116,21 +110,23 @@ export const CouponForm = ({
               name="expiration"
               value={coupon.expiration}
               onChange={handleFormChange}
+              className="focus:!border-t-gray-900 "
             />
-
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
-              Límite de uso
-            </Typography>
 
             <Input
               placeholder="Límite de uso"
+              label="Límite de uso"
               type="number"
               name="limit"
               value={coupon.limit}
               onChange={handleFormChange}
             />
 
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="font-openSans font-bold"
+            >
               Aplicado a:
             </Typography>
             <Select
@@ -148,13 +144,18 @@ export const CouponForm = ({
             </Select>
           </div>
           <div>
-            <Button type="button" onClick={onClose} className="mt-6" fullWidth>
+            <Button
+              type="button"
+              onClick={onClose}
+              className="mt-6 bg-btnCard"
+              fullWidth
+            >
               Cerrar
             </Button>
             <Button
               type="submit"
               onClick={handleFormSubmit}
-              className="mt-6"
+              className="mt-6 bg-btnTableCoupon"
               fullWidth
             >
               {isEditMode ? 'Actualizar' : 'Crear'}

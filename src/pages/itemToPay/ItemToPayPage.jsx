@@ -96,40 +96,23 @@ const ItemToPayPage = () => {
         {convertedItems.map((item) => (
           <Card
             variant="gradient"
-            // className="w-full max-w-[18rem] p-8 bg-card border-2  shadow-2xl"
             className="w-full max-w-[18rem]  bg-card  shadow-2xl"
             key={item._id}
           >
             <CardHeader
-              // floated={false}
-              // shadow={false}
-              // color="transparent"
-              // className="m-0 rounded-none border-b border-white/10 text-center "
               color="white"
               floated={false}
               shadow={false}
               className="m-0 grid place-items-center px-4 py-8 text-center bg-blue-gray-900 rounded-b-none shadow-md"
             >
               <Typography
-                // variant="small"
                 variant="h5"
-                // className="uppercase font-bold  text-cardText"
                 className="uppercase font-bold  text-primaryText "
               >
                 {item.name}
               </Typography>
-              {/* <Typography
-                variant="h1"
-                color="white"
-                className="mt-6 flex justify-center gap-1 text-7xl font-normal"
-              >
-                <span className="mt-2 text-sm text-cardText">{currency}</span>
-                <span className="text-4xl text-cardText font-bold">
-                  {item.price}{' '}
-                </span>
-              </Typography> */}
             </CardHeader>
-            {/* <CardBody className="p-0"> */}
+
             <CardBody className="my-12 p-0 flex flex-col justify-center items-center ">
               <Typography
                 variant="h1"
@@ -143,7 +126,6 @@ const ItemToPayPage = () => {
               </Typography>
             </CardBody>
 
-            {/* <CardFooter className="mt-12 p-0"> */}
             <CardFooter className="p-8">
               <Button
                 onClick={() => handlePaymentClick(item)}
