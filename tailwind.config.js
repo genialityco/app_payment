@@ -13,6 +13,7 @@ module.exports = withMT({
         btnFormUserApply:'#02DBDB',
         memberCard:'#000000',
         btnTableCoupon:"#00A6ED",
+        headTable:'#d1dbe6'
       },
       textColor: {
         primaryText: '#ffffff',
