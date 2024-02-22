@@ -121,7 +121,10 @@ export const CouponManagement = () => {
                 Cupones
               </Typography>
             ) : (
-              <Typography variant="h2" className="p-4 text-3xl text-primaryText font-openSans font-bold lg:text-4xl" >
+              <Typography
+                variant="h2"
+                className="p-4 text-3xl text-primaryText font-openSans font-bold lg:text-4xl"
+              >
                 Historial de Usos
               </Typography>
             )}
@@ -129,16 +132,15 @@ export const CouponManagement = () => {
           <div className="flex justify-end gap-2 m-0">
             {!showUsedCoupons ? (
               <Button
-                color="green"
                 onClick={() => setIsModalOpen(true)}
-                className="w-20 p-0 bg-btnTableCoupon"
+                className="w-20 p-0 font-openSans  bg-btnTableCoupon"
               >
                 Crear
               </Button>
             ) : null}
             <Button
               onClick={() => setShowUsedCoupons(!showUsedCoupons)}
-              className=" md:w-28 p-3 bg-btnCard"
+              className=" md:w-28 p-3 font-openSans bg-btnCard"
             >
               {showUsedCoupons ? 'Ver cupones' : 'Ver usos'}
             </Button>

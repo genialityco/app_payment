@@ -33,8 +33,21 @@ const PaymentHandlePage = () => {
     fetchPayment();
   }, []);
 
-  if (loading) return <div>Cargando detalles del pago...</div>;
-  if (error) return <div>Error al cargar el pago: {error.message}</div>;
+  if (loading)
+    return (
+      <Typography className="text-secundaryText text-center font-openSans font-semibold">
+        Cargando detalles del pago...
+      </Typography>
+    );
+  if (error)
+    return (
+      <Typography
+        variant="lead"
+        className="text-secundaryText text-center font-openSans font-semibold"
+      >
+        Error al cargar el pago: {error.message}
+      </Typography>
+    );
   if (!payment)
     return (
       <Typography
@@ -79,10 +92,10 @@ const PaymentHandlePage = () => {
       </Typography>
       <List>
         <div>
-          <Typography variant="h6" color="blue-gray">
+          <Typography variant="h6" color="blue-gray" className="font-openSans ">
             {paymentStatusMessage()}
           </Typography>
-          <Typography variant="h6" color="blue-gray">
+          <Typography variant="h6" color="blue-gray" className="font-openSans ">
             Referencia del pago:{' '}
             <Typography
               variant="small"
@@ -100,7 +113,7 @@ const PaymentHandlePage = () => {
               {payment.payment_id}
             </Typography>
           </Typography>
-          <Typography variant="h6" color="blue-gray">
+          <Typography variant="h6" color="blue-gray" className="font-openSans">
             Total pagado:{' '}
             <Typography
               variant="small"
@@ -113,7 +126,7 @@ const PaymentHandlePage = () => {
 
           <Button
             size="lg"
-            className=" m-auto bg-btnCard text-primaryText"
+            className=" m-auto font-openSans font-bold bg-btnCard text-primaryText"
           >
             <Link to="/">Ir al Inicio</Link>
           </Button>

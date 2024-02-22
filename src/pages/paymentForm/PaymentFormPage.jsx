@@ -169,7 +169,7 @@ const PaymentFormPage = () => {
           <div className="mb-4 h-20 p-6 text-white ">
             <UserCircleIcon className="h-14 w-14 text-secundaryText" />
           </div>
-          <Typography variant="h5" color="blue-gray">
+          <Typography variant="h5" className="text-secundaryText font-openSans font-bold">
             Datos del Comprador
           </Typography>
         </CardHeader>
