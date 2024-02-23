@@ -64,7 +64,7 @@ export const CouponForm = ({
       <Card
         color="transparent"
         shadow={false}
-        className="h-96 p-4 border text-center absolute z-10 inset-x-1/3 top-5 overflow-y-scroll bg-card"
+        className="h-80 p-4 border text-center absolute left-1/2 transform -translate-x-1/2 z-10 w-80 lg:w-1/3 xl:h-96 top-10 overflow-y-scroll bg-card shadow-2xl "
       >
         <Typography
           variant="h4"
@@ -73,7 +73,7 @@ export const CouponForm = ({
         >
           {isEditMode ? 'Editar Cupón' : 'Crear Cupón'}
         </Typography>
-        <form className="mt-8 mb-2 w-80 sm:w-96 lg:w-full">
+        <form className="mt-8 mb-2 w-full">
           <div className="mb-1 flex flex-col gap-6">
             <Input
               placeholder="Nombre"
@@ -102,7 +102,11 @@ export const CouponForm = ({
               onChange={handleFormChange}
             />
 
-            <Typography variant="h6" color="blue-gray" className="font-openSans font-bold">
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="font-openSans font-bold"
+            >
               Fecha de Expiración
             </Typography>
             <Input
@@ -110,7 +114,10 @@ export const CouponForm = ({
               name="expiration"
               value={coupon.expiration}
               onChange={handleFormChange}
-              className="focus:!border-t-gray-900 "
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              labelProps={{
+                className: 'before:content-none after:content-none',
+              }}
             />
 
             <Input
@@ -132,6 +139,7 @@ export const CouponForm = ({
             <Select
               multiple
               placeholder="Aplicable a..."
+              label="Seleccionar Membresía"
               name="applicable"
               value={coupon.applicable}
               onChange={handleItemChange}
@@ -147,7 +155,7 @@ export const CouponForm = ({
             <Button
               type="button"
               onClick={onClose}
-              className="mt-6 bg-btnCard"
+              className="mt-6 bg-btnPrimary"
               fullWidth
             >
               Cerrar

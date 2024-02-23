@@ -88,7 +88,7 @@ const PaymentHistoryPage = () => {
 
           {loadingButton ? (
             <Button
-              className="mt-3 w-2/5 mx-auto flex justify-center font-openSans font-semibold text-primaryText bg-btnCard"
+              className="mt-3 w-2/5 mx-auto flex justify-center font-openSans font-semibold text-primaryText bg-btnPrimary"
               loading={true}
             >
               Cargando...
@@ -96,7 +96,7 @@ const PaymentHistoryPage = () => {
           ) : (
             <Button
               type="submit"
-              className="mt-3 w-2/5 font-openSans font-semibold text-primaryText bg-btnCard"
+              className="mt-3 w-2/5 font-openSans font-semibold text-primaryText bg-btnPrimary"
               disabled={!document || loadingButton}
             >
               Buscar

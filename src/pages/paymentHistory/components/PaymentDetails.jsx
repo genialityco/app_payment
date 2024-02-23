@@ -53,17 +53,29 @@ export const PaymentDetails = ({
       </Typography>
     </td>
     <td className={classes}>
-      <Typography variant="small" color="blue-gray" className="font-openSans font-semibold">
+      <Typography
+        variant="small"
+        color="blue-gray"
+        className="font-openSans font-semibold"
+      >
         {payment_id}
       </Typography>
     </td>
     <td className={classes}>
-      <Typography variant="small" color="blue-gray" className="font-openSans  font-semibold">
+      <Typography
+        variant="small"
+        color="blue-gray"
+        className="font-openSans  font-semibold"
+      >
         {approved_date ? formatDate(approved_date) : 'Pendiente de pago'}
       </Typography>
     </td>
     <td className={classes}>
-      <Typography variant="small" color="blue-gray" className="font-openSans  font-semibold">
+      <Typography
+        variant="small"
+        color="blue-gray"
+        className="font-openSans  font-semibold"
+      >
         {`${amount} ${currency}`}
       </Typography>
     </td>
@@ -74,21 +86,17 @@ export const PaymentDetails = ({
           variant="ghost"
           value={getStatusTextSpanish(status)}
           color={getStatusColor(status)}
-          className='font-openSans font-bold'
+          className="font-openSans font-bold"
         />
       </div>
     </td>
     {showAction && (
-      <td
-        className={`${classes} ${
-          status !== 'PENDING' ? 'w-auto' : '' 
-        }`}
-      >
+      <td className={`${classes} ${status !== 'PENDING' ? 'w-auto' : ''}`}>
         {status === 'PENDING' && (
           <div className="flex justify-center items-center">
             <Button
               size="sm"
-              className="font-openSans font-semibold bg-btnFormUserApply"
+              className="font-openSans font-semibold bg-btnSecundary"
               onClick={() => handlePayment(redirect_url)}
             >
               Pagar
@@ -97,7 +105,11 @@ export const PaymentDetails = ({
         )}
 
         {status === 'Procesando' && (
-          <Typography variant="h6" color="blue-gray" className='font-openSans font-semibold'>
+          <Typography
+            variant="h6"
+            color="blue-gray"
+            className="font-openSans font-semibold"
+          >
             Procesando...
           </Typography>
         )}

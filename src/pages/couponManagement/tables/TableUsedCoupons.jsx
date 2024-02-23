@@ -32,7 +32,7 @@ export const TableUsedCoupons = ({ getAllPayments, payments, formatDate }) => {
             {TABLE_HEAD.map((head) => (
               <th
                 key={head}
-                className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                className="border-b border-blue-gray-100 bg-headTable p-4"
               >
                 <Typography
                   variant="small"

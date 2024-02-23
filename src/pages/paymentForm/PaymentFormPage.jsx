@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { createPayment } from "../../services/paymentService";
-import { createPaymentDb } from "../../services/paymentDbService";
-import { PaymentForm } from "./components/PaymentForm";
-import { PurchaseSummary } from "./components/PurchaseSummary";
-import { useCurrency } from "../../contexts/CurrencyContext";
-import { CouponInput } from "./components/CouponInput";
-import { Card, CardHeader, Button, Typography } from "@material-tailwind/react";
-import { UserCircleIcon } from "@heroicons/react/24/solid";
+import React, { useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+import { createPayment } from '../../services/paymentService';
+import { createPaymentDb } from '../../services/paymentDbService';
+import { PaymentForm } from './components/PaymentForm';
+import { PurchaseSummary } from './components/PurchaseSummary';
+import { useCurrency } from '../../contexts/CurrencyContext';
+import { CouponInput } from './components/CouponInput';
+import { Card, CardHeader, Button, Typography } from '@material-tailwind/react';
+import { UserCircleIcon } from '@heroicons/react/24/solid';
 
 // Hooks
-import { useItem } from "./hooks/useItem";
-import { useFormData } from "./hooks/useFormData";
-import { useCoupon } from "./hooks/useCoupon";
-import { useCurrencyConverter } from "./hooks/useCurrencyConverter";
+import { useItem } from './hooks/useItem';
+import { useFormData } from './hooks/useFormData';
+import { useCoupon } from './hooks/useCoupon';
+import { useCurrencyConverter } from './hooks/useCurrencyConverter';
 
 const PaymentFormPage = () => {
   const { currency, selectedCountry, countries } = useCurrency();
@@ -22,11 +22,11 @@ const PaymentFormPage = () => {
 
   const [item, loadItem] = useItem(id, location);
   const [formData, handleChange, handleSelectChange] = useFormData({
-    name: "",
-    document: "",
-    email: "",
-    profession: "",
-    phone: "",
+    name: '',
+    document: '',
+    email: '',
+    profession: '',
+    phone: '',
   });
 
   const [convertedPrice, setConvertedPrice] = useCurrencyConverter(
@@ -45,14 +45,15 @@ const PaymentFormPage = () => {
   }, [loadItem]);
 
   useEffect(() => {
-    const paymentCreated = sessionStorage.getItem("paymentCreated");
+    const paymentCreated = sessionStorage.getItem('paymentCreated');
     if (paymentCreated) {
       window.location.href = `${window.location.origin}/payment-handle`;
     }
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    sessionStorage.setItem("formData", JSON.stringify(formData));
+    sessionStorage.setItem('formData', JSON.stringify(formData));
   }, [formData]);
 
   const handlePaymentDb = async (payment) => {
@@ -66,7 +67,7 @@ const PaymentFormPage = () => {
       payer: formData,
       description: item.name,
       redirect_url: payment.redirect_url,
-      coupon: couponId != "" ? couponId : null,
+      coupon: couponId != '' ? couponId : null,
     };
     try {
       await createPaymentDb(paymentDataDb);
@@ -88,10 +89,10 @@ const PaymentFormPage = () => {
     };
     try {
       const response = await createPayment(infoPayment);
-      sessionStorage.setItem("paymentId", response.id);
-      sessionStorage.setItem("item", JSON.stringify(item));
+      sessionStorage.setItem('paymentId', response.id);
+      sessionStorage.setItem('item', JSON.stringify(item));
       await handlePaymentDb(response);
-      sessionStorage.setItem("paymentCreated", "true");
+      sessionStorage.setItem('paymentCreated', 'true');
       window.location.href = response.redirect_url;
     } catch (error) {
       console.error(error);
@@ -139,7 +140,7 @@ const PaymentFormPage = () => {
               applyCoupon={applyCoupon}
             />
           </div>
-          <Button type="submit" className="mt-6 bg-btnFormUser" fullWidth>
+          <Button type="submit" className="mt-6 bg-btnPrimary" fullWidth>
             Pagar
           </Button>
         </form>

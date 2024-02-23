@@ -35,7 +35,7 @@ export const TableCupons = ({
               {TABLE_HEAD.map((head) => (
                 <th
                   key={head}
-                  className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                  className="border-b border-blue-gray-100 bg-headTable p-4"
                 >
                   <Typography
                     variant="small"
@@ -69,7 +69,12 @@ export const TableCupons = ({
                 <td className="p-4">{coupon.discount} %</td>
                 <td className="p-4">
                   <Button
-                    className={coupon.active ? 'button' : ''}
+                    size="sm"
+                    className={
+                      coupon.active
+                        ? 'button font-openSans bg-btnThird'
+                        : 'button font-openSans bg-btnPrimary'
+                    }
                     onClick={() => toggleCouponStatus(coupon._id)}
                   >
                     {coupon.active ? 'Activo' : 'Inactivo'}
