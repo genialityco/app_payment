@@ -119,8 +119,10 @@ const ItemToPayPage = () => {
                 color="white"
                 className="mt-6 flex justify-center gap-1 text-7xl font-normal"
               >
-                <span className="mt-2 text-sm text-cardText">{currency}</span>
-                <span className="text-4xl text-cardText font-bold">
+                <span className="mt-2 text-sm text-secundaryText">
+                  {currency}
+                </span>
+                <span className="text-4xl text-secundaryText font-bold">
                   {item.price}{' '}
                 </span>
               </Typography>
@@ -130,7 +132,7 @@ const ItemToPayPage = () => {
               <Button
                 onClick={() => handlePaymentClick(item)}
                 size="lg"
-                className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100  text-primaryText bg-btnCard"
+                className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100  text-primaryText bg-btnPrimary"
                 ripple={false}
                 fullWidth={true}
               >

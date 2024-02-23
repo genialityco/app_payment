@@ -35,13 +35,14 @@ export const TablePaymentHistory = ({
   payments,
   formatDate,
 }) => {
+  
   useEffect(() => {
     const init = async () => {
       await getAllPayments();
     };
     init();
   }, []);
-  console.log(payments);
+
   return (
     <Card className="h-full w-full overflow-hidden">
       <div className="w-full max-h-96 overflow-x-auto overflow-y-auto">

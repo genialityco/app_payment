@@ -14,7 +14,7 @@ import {
   getItemsToPay,
   getItemToPayById,
   updateItemToPay,
-  deleteItemToPay
+  deleteItemToPay,
 } from "../../services/itemToPayService";
 import { getPayments } from "../../services/paymentDbService";
 import { TableItems } from "./tables/TableItems";
@@ -95,9 +95,8 @@ const ItemToPayManagementPage = () => {
     setPayments(paymentsData.data);
   };
 
-  console.log(items);
   return (
-    <main className="w-full">
+    <div className="w-full">
       <Typography variant="h2" className="text-center py-6 text-primaryText">
         Administrador de pagos
       </Typography>
@@ -143,7 +142,7 @@ const ItemToPayManagementPage = () => {
           />
         )}
       </section>
-    </main>
+    </div>
   );
 };
 

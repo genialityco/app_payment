@@ -21,7 +21,7 @@ export const CouponInput = ({ handleChange, applyCoupon }) => {
           e.preventDefault();
           applyCoupon();
         }}
-        className="mt-6 font-openSans font-bold bg-btnFormUserApply"
+        className="mt-6 font-openSans font-bold bg-btnSecundary"
         fullWidth
       >
         Aplicar
