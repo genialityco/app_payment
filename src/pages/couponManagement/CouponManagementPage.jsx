@@ -112,7 +112,7 @@ export const CouponManagement = () => {
       />
       <div>
         <div className="flex flex-col justify-center p-5">
-          <div className="flex justify-start m-auto ">
+          <div className="flex justify-start m-auto">
             {!showUsedCoupons ? (
               <Typography
                 variant="h2"
