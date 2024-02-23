@@ -35,7 +35,7 @@ const itemsMenu = [
     icon: <CurrencyDollarIcon className="h-7" />,
   },
   {
-    route: '/items-management',
+    route: '/items-to-pay-management',
     name: 'Administrar Pagos',
     isAdminModule: true,
     icon: (

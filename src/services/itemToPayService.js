@@ -22,4 +22,14 @@ const getItemsToPay = async () => {
   }
 };
 
-export { createItemToPay, getItemsToPay };
+const getItemToPayById = async (idItem) => {
+  try {
+    const response = await apiItemToPayment.get(`/getitem/${idItem}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener el pago:", error);
+    throw error;
+  }
+};
+
+export { createItemToPay, getItemsToPay, getItemToPayById };

@@ -10,6 +10,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { CouponManagement } from "./pages/couponManagement/CouponManagementPage";
 import { MenuContainer } from "./components/MenuContainer";
 import { Spinner } from "@material-tailwind/react";
+import ItemToPayManagementPage from "./pages/itemsToPayManagement/ItemToPayManagementPage";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,7 +32,7 @@ function App() {
                   />
 
                   <Route path="/items-to-pay" element={<ItemToPayPage />} />
-                  <Route path="/payment" element={<PaymentFormPage />} />
+                  <Route path="/payment/:id" element={<PaymentFormPage />} />
                   <Route
                     path="/payment-handle"
                     element={<PaymentHandlePage />}
@@ -47,6 +48,10 @@ function App() {
                   <Route
                     path="/login-admin"
                     element={<LoginPage />}
+                  />
+                  <Route 
+                  path="/items-to-pay-management"
+                  element={<ItemToPayManagementPage />}
                   />
                 </Routes>
               </>

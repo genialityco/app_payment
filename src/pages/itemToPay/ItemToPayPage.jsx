@@ -67,7 +67,7 @@ const ItemToPayPage = () => {
         selectedCountryCode: selectedCountry.countryCode,
         currency,
       };
-      navigate('/payment', {
+      navigate(`/payment/${paymentInformation.id}`, {
         state: paymentInformation,
       });
       sessionStorage.setItem('item', JSON.stringify(paymentInformation));

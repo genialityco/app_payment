@@ -1,115 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { createPayment } from '../../services/paymentService';
-import { createPaymentDb } from '../../services/paymentDbService';
-import { PaymentForm } from './components/PaymentForm';
-import { PurchaseSummary } from './components/PurchaseSummary';
-import { useCurrency } from '../../contexts/CurrencyContext';
-import { CouponInput } from './components/CouponInput';
-import { getCoupons } from '../../services/couponService';
-import { Card, CardHeader, Button, Typography } from '@material-tailwind/react';
-import { UserCircleIcon } from '@heroicons/react/24/solid';
+import React, { useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import { createPayment } from "../../services/paymentService";
+import { createPaymentDb } from "../../services/paymentDbService";
+import { PaymentForm } from "./components/PaymentForm";
+import { PurchaseSummary } from "./components/PurchaseSummary";
+import { useCurrency } from "../../contexts/CurrencyContext";
+import { CouponInput } from "./components/CouponInput";
+import { Card, CardHeader, Button, Typography } from "@material-tailwind/react";
+import { UserCircleIcon } from "@heroicons/react/24/solid";
+
+// Hooks
+import { useItem } from "./hooks/useItem";
+import { useFormData } from "./hooks/useFormData";
+import { useCoupon } from "./hooks/useCoupon";
+import { useCurrencyConverter } from "./hooks/useCurrencyConverter";
 
 const PaymentFormPage = () => {
   const { currency, selectedCountry, countries } = useCurrency();
+  const { id } = useParams();
   const location = useLocation();
-  const [item, setItem] = useState(
-    () =>
-      JSON.parse(sessionStorage.getItem('item')) ||
-      location.state?.item ||
-      ''
-  );
-  const [convertedPrice, setConvertedPrice] = useState(0);
-  const [formData, setFormData] = useState(() => {
-    const savedFormData = sessionStorage.getItem('formData');
-    return savedFormData
-      ? JSON.parse(savedFormData)
-      : {
-          name: '',
-          document: '',
-          email: '',
-          profession: '',
-          phone: '',
-        };
+
+  const [item, loadItem] = useItem(id, location);
+  const [formData, handleChange, handleSelectChange] = useFormData({
+    name: "",
+    document: "",
+    email: "",
+    profession: "",
+    phone: "",
   });
-  const [coupon, setCoupon] = useState('');
-  const [couponId, setCouponId] = useState('');
+
+  const [convertedPrice, setConvertedPrice] = useCurrencyConverter(
+    item?.price || 0,
+    item?.currency,
+    currency
+  );
+
+  const [coupon, handleChangeCoupon, applyCoupon, couponId] = useCoupon(
+    convertedPrice,
+    setConvertedPrice
+  );
 
   useEffect(() => {
-    const paymentCreated = sessionStorage.getItem('paymentCreated');
+    loadItem();
+  }, [loadItem]);
+
+  useEffect(() => {
+    const paymentCreated = sessionStorage.getItem("paymentCreated");
     if (paymentCreated) {
       window.location.href = `${window.location.origin}/payment-handle`;
     }
   }, []);
 
   useEffect(() => {
-    if (item.price && currency) {
-      convertCurrency(item.price, item.currency, currency);
-    }
-  }, [item.price, currency]);
-
-  useEffect(() => {
-    sessionStorage.setItem('formData', JSON.stringify(formData));
+    sessionStorage.setItem("formData", JSON.stringify(formData));
   }, [formData]);
-
-  const convertCurrency = async (amount, fromCurrency, toCurrency) => {
-    if (fromCurrency === toCurrency) {
-      setConvertedPrice(amount);
-      return;
-    }
-    const url = `https://api.exchangerate-api.com/v4/latest/${fromCurrency}`;
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      const rate = data.rates[toCurrency];
-      setConvertedPrice((amount * rate).toFixed(2));
-    } catch (error) {
-      console.error('Error al convertir la moneda: ', error);
-    }
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
-  const handleSelectChange = (name, value) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
-  const handleChangeCoupon = (e) => {
-    const { value } = e.target;
-    setCoupon(value);
-  };
-
-  const applyCoupon = async () => {
-    const coupons = await getCoupons();
-    const couponData = coupons.data.filter((cou) => cou.code === coupon);
-    const currentDate = new Date();
-
-    if (
-      couponData.length > 0 &&
-      couponData[0].active &&
-      couponData[0].used < couponData[0].limit &&
-      new Date(couponData[0].expiration) > currentDate
-    ) {
-      const newPrice = (
-        convertedPrice -
-        (convertedPrice * couponData[0].discount) / 100
-      ).toFixed(2);
-      setCouponId(couponData[0]._id);
-      setConvertedPrice(newPrice);
-    } else {
-      alert('El cupón no es válido o a vencido.');
-    }
-  };
 
   const handlePaymentDb = async (payment) => {
     const paymentDataDb = {
@@ -122,7 +66,7 @@ const PaymentFormPage = () => {
       payer: formData,
       description: item.name,
       redirect_url: payment.redirect_url,
-      coupon: couponId != '' ? couponId : null,
+      coupon: couponId != "" ? couponId : null,
     };
     try {
       await createPaymentDb(paymentDataDb);
@@ -144,10 +88,10 @@ const PaymentFormPage = () => {
     };
     try {
       const response = await createPayment(infoPayment);
-      sessionStorage.setItem('paymentId', response.id);
-      sessionStorage.setItem('item', JSON.stringify(item));
+      sessionStorage.setItem("paymentId", response.id);
+      sessionStorage.setItem("item", JSON.stringify(item));
       await handlePaymentDb(response);
-      sessionStorage.setItem('paymentCreated', 'true');
+      sessionStorage.setItem("paymentCreated", "true");
       window.location.href = response.redirect_url;
     } catch (error) {
       console.error(error);
@@ -169,7 +113,10 @@ const PaymentFormPage = () => {
           <div className="mb-4 h-20 p-6 text-white ">
             <UserCircleIcon className="h-14 w-14 text-secundaryText" />
           </div>
-          <Typography variant="h5" className="text-secundaryText font-openSans font-bold">
+          <Typography
+            variant="h5"
+            className="text-secundaryText font-openSans font-bold"
+          >
             Datos del Comprador
           </Typography>
         </CardHeader>
@@ -183,7 +130,7 @@ const PaymentFormPage = () => {
               handleSelectChange={handleSelectChange}
             />
             <PurchaseSummary
-              item={item.name}
+              item={item?.name}
               currency={currency}
               price={convertedPrice}
             />
