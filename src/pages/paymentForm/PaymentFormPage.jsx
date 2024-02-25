@@ -85,7 +85,7 @@ const PaymentFormPage = () => {
       payer: formData,
       description: item.name,
       success_url: `${window.location.origin}/payment-handle`,
-      back_url: `${window.location.origin}/payment`,
+      back_url: `${window.location.origin}/payment/${id}`,
     };
     try {
       const response = await createPayment(infoPayment);

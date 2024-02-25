@@ -92,22 +92,23 @@ const ItemToPayPage = () => {
       <Typography variant="h2" className="text-center py-6 text-primaryText">
         PAGOS
       </Typography>
-      <section className="flex flex-col items-center pb-4 gap-y-5 xl:h-[calc(100vh-161px)] lg:flex-row lg:justify-evenly lg:gap-y-0">
+
+      <section className=" mb-6 grid grid-cols-1 justify-items-center items-center gap-y-5 md:grid-cols-2 xl:grid-cols-4  xl:h-[calc(100vh-161px)] ">
         {convertedItems.map((item) => (
           <Card
             variant="gradient"
-            className="w-full max-w-[18rem]  bg-card  shadow-2xl"
+            className="w-full max-w-[18rem] m-auto grid grid-cols-1 grid-rows-[1fr_1fr_auto]  bg-card  shadow-2xl"
             key={item._id}
           >
             <CardHeader
               color="white"
               floated={false}
               shadow={false}
-              className="m-0 grid place-items-center px-4 py-8 text-center bg-blue-gray-900 rounded-b-none shadow-md"
+              className="m-0 grid place-items-center p-3 text-center bg-blue-gray-900 rounded-b-none shadow-md"
             >
               <Typography
                 variant="h5"
-                className="uppercase font-bold  text-primaryText "
+                className="uppercase font-bold  text-primaryText text-lg "
               >
                 {item.name}
               </Typography>
@@ -128,7 +129,7 @@ const ItemToPayPage = () => {
               </Typography>
             </CardBody>
 
-            <CardFooter className="p-8">
+            <CardFooter className="py-6">
               <Button
                 onClick={() => handlePaymentClick(item)}
                 size="lg"

@@ -18,6 +18,9 @@ module.exports = withMT({
       fontFamily: {
         openSans: ['Open Sans', 'sans-serif'],
       },
+      screens: {
+        'mobile': '640px',
+      },
     },
   },
   plugins: [],
