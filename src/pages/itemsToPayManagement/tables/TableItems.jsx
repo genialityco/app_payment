@@ -8,7 +8,7 @@ const TABLE_HEAD = [
   'Moneda',
   'Estado',
   'Creado',
-  'Acciones'
+  'Acciones',
 ];
 
 export const TableItems = ({
@@ -18,7 +18,6 @@ export const TableItems = ({
   deleteCreatedItem,
   toggleItemStatus,
 }) => {
-
   const handleClickEdit = (coupon) => {
     openModalEdit(coupon);
   };
@@ -27,7 +26,7 @@ export const TableItems = ({
     deleteCreatedItem(couponId);
   };
   return (
-    <Card className="h-full w-full overflow-hidden">
+    <Card className="h-full w-full overflow-hidden mb-4">
       <div className="w-full max-h-96 overflow-x-auto overflow-y-auto">
         <table className="w-full min-w-max table-auto text-left">
           <thead>
@@ -69,7 +68,7 @@ export const TableItems = ({
                 <td className="p-4">{item.currency}</td>
                 <td className="p-4">
                   <Button
-                    className={item.active ? 'button' : ''}
+                    className={item.active ? 'button bg-btnSecundary' : 'bg-btnPrimary'}
                     onClick={() => toggleItemStatus(item._id)}
                   >
                     {item.active ? 'Activo' : 'Inactivo'}

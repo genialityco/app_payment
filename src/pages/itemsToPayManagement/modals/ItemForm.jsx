@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Modal } from "../../../components/modal";
+import { useState, useEffect } from 'react';
+import { Modal } from '../../../components/modal';
 import {
   Card,
   Input,
@@ -7,7 +7,7 @@ import {
   Option,
   Button,
   Typography,
-} from "@material-tailwind/react";
+} from '@material-tailwind/react';
 
 export const ItemForm = ({
   isOpen,
@@ -19,18 +19,18 @@ export const ItemForm = ({
   isEditMode,
 }) => {
   const [item, setItem] = useState({
-    name: "",
-    price: "",
-    currency: "",
+    name: '',
+    price: '',
+    currency: '',
   });
 
   useEffect(() => {
     if (isEditMode) {
       const editedItem = {
         _id: itemEdit._id,
-        name: itemEdit.name || "",
-        price: itemEdit.price || "",
-        currency: itemEdit.currency || "",
+        name: itemEdit.name || '',
+        price: itemEdit.price || '',
+        currency: itemEdit.currency || '',
       };
       setItem(editedItem);
     }
@@ -50,18 +50,16 @@ export const ItemForm = ({
     <Modal isOpen={isOpen} onClose={onClose}>
       <Card
         color="transparent"
-        shadow={false}
-        className="h-96 p-4 border text-center absolute z-10 inset-x-1/3 top-5 overflow-y-scroll bg-card"
+        className="p-8 border text-center absolute left-1/2 transform -translate-x-1/2 z-10 w-80 lg:w-1/3 xl:max-w-sm bg-card shadow-2xl "
       >
         <Typography
           variant="h4"
-          color="blue-gray"
-          className="font-openSans font-bold"
+          className="font-openSans font-bold text-secundaryText py-5 "
         >
-          {isEditMode ? "Editar Cupón" : "Crear Cupón"}
+          {isEditMode ? 'Editar Cupón' : 'Crear Cupón'}
         </Typography>
-        <form className="mt-8 mb-2 w-80 sm:w-96 lg:w-full">
-          <div className="mb-1 flex flex-col gap-6">
+        <form className="lg:w-full">
+          <div className="mb-1 flex flex-col gap-5">
             <Input
               placeholder="Nombre"
               label="Nombre"
@@ -92,20 +90,22 @@ export const ItemForm = ({
           </div>
           <div>
             <Button
+              size="md"
               type="button"
               onClick={onClose}
-              className="mt-6 bg-btnCard"
+              className="mt-3 bg-btnSecundary"
               fullWidth
             >
               Cerrar
             </Button>
             <Button
+              size="md"
               type="submit"
               onClick={handleFormSubmit}
-              className="mt-6 bg-btnTableCoupon"
+              className="mt-3 bg-btnPrimary"
               fullWidth
             >
-              {isEditMode ? "Actualizar" : "Crear"}
+              {isEditMode ? 'Actualizar' : 'Crear'}
             </Button>
           </div>
         </form>

@@ -1,5 +1,5 @@
-import { useCallback, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCallback, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Card,
   CardHeader,
@@ -8,19 +8,19 @@ import {
   Typography,
   Button,
   Spinner,
-} from "@material-tailwind/react";
+} from '@material-tailwind/react';
 import {
   createItemToPay,
   getItemsToPay,
   getItemToPayById,
   updateItemToPay,
   deleteItemToPay,
-} from "../../services/itemToPayService";
-import { getPayments } from "../../services/paymentDbService";
-import { TableItems } from "./tables/TableItems";
-import { format } from "date-fns";
-import { TablePaymentHistory } from "./tables/TablePaymentHistory";
-import { ItemForm } from "./modals/ItemForm";
+} from '../../services/itemToPayService';
+import { getPayments } from '../../services/paymentDbService';
+import { TableItems } from './tables/TableItems';
+import { format } from 'date-fns';
+import { TablePaymentHistory } from './tables/TablePaymentHistory';
+import { ItemForm } from './modals/ItemForm';
 
 const getAllItemsToPay = async () => {
   const itemsData = await getItemsToPay();
@@ -44,11 +44,11 @@ const ItemToPayManagementPage = () => {
   }, []);
 
   const formatDate = useCallback((dateString) => {
-    if (!dateString) return "";
+    if (!dateString) return '';
 
     const date = new Date(dateString);
 
-    return format(date, "dd/MM/yy");
+    return format(date, 'dd/MM/yy');
   }, []);
 
   // Funciones para manejar los cupones
@@ -96,11 +96,11 @@ const ItemToPayManagementPage = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full h-[calc(100vh-83px)]">
       <Typography variant="h2" className="text-center py-6 text-primaryText">
-        Administrador de pagos
+        Administrador de Pagos
       </Typography>
-      <section className="flex flex-col justify-center p-5 gap-y-5 xl:h-[calc(100vh-161px)]">
+      <section className="flex flex-col justify-center p-5 gap-y-5 ">
         <ItemForm
           isOpen={isModalOpen}
           onClose={handleCloseModal}
@@ -110,20 +110,22 @@ const ItemToPayManagementPage = () => {
           itemEdit={itemEdit}
           isEditMode={isEditMode}
         />
-        <div className="flex justify-end gap-2 m-0">
+        <div className="flex justify-center md:justify-end gap-2 m-0">
           {showItems ? (
             <Button
+            size='md'
               onClick={() => setIsModalOpen(true)}
-              className="w-20 p-0 font-openSans  bg-btnTableCoupon"
+              className=" font-openSans  bg-btnThird"
             >
               Crear
             </Button>
           ) : null}
           <Button
+            size="md"
             onClick={() => setShowItems(!showItems)}
-            className=" md:w-28 p-3 font-openSans bg-btnCard"
+            className=" font-openSans bg-btnPrimary "
           >
-            {showItems ? "Historial de pagos" : "Ver pagos creados"}
+            {showItems ? 'Historial de pagos' : 'Ver pagos creados'}
           </Button>
         </div>
         {showItems ? (

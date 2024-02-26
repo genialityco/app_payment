@@ -37,7 +37,7 @@ const PaymentHandlePage = () => {
     return (
       <Typography
         variant="h3"
-        className="h-screen mt-20 text-primaryText text-center font-openSans font-semibold"
+        className="h-[calc(100vh-161px)] mt-20 text-primaryText text-center font-openSans font-semibold"
       >
         Cargando detalles del pago...
       </Typography>
@@ -46,7 +46,7 @@ const PaymentHandlePage = () => {
     return (
       <Typography
         variant="h3"
-        className="h-screen mt-20 text-primaryText text-center font-openSans font-semibold"
+        className="h-[calc(100vh-161px)] mt-20 text-primaryText text-center font-openSans font-semibold"
       >
         Error al cargar el pago: {error.message}
       </Typography>
@@ -55,7 +55,7 @@ const PaymentHandlePage = () => {
     return (
       <Typography
         variant="h3"
-        className="h-screen mt-20 text-primaryText text-center font-openSans font-semibold"
+        className="h-[calc(100vh-161px)] mt-20 xl:mt-24 text-primaryText text-center font-openSans font-semibold"
       >
         No se encontró el pago
       </Typography>

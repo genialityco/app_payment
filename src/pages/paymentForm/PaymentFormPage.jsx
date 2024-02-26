@@ -34,6 +34,7 @@ const PaymentFormPage = () => {
     item?.currency,
     currency
   );
+ 
 
   const [coupon, handleChangeCoupon, applyCoupon, couponId] = useCoupon(
     convertedPrice,
@@ -140,7 +141,7 @@ const PaymentFormPage = () => {
               applyCoupon={applyCoupon}
             />
           </div>
-          <Button type="submit" className="mt-6 bg-btnPrimary" fullWidth>
+          <Button type="submit" className="mt-6 bg-btnPrimary" fullWidth disabled={!formData.name || !formData.document || !formData.email || !formData.profession || !formData.phone}>
             Pagar
           </Button>
         </form>

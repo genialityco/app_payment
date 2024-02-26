@@ -110,8 +110,8 @@ export const CouponManagement = () => {
         couponEdit={couponEdit}
         isEditMode={isEditMode}
       />
-      <div>
-        <div className="flex flex-col justify-center p-5">
+      <div className="h-[calc(100vh-83px)]">
+        <div className="flex flex-col justify-center p-5 ">
           <div className="flex justify-start m-auto">
             {!showUsedCoupons ? (
               <Typography

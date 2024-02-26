@@ -137,7 +137,6 @@ export const MenuContainer = () => {
   const toggleNav = () => setIsOpen(!isOpen);
 
   return (
-    //  <Navbar shadow={false} className="max-w-none px-4 py-2 bg-[url('/src/assets/wave.png')] rounded-none border-none">
     <Navbar
       shadow={false}
       className="max-w-none px-4 py-2 bg-[url('/src/assets/wave.png')] rounded-none border-none relative z-50"
