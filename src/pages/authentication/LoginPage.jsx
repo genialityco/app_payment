@@ -1,21 +1,22 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
-import { Input } from "@material-tailwind/react";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
+import { Card, Input, Typography, Button } from '@material-tailwind/react';
+import { HiMail, HiLockClosed } from 'react-icons/hi';
 
 const Login = () => {
   const { login } = useAuth();
 
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const userCredential = await login(email, password);
       if (userCredential) {
-        navigate("/");
+        navigate('/');
       }
     } catch (error) {
       console.error(error);
@@ -23,54 +24,85 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
-        <div className="text-center">
-          <h2 className="mt-6 text-3xl font-bold text-gray-900">
+    <section className="flex items-center justify-center py-10">
+      <Card className="m-5 w-80 p-6 flex flex-col items-center md:w-1/2 max-w-md text-center border-2 bg-card">
+        <div className="my-5">
+          <Typography
+            variant="h3"
+            className=" font-openSans font-bold text-secundaryText "
+          >
             Bienvenido de nuevo
-          </h2>
-          <p className="mt-2 text-sm text-gray-500">
+          </Typography>
+          <Typography
+            variant="paragraph"
+            className="mt-3 font-openSans font-semibold"
+          >
             Por favor ingresa a tu cuenta
-          </p>
+          </Typography>
         </div>
-        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          <input type="hidden" name="remember" defaultValue="true" />
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
+        <form onSubmit={handleSubmit} className="w-full lg:p-6">
+          <div className="mb-1 flex flex-col gap-6">
+            <div class="hidden relative w-full min-w-[200px] h-10">
+              <div class="absolute grid w-5 h-6 place-items-center text-blue-gray-500 top-2/4 right-3 -translate-y-2/4">
+                <HiMail className="h-5 w-6 me-3" />
+              </div>
               <Input
+                variant="standard"
+                type="text"
+                label="Remember"
+                placeholder="Remember"
+                name="remember"
+                /*  defaultValue="true" */
+                className=" !border-t-blue-gray-200 focus:!border-t-gray-900 "
+                labelProps={{
+                  className: 'before:content-none after:content-none',
+                }}
+              />
+            </div>
+            <div class="relative w-full min-w-[200px] h-10">
+              <div class="absolute grid w-5 h-6 place-items-center text-blue-gray-500 top-2/4 right-3 -translate-y-2/4">
+                <HiMail className="h-5 w-6 me-3" />
+              </div>
+              <Input
+                variant="standard"
                 type="email"
                 autoComplete="email"
                 label="Correo Electronico"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Correo Electrónico"
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-transparent !border-t-blue-gray-200 focus:!border-t-gray-900 "
+                labelProps={{
+                  className: 'before:content-none after:content-none',
+                }}
               />
             </div>
-            <div>
+            <div class="relative w-full min-w-[200px] h-10">
+              <div class="absolute grid w-5 h-6 place-items-center text-blue-gray-500 top-2/4 right-3 -translate-y-2/4">
+                <HiLockClosed className="h-5 w-6 me-3" />
+              </div>
+
               <Input
+                variant="standard"
                 type="password"
                 autoComplete="current-password"
                 label="Contraseña"
-                required
-                onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Contraseña"
+                onChange={(e) => setPassword(e.target.value)}
+                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                labelProps={{
+                  className: 'before:content-none after:content-none',
+                }}
               />
             </div>
           </div>
-
           <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
+            <Button type="submit" className="font-openSans font-semibold mt-8 bg-btnPrimary " fullWidth disabled={!email || !password}>
               Iniciar sesión
-            </button>
+            </Button>
           </div>
         </form>
-      </div>
-    </div>
+      </Card>
+    </section>
   );
 };
 

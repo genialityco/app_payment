@@ -129,7 +129,7 @@ export const CouponForm = ({
               onChange={handleFormChange}
             />
 
-            <Typography
+           {/*  <Typography
               variant="h6"
               color="blue-gray"
               className="font-openSans font-bold"
@@ -149,7 +149,7 @@ export const CouponForm = ({
                   {item.name}
                 </Option>
               ))}
-            </Select>
+            </Select> */}
           </div>
           <div>
             <Button
