@@ -93,7 +93,7 @@ export const ItemForm = ({
               size="md"
               type="button"
               onClick={onClose}
-              className="mt-3 bg-btnSecundary"
+              className="mt-5 bg-btnSecundary"
               fullWidth
             >
               Cerrar

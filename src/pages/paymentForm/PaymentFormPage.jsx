@@ -141,7 +141,7 @@ const PaymentFormPage = () => {
               applyCoupon={applyCoupon}
             />
           </div>
-          <Button type="submit" className="mt-6 bg-btnPrimary" fullWidth disabled={!formData.name || !formData.document || !formData.email || !formData.profession || !formData.phone}>
+          <Button type="submit" className="mt-6 bg-btnPrimary" fullWidth disabled={!formData.name || !formData.document || !formData.email || !formData.profession || !formData.phone ||  !formData.country}>
             Pagar
           </Button>
         </form>
