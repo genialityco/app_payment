@@ -9,17 +9,19 @@ const MenuItems = ({ name, icon, route }) => {
   };
 
   return (
-    <>
-      <Typography variant="small" className="font-semibold text-primaryText font-openSans">
-        <ListItem
-          onClick={() => handleClickLink(route)}
-          className="flex items-center gap-2 py-2 pr-4"
-        >
-          {' '}
-          {icon} {name}
-        </ListItem>
+    <ListItem className="flex items-center gap-2 py-2 pr-4">
+      <span className="font-semibold text-primaryText font-openSans">
+        {' '}
+        {icon}
+      </span>
+      <Typography
+        variant="paragraph"
+        onClick={() => handleClickLink(route)}
+        className="font-semibold text-primaryText font-openSans"
+      >
+        {name}
       </Typography>
-    </>
+    </ListItem>
   );
 };
 

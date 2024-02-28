@@ -44,6 +44,10 @@ export const PaymentForm = ({
         name="profession"
         value={formData.profession}
         onChange={handleChange}
+        className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+        labelProps={{
+          className: "before:content-none after:content-none",
+        }}
       />
       <Input
         variant="standard"
