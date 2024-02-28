@@ -53,9 +53,9 @@ export const CountrySelector = () => {
         allowHover={true}
       >
         <MenuHandler>
-          <div className="font-semibold text-primaryText font-openSans">
+          <div className="w-32 font-semibold text-primaryText font-openSans">
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium  "
+              className="flex items-center lg:justify-center gap-2 py-2 pr-4 font-medium  "
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
