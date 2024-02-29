@@ -97,7 +97,7 @@ const ItemToPayManagementPage = () => {
 
   return (
     <div className="w-full h-[calc(100vh-83px)]">
-      <Typography variant="h2" className="text-center py-6 text-primaryText">
+      <Typography variant="h2" className="text-center py-10 text-primaryText">
         Administrador de Pagos
       </Typography>
       <section className="flex flex-col justify-center p-5 gap-y-5 ">
@@ -110,10 +110,10 @@ const ItemToPayManagementPage = () => {
           itemEdit={itemEdit}
           isEditMode={isEditMode}
         />
-        <div className="flex justify-center md:justify-end gap-2 m-0">
+        <div className="flex justify-center md:justify-end gap-2 m-0 xl:me-14 my-5">
           {showItems ? (
             <Button
-            size='md'
+              size="md"
               onClick={() => setIsModalOpen(true)}
               className=" font-openSans  bg-btnThird"
             >

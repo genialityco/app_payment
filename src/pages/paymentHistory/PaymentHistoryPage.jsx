@@ -52,7 +52,7 @@ const PaymentHistoryPage = () => {
   );
 
   return (
-    <section className="flex flex-col justify-center items-center py-10">
+    <section className="flex flex-col justify-center items-center py-10 xl:my-10">
       <Card
         color="transparent"
         shadow={true}

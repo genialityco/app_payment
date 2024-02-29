@@ -33,7 +33,7 @@ export const TableItems = ({
   };
 
   return (
-    <Card className="h-full w-full overflow-hidden mb-4">
+    <Card className="h-full w-full overflow-hidden mb-4 max-w-screen-xl m-auto">
       <div className="overflow-x-auto px-0">
         <div
           className={`w-full   ${

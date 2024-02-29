@@ -48,7 +48,7 @@ function NavList() {
           {itemsMenu.map((item) => {
             if (!item.isAdminModule || (item.isAdminModule && currentUser)) {
               return (
-                <div key={`country-name-${item.name}`}>
+                <div className='hover:text-blue-gray-900' key={`country-name-${item.name}`}>
                   <MenuItems
                     name={item.name}
                     icon={item.icon}
@@ -115,7 +115,7 @@ export const MenuContainer = () => {
             <Bars3Icon className="h-6 w-6" />
           )}
         </IconButton>
-        <div className="hidden lg:block w-full">
+        <div className="hidden lg:block w-full hover:text-blue-gray-900">
           <NavList />
         </div>
         <div className="flex flex-col lg:flex-row">

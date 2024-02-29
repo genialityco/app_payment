@@ -55,7 +55,7 @@ export const CountrySelector = () => {
         <MenuHandler>
           <div className="w-32 font-semibold text-primaryText font-openSans">
             <ListItem
-              className="flex items-center lg:justify-center gap-2 py-2 pr-4 font-medium  "
+              className="flex items-center justify-center gap-2 py-2 font-medium  "
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
@@ -86,7 +86,7 @@ export const CountrySelector = () => {
       <div className="block z-50 lg:hidden absolute top-12">
         <Collapse
           open={isMobileMenuOpen}
-          className="shadow-2xl w-28 rounded-lg bg-card"
+          className="shadow-2xl w-32 rounded-lg bg-card"
         >
           {renderItems}
         </Collapse>
