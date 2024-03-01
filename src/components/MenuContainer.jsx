@@ -79,14 +79,14 @@ const itemsMenu = [
 ];
 
 function NavList() {
-  const { currentUser, logout } = useAuth();
+  const { currentUser, logout, isAdministrator } = useAuth();
 
   return (
     <div className="flex lg:flex-row lg:items-center justify-between w-full">
       <div>
         <List className="flex flex-row mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:p-1 lg:items-center ">
           {itemsMenu.map((item) => {
-            if (!item.isAdminModule || (item.isAdminModule && currentUser)) {
+            if (!item.isAdminModule || (item.isAdminModule && isAdministrator)) {
               return (
                 <div key={`country-name-${item.name}`}>
                   <MenuItems
@@ -99,7 +99,7 @@ function NavList() {
             }
             return null;
           })}
-          {currentUser ? (
+          {isAdministrator ? (
             <div className="flex flex-row">
               <button
                 onClick={logout}

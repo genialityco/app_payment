@@ -8,6 +8,7 @@ import { useCurrency } from '../../contexts/CurrencyContext';
 import { CouponInput } from './components/CouponInput';
 import { Card, CardHeader, Button, Typography } from '@material-tailwind/react';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
+import { useAuth } from '../../contexts/AuthContext';
 
 // Hooks
 import { useItem } from './hooks/useItem';
@@ -40,6 +41,8 @@ const PaymentFormPage = () => {
     setConvertedPrice
   );
 
+  const { saveEventData } = useAuth();
+
   useEffect(() => {
     loadItem();
   }, [loadItem]);
@@ -70,7 +73,10 @@ const PaymentFormPage = () => {
       coupon: couponId != '' ? couponId : null,
     };
     try {
-      await createPaymentDb(paymentDataDb);
+      const response = await createPaymentDb(paymentDataDb);
+      // if(response.status === "success"){
+      //   saveEventData(response.data);
+      // }
     } catch (error) {
       console.error(error);
     }
@@ -93,7 +99,8 @@ const PaymentFormPage = () => {
       sessionStorage.setItem('item', JSON.stringify(item));
       await handlePaymentDb(response);
       sessionStorage.setItem('paymentCreated', 'true');
-      window.location.href = response.redirect_url;
+      // window.location.href = response.redirect_url;
+      window.open(`${response.redirect_url}`);
     } catch (error) {
       console.error(error);
     }
