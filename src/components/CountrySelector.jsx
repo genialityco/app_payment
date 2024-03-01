@@ -53,6 +53,50 @@ export const CountrySelector = () => {
         allowHover={true}
       >
         <MenuHandler>
+          <div className="w-32 font-semibold text-primaryText font-openSans">
+            <ListItem
+              className="flex items-center justify-center gap-2 py-2 font-medium  "
+              selected={isMenuOpen || isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen((cur) => !cur)}
+            >
+              {selectedCountry?.name
+                ? selectedCountry?.name
+                : 'Seleccionar País'}
+              <ChevronDownIcon
+                strokeWidth={2.5}
+                className={`hidden h-3 w-3 transition-transform lg:block ${
+                  isMenuOpen ? 'rotate-180' : ''
+                }`}
+              />
+              <ChevronDownIcon
+                strokeWidth={2.5}
+                className={`block h-3 w-3 transition-transform lg:hidden ${
+                  isMobileMenuOpen ? 'rotate-180' : ''
+                }`}
+              />
+            </ListItem>
+          </div>
+        </MenuHandler>
+        <MenuList className="hidden max-w-screen-xl rounded-xl lg:block text-primaryText font-openSans ">
+          <ul className=" grid grid-cols-3 gap-y-2 outline-none outline-0 ">
+            {renderItems}
+          </ul>
+        </MenuList>
+      </Menu>
+      <div className="block z-50 lg:hidden absolute top-12">
+        <Collapse
+          open={isMobileMenuOpen}
+          className="shadow-2xl w-32 rounded-lg bg-card"
+        >
+          {renderItems}
+        </Collapse>
+      </div>
+    </>
+  );
+};
+
+/* 
+<MenuHandler>
           <Typography
             variant="small"
             className="font-semibold text-primaryText font-openSans  "
@@ -79,22 +123,4 @@ export const CountrySelector = () => {
               />
             </ListItem>
           </Typography>
-        </MenuHandler>
-        <MenuList className="hidden max-w-screen-xl rounded-xl lg:block text-primaryText font-openSans ">
-          <ul className=" grid grid-cols-3 gap-y-2 outline-none outline-0 ">
-            {renderItems}
-          </ul>
-        </MenuList>
-      </Menu>
-      {/* <div className=" block z-50 lg:hidden"> */}
-      <div className="block z-50 lg:hidden absolute top-12">
-        <Collapse
-          open={isMobileMenuOpen}
-          className="shadow-2xl w-28 rounded-lg bg-card"
-        >
-          {renderItems}
-        </Collapse>
-      </div>
-    </>
-  );
-};
+        </MenuHandler> */

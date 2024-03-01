@@ -1,41 +1,40 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 import { Card, Typography, Chip, Button } from '@material-tailwind/react';
 
 const TABLE_HEAD = [
-  "Orden ID",
-  "Pagador",
-  "Tipo de pago",
-  "Valor Pagado",
-  "Estado",
-  "Creado",
-  "Pagado",
+  'Orden ID',
+  'Pagador',
+  'Tipo de pago',
+  'Valor Pagado',
+  'Estado',
+  'Creado',
+  'Pagado',
 ];
 
 const STATUS_COLORS = {
-  PENDING: "blue",
-  PAID: "green",
-  REJECT: "red",
-  DEFAULT: "amber",
+  PENDING: 'blue',
+  PAID: 'green',
+  REJECT: 'red',
+  DEFAULT: 'amber',
 };
 
 const STATUS_TEXT_SPANISH = {
-  PENDING: "PENDIENTE",
-  PAID: "PAGADO",
-  REJECT: "RECHAZADA",
-  DEFAULT: "SIN INFORMACIÓN",
+  PENDING: 'PENDIENTE',
+  PAID: 'PAGADO',
+  REJECT: 'RECHAZADA',
+  DEFAULT: 'SIN INFORMACIÓN',
 };
 
 const getStatusColor = (status) =>
   STATUS_COLORS[status] || STATUS_COLORS.DEFAULT;
 
-  const getStatusTextSpanish = (status) => STATUS_TEXT_SPANISH[status];
+const getStatusTextSpanish = (status) => STATUS_TEXT_SPANISH[status];
 
 export const TablePaymentHistory = ({
   getAllPayments,
   payments,
   formatDate,
 }) => {
-  
   useEffect(() => {
     const init = async () => {
       await getAllPayments();
@@ -45,7 +44,11 @@ export const TablePaymentHistory = ({
 
   return (
     <Card className="h-full w-full overflow-hidden">
-      <div className="w-full max-h-96 overflow-x-auto overflow-y-auto">
+      <div
+        className={`w-full   ${
+          payments.length > 6 ? 'max-h-96 ' : ''
+        } overflow-y-auto overflow-x-auto`}
+      >
         <table className="w-full min-w-max table-auto text-left">
           <thead>
             <tr>
@@ -102,7 +105,7 @@ export const TablePaymentHistory = ({
                 <td className="p-4 text-center">
                   {payment.approved_date
                     ? formatDate(payment.approved_date)
-                    : "-"}
+                    : '-'}
                 </td>
               </tr>
             ))}

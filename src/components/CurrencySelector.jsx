@@ -59,12 +59,9 @@ export const CurrencySelector = () => {
         allowHover={true}
       >
         <MenuHandler>
-          <Typography
-            variant="small"
-            className="font-semibold text-primaryText font-openSans"
-          >
+          <div className="font-semibold text-primaryText font-openSans">
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium  "
+              className="flex items-center justify-center gap-2 py-2 pr-4 font-medium  "
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
               value={selectedCurrency}
@@ -85,7 +82,7 @@ export const CurrencySelector = () => {
                 }`}
               />
             </ListItem>
-          </Typography>
+          </div>
         </MenuHandler>
         <MenuList className="hidden max-w-screen-xl rounded-xl lg:block text-secundaryText">
           <ul className={`grid ${gridClasses} gap-y-2 outline-none outline-0`}>
@@ -96,7 +93,7 @@ export const CurrencySelector = () => {
       <div className="block z-50 lg:hidden absolute top-20">
         <Collapse
           open={isMobileMenuOpen}
-          className="bg-card shadow-2xl w-28 rounded-lg"
+          className="bg-card shadow-2xl w-32 rounded-lg"
         >
           {renderCurrency}
         </Collapse>

@@ -10,13 +10,7 @@ export const PurchaseSummary = ({ item, currency, price }) => {
       >
         Resumen de la Compra
       </Typography>
-      <Typography
-        variant="h6"
-        color="blue-gray"
-        className="font-openSans font-bold"
-      >
-        {item}
-      </Typography>
+      <p className="font-openSans font-bold text-blue-gray-800">{item}</p>
       <Typography
         variant="h6"
         color="blue-gray"

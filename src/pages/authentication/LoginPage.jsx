@@ -42,8 +42,8 @@ const Login = () => {
         </div>
         <form onSubmit={handleSubmit} className="w-full lg:p-6">
           <div className="mb-1 flex flex-col gap-6">
-            <div class="hidden relative w-full min-w-[200px] h-10">
-              <div class="absolute grid w-5 h-6 place-items-center text-blue-gray-500 top-2/4 right-3 -translate-y-2/4">
+            <div className="hidden relative w-full min-w-[200px] h-10">
+              <div className="absolute grid w-5 h-6 place-items-center text-blue-gray-500 top-2/4 right-3 -translate-y-2/4">
                 <HiMail className="h-5 w-6 me-3" />
               </div>
               <Input
@@ -59,15 +59,15 @@ const Login = () => {
                 }}
               />
             </div>
-            <div class="relative w-full min-w-[200px] h-10">
-              <div class="absolute grid w-5 h-6 place-items-center text-blue-gray-500 top-2/4 right-3 -translate-y-2/4">
+            <div className="relative w-full min-w-[200px] h-10">
+              <div className="absolute grid w-5 h-6 place-items-center text-blue-gray-500 top-2/4 right-3 -translate-y-2/4">
                 <HiMail className="h-5 w-6 me-3" />
               </div>
               <Input
                 variant="standard"
                 type="email"
                 autoComplete="email"
-                label="Correo Electronico"
+                label="Correo Electrónico"
                 placeholder="Correo Electrónico"
                 onChange={(e) => setEmail(e.target.value)}
                 className="bg-transparent !border-t-blue-gray-200 focus:!border-t-gray-900 "
@@ -76,8 +76,8 @@ const Login = () => {
                 }}
               />
             </div>
-            <div class="relative w-full min-w-[200px] h-10">
-              <div class="absolute grid w-5 h-6 place-items-center text-blue-gray-500 top-2/4 right-3 -translate-y-2/4">
+            <div className="relative w-full min-w-[200px] h-10">
+              <div className="absolute grid w-5 h-6 place-items-center text-blue-gray-500 top-2/4 right-3 -translate-y-2/4">
                 <HiLockClosed className="h-5 w-6 me-3" />
               </div>
 

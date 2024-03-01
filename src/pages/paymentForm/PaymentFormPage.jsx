@@ -93,6 +93,7 @@ const PaymentFormPage = () => {
       success_url: `${window.location.origin}/payment-handle`,
       back_url: `${window.location.origin}/payment/${id}`,
     };
+
     try {
       const response = await createPayment(infoPayment);
       sessionStorage.setItem('paymentId', response.id);
@@ -114,7 +115,6 @@ const PaymentFormPage = () => {
       >
         <CardHeader
           color="white"
-          floated={false}
           shadow={false}
           className="m-0 grid place-items-center px-4 py-8 text-center bg-[url(/src/assets/graph.png)]  bg-[center_right_45%] bg-contain bg-no-repeat  "
         >
@@ -147,7 +147,20 @@ const PaymentFormPage = () => {
               applyCoupon={applyCoupon}
             />
           </div>
-          <Button type="submit" className="mt-6 bg-btnPrimary" fullWidth>
+          <Button
+            type="submit"
+            className="mt-6 bg-btnPrimary"
+            fullWidth
+            disabled={
+              !formData.name ||
+              !formData.document ||
+              !formData.email ||
+              !formData.profession ||
+              !formData.phone ||
+              !formData.country ||
+              !formData.prefix
+            }
+          >
             Pagar
           </Button>
         </form>

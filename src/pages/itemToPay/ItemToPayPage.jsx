@@ -89,11 +89,11 @@ const ItemToPayPage = () => {
 
   return (
     <main className="w-full">
-      <Typography variant="h2" className="text-center py-6 text-primaryText">
+      <Typography variant="h2" className="text-center py-2 my-6 text-primaryText">
         PAGOS
       </Typography>
 
-      <section className=" mb-6 grid grid-cols-1 justify-items-center items-center gap-y-5 md:grid-cols-2 xl:grid-cols-4  xl:h-[calc(100vh-161px)] ">
+      <section className=" mb-7 grid grid-cols-1 justify-items-center items-center gap-y-8 md:grid-cols-2 xl:grid-cols-4  xl:h-[calc(100vh-161px)] ">
         {convertedItems.map((item) => (
           <Card
             variant="gradient"

@@ -64,7 +64,7 @@ export const CouponForm = ({
       <Card
         color="transparent"
         shadow={false}
-        className="h-80 p-4 border text-center absolute left-1/2 transform -translate-x-1/2 z-10 w-80 lg:w-1/3 xl:h-96 top-10 overflow-y-scroll bg-card shadow-2xl "
+        className="h-80 p-4 border text-center absolute left-1/2 transform -translate-x-1/2 z-10 w-80 lg:w-1/3 xl:h-[37rem] top-10 overflow-y-auto bg-card shadow-2xl "
       >
         <Typography
           variant="h4"
