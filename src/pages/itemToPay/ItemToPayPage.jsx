@@ -96,71 +96,36 @@ const ItemToPayPage = () => {
         PAGOS
       </Typography>
       <Card className="w-11/12 max-w-screen-xl m-auto border-2 my-5">
-        <CardBody className="overflow-x-auto px-0">
-          {/* Renderizar como tabla en dispositivos de escritorio */}
-          <div className="hidden md:block">
-            <table className="w-full min-w-max table-auto text-center">
-              <tbody>
-                {convertedItems.map((item) => (
-                  <tr key={item._id}>
-                    <td className="border bg-blue-gray-900  p-3">
-                      {' '}
-                      <Typography
-                        variant="h5"
-                        className="uppercase font-bold  text-primaryText text-lg text-left "
-                      >
-                        {item.name}
-                      </Typography>
-                    </td>
-                    <td className="border p-3">
-                      {currency} {item.price}
-                    </td>
-                    <td className="border p-4">
-                      <Button
-                        onClick={() => handlePaymentClick(item)}
-                        size="sm"
-                        className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100  text-primaryText bg-btnPrimary"
-                      >
-                        Pagar
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="md:hidden">
-            {/* Renderizar como columnas en dispositivos móviles */}
-            {convertedItems.map((item) => (
-              <div
-                key={item._id}
-                className="mb-4 flex flex-col justify-center text-center"
-              >
-                <div className=" bg-blue-gray-900 p-3 mb-1">
-                  <Typography
-                    variant="h5"
-                    className="uppercase font-bold text-primaryText text-lg"
-                  >
-                    {item.name}
-                  </Typography>
-                </div>
-                <div className=" p-3 mb-1">
-                  {currency} {item.price}
-                </div>
-                <div className="p-4 self-center">
-                  <Button
-                    onClick={() => handlePaymentClick(item)}
-                    size="md"
-                    className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100 text-primaryText bg-btnPrimary"
-                    ripple={false}
-                    fullWidth={true}
-                  >
-                    Pagar
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
+        <CardBody className="overflow-x-auto px-0 md:px-2 md:py-3">
+          <table className="w-full min-w-max table-auto text-center">
+            <tbody>
+              {convertedItems.map((item) => (
+                <tr key={item._id}>
+                  <td className="w-36 md:w-auto border bg-blue-gray-900  p-3">
+                    {' '}
+                    <Typography
+                      variant="h5"
+                      className="uppercase font-bold  text-primaryText text-lg text-left "
+                    >
+                      {item.name}
+                    </Typography>
+                  </td>
+                  <td className="border p-3">
+                    {currency} {item.price}
+                  </td>
+                  <td className="border p-2 md:p-4">
+                    <Button
+                      onClick={() => handlePaymentClick(item)}
+                      size="sm"
+                      className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100  text-primaryText bg-btnPrimary"
+                    >
+                      Pagar
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </CardBody>
       </Card>
     </main>
