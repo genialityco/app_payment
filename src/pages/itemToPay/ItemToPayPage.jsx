@@ -89,60 +89,80 @@ const ItemToPayPage = () => {
 
   return (
     <main className="w-full">
-      <Typography variant="h2" className="text-center py-2 my-6 text-primaryText">
+      <Typography
+        variant="h2"
+        className="text-center py-2 my-6 text-primaryText"
+      >
         PAGOS
       </Typography>
-
-      <section className=" mb-7 grid grid-cols-1 justify-items-center items-center gap-y-8 md:grid-cols-2 xl:grid-cols-4  xl:h-[calc(100vh-161px)] ">
-        {convertedItems.map((item) => (
-          <Card
-            variant="gradient"
-            className="w-full max-w-[18rem] m-auto grid grid-cols-1 grid-rows-[1fr_1fr_auto]  bg-card  shadow-2xl"
-            key={item._id}
-          >
-            <CardHeader
-              color="white"
-              floated={false}
-              shadow={false}
-              className="m-0 grid place-items-center p-3 text-center bg-blue-gray-900 rounded-b-none shadow-md"
-            >
-              <Typography
-                variant="h5"
-                className="uppercase font-bold  text-primaryText text-lg "
+      <Card className="w-11/12 max-w-screen-xl m-auto border-2 my-5">
+        <CardBody className="overflow-x-auto px-0">
+          {/* Renderizar como tabla en dispositivos de escritorio */}
+          <div className="hidden md:block">
+            <table className="w-full min-w-max table-auto text-center">
+              <tbody>
+                {convertedItems.map((item) => (
+                  <tr key={item._id}>
+                    <td className="border bg-blue-gray-900  p-3">
+                      {' '}
+                      <Typography
+                        variant="h5"
+                        className="uppercase font-bold  text-primaryText text-lg text-left "
+                      >
+                        {item.name}
+                      </Typography>
+                    </td>
+                    <td className="border p-3">
+                      {currency} {item.price}
+                    </td>
+                    <td className="border p-4">
+                      <Button
+                        onClick={() => handlePaymentClick(item)}
+                        size="sm"
+                        className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100  text-primaryText bg-btnPrimary"
+                      >
+                        Pagar
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="md:hidden">
+            {/* Renderizar como columnas en dispositivos móviles */}
+            {convertedItems.map((item) => (
+              <div
+                key={item._id}
+                className="mb-4 flex flex-col justify-center text-center"
               >
-                {item.name}
-              </Typography>
-            </CardHeader>
-
-            <CardBody className="my-12 p-0 flex flex-col justify-center items-center ">
-              <Typography
-                variant="h1"
-                color="white"
-                className="mt-6 flex justify-center gap-1 text-7xl font-normal"
-              >
-                <span className="mt-2 text-sm text-secundaryText">
-                  {currency}
-                </span>
-                <span className="text-4xl text-secundaryText font-bold">
-                  {item.price}{' '}
-                </span>
-              </Typography>
-            </CardBody>
-
-            <CardFooter className="py-6">
-              <Button
-                onClick={() => handlePaymentClick(item)}
-                size="lg"
-                className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100  text-primaryText bg-btnPrimary"
-                ripple={false}
-                fullWidth={true}
-              >
-                Pagar
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
-      </section>
+                <div className=" bg-blue-gray-900 p-3 mb-1">
+                  <Typography
+                    variant="h5"
+                    className="uppercase font-bold text-primaryText text-lg"
+                  >
+                    {item.name}
+                  </Typography>
+                </div>
+                <div className=" p-3 mb-1">
+                  {currency} {item.price}
+                </div>
+                <div className="p-4 self-center">
+                  <Button
+                    onClick={() => handlePaymentClick(item)}
+                    size="md"
+                    className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100 text-primaryText bg-btnPrimary"
+                    ripple={false}
+                    fullWidth={true}
+                  >
+                    Pagar
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardBody>
+      </Card>
     </main>
   );
 };

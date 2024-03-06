@@ -48,7 +48,7 @@ export const TableUsedCoupons = ({ getAllPayments, payments, formatDate }) => {
         <tbody>
           {payments.length === 0 && (
             <tr>
-              <td colSpan="7">
+              <td colSpan={5}>
                 <Typography
                   variant="paragraph"
                   color="blue-gray"
@@ -72,7 +72,7 @@ export const TableUsedCoupons = ({ getAllPayments, payments, formatDate }) => {
                   payment.coupon.discount
                 )}
               </td>
-              <td className="p-4">{formatDate(payment.approved_date)}</td>
+              {/* <td className="p-4">{formatDate(payment.approved_date)}</td> */}
             </tr>
           ))}
         </tbody>
