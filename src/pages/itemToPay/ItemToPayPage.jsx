@@ -4,9 +4,7 @@ import { getItemsToPay } from '../../services/itemToPayService';
 import { useCurrency } from '../../contexts/CurrencyContext';
 import {
   Card,
-  CardHeader,
   CardBody,
-  CardFooter,
   Typography,
   Button,
   Spinner,
@@ -38,7 +36,32 @@ const ItemToPayPage = () => {
     setConvertedItems(itemsData.data);
   }, []);
 
-  const convertPrices = useCallback(
+ 
+  const formatNumberByCountry = (value, countryCode) => {
+    // Separador de miles por defecto
+    let separator = ',';
+  
+    // Determinar el separador de miles según el país
+    switch (countryCode) {
+      case 'MX': // México
+      case 'CO': // Colombia
+      case 'CL': // Chile
+      case 'AR': // Argentina
+        separator = '.';
+        break;
+       
+      default:
+        separator = ',';
+    }
+    // Formatear el número manualmente
+  const parts = value.toString().split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+
+  return parts.join('.');
+};
+
+
+const convertPrices = useCallback(
     async (items) => {
       const converted = await Promise.all(
         items.map(async (item) => {
@@ -47,16 +70,19 @@ const ItemToPayPage = () => {
             'COP',
             currency
           );
+
           return {
             ...item,
-            price: convertedPrice ? parseFloat(convertedPrice) : item.price,
+            price: convertedPrice
+              ? formatNumberByCountry(parseFloat(convertedPrice), selectedCountry.countryCode)
+              : item.price,
           };
         })
       );
       setConvertedItems(converted);
     },
-    [currency]
-  );
+    [currency, selectedCountry.countryCode]
+  ); 
 
   const handlePaymentClick = useCallback(
     (item) => {
