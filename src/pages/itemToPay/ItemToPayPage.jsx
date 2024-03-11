@@ -12,6 +12,15 @@ import {
   Spinner,
 } from '@material-tailwind/react';
 
+/**
+ * Función para convertir entre monedas, según el país o moneda seleccionada.
+ * 
+ * @param {number} amount 
+ * @param {string} fromCurrency 
+ * @param {string} toCurrency 
+ * @returns {amount.<number>}
+ */
+
 const convertCurrency = async (amount, fromCurrency, toCurrency) => {
   if (fromCurrency === toCurrency) return amount;
   const url = `https://api.exchangerate-api.com/v4/latest/${fromCurrency}`;
@@ -93,7 +102,7 @@ const ItemToPayPage = () => {
         variant="h2"
         className="text-center py-2 my-6 text-primaryText"
       >
-        PAGOS
+        PRECIOS
       </Typography>
       <Card className="w-11/12 max-w-screen-xl m-auto border-2 my-5">
         <CardBody className="overflow-x-auto px-0">
