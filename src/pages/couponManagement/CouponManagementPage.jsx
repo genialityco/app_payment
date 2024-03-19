@@ -140,7 +140,7 @@ export const CouponManagement = () => {
             ) : null}
             <Button
               onClick={() => setShowUsedCoupons(!showUsedCoupons)}
-              className=" md:w-28 p-3 font-openSans bg-btnPrimary focus:opacity-100"
+              className=" md:w-28 p-3 font-openSans bg-btnPrimary focus:opacity-95"
             >
               {showUsedCoupons ? 'Ver cupones' : 'Ver usos'}
             </Button>
