@@ -1,6 +1,10 @@
 import { Typography } from '@material-tailwind/react';
+import { formatPriceByCountry } from '../../../utils/formatPriceByCountry';
 
 export const PurchaseSummary = ({ item, currency, price }) => {
+
+  const formattedPrice = formatPriceByCountry(price);
+ 
   return (
     <div className="border-2  border-cyan-300 border-dashed">
       <Typography
@@ -16,7 +20,7 @@ export const PurchaseSummary = ({ item, currency, price }) => {
         color="blue-gray"
         className="font-openSans font-bold"
       >
-        Total: {currency} {price}
+        Total: {currency} {formattedPrice}
       </Typography>
     </div>
   );

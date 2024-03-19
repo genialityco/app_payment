@@ -35,6 +35,7 @@ const PaymentFormPage = () => {
     item?.currency,
     currency
   );
+  //console.log(convertedPrice)
 
   const [coupon, handleChangeCoupon, applyCoupon, couponId] = useCoupon(
     convertedPrice,

@@ -110,7 +110,8 @@ const ItemToPayManagementPage = () => {
           itemEdit={itemEdit}
           isEditMode={isEditMode}
         />
-        <div className="flex justify-center md:justify-end gap-2 m-0 xl:me-14 my-5">
+        {/* <div className="flex justify-center md:justify-end gap-2 m-0 xl:me-14 my-5"> */}
+        <div className="my-5 flex justify-center gap-2 md:justify-end xl:me-32 ">
           {showItems ? (
             <Button
               size="md"
@@ -123,7 +124,7 @@ const ItemToPayManagementPage = () => {
           <Button
             size="md"
             onClick={() => setShowItems(!showItems)}
-            className=" font-openSans bg-btnPrimary "
+            className=" font-openSans bg-btnPrimary focus:opacity-100 "
           >
             {showItems ? 'Historial de pagos' : 'Ver pagos creados'}
           </Button>

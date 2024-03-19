@@ -16,7 +16,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className="bg-[url(/src/assets/wave.png)] bg-no-repeat 2xl:bg-cover">
+    // <div className="bg-[url(/src/assets/wave.png)] bg-no-repeat 2xl:bg-cover">
+    <div className="bg-[url(/src/assets/wave.png)] bg-no-repeat 2xl:bg-[length:100vw_60vh]">
       <CurrencyProvider setIsLoading={setIsLoading}>
         <AuthProvider>
           <BrowserRouter>

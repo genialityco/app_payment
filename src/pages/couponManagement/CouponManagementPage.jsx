@@ -129,7 +129,7 @@ export const CouponManagement = () => {
               </Typography>
             )}
           </div>
-          <div className="flex justify-center md:justify-end gap-2 m-0">
+          <div className="py-4 flex justify-center md:justify-end gap-2 m-0">
             {!showUsedCoupons ? (
               <Button
                 onClick={() => setIsModalOpen(true)}
@@ -140,7 +140,7 @@ export const CouponManagement = () => {
             ) : null}
             <Button
               onClick={() => setShowUsedCoupons(!showUsedCoupons)}
-              className=" md:w-28 p-3 font-openSans bg-btnPrimary"
+              className=" md:w-28 p-3 font-openSans bg-btnPrimary focus:opacity-100"
             >
               {showUsedCoupons ? 'Ver cupones' : 'Ver usos'}
             </Button>

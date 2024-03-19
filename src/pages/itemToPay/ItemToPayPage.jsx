@@ -9,6 +9,7 @@ import {
   Button,
   Spinner,
 } from '@material-tailwind/react';
+import { formatPriceByCountry } from '../../utils/formatPriceByCountry';
 
 const convertCurrency = async (amount, fromCurrency, toCurrency) => {
   if (fromCurrency === toCurrency) return amount;
@@ -17,6 +18,7 @@ const convertCurrency = async (amount, fromCurrency, toCurrency) => {
     const response = await fetch(url);
     const data = await response.json();
     const rate = data.rates[toCurrency];
+
     return (amount * rate).toFixed(2);
   } catch (error) {
     console.error('Error converting currency: ', error);
@@ -36,32 +38,7 @@ const ItemToPayPage = () => {
     setConvertedItems(itemsData.data);
   }, []);
 
- 
-  const formatNumberByCountry = (value, countryCode) => {
-    // Separador de miles por defecto
-    let separator = ',';
-  
-    // Determinar el separador de miles según el país
-    switch (countryCode) {
-      case 'MX': // México
-      case 'CO': // Colombia
-      case 'CL': // Chile
-      case 'AR': // Argentina
-        separator = '.';
-        break;
-       
-      default:
-        separator = ',';
-    }
-    // Formatear el número manualmente
-  const parts = value.toString().split('.');
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, separator);
-
-  return parts.join('.');
-};
-
-
-const convertPrices = useCallback(
+  const convertPrices = useCallback(
     async (items) => {
       const converted = await Promise.all(
         items.map(async (item) => {
@@ -70,19 +47,18 @@ const convertPrices = useCallback(
             'COP',
             currency
           );
+         
 
           return {
             ...item,
-            price: convertedPrice
-              ? formatNumberByCountry(parseFloat(convertedPrice), selectedCountry.countryCode)
-              : item.price,
+            price: convertedPrice ? parseFloat(convertedPrice) : item.price,
           };
         })
       );
       setConvertedItems(converted);
     },
     [currency, selectedCountry.countryCode]
-  ); 
+  );
 
   const handlePaymentClick = useCallback(
     (item) => {
@@ -137,7 +113,7 @@ const convertPrices = useCallback(
                     </Typography>
                   </td>
                   <td className="border p-3">
-                    {currency} {item.price}
+                    {currency} {formatPriceByCountry(item.price)}
                   </td>
                   <td className="border p-2 md:p-4">
                     <Button
@@ -159,3 +135,5 @@ const convertPrices = useCallback(
 };
 
 export default ItemToPayPage;
+
+

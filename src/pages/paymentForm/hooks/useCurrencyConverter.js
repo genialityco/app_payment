@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 export const useCurrencyConverter = (amount, fromCurrency, toCurrency) => {
   const [convertedPrice, setConvertedPrice] = useState(0);
+  amount = parseFloat(amount.toString().replace(/,/g, ""));
   useEffect(() => {
     const convertCurrency = async () => {
       if (fromCurrency === toCurrency) {
