@@ -20,7 +20,7 @@ module.exports = withMT({
       },
       screens: {
         'mobile': '640px',
-      },
+      }
     },
   },
   plugins: [],

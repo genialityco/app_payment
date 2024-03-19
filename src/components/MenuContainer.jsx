@@ -1,38 +1,40 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
   Navbar,
   Collapse,
   Typography,
   IconButton,
   List,
-} from '@material-tailwind/react';
-import { useAuth } from '../contexts/AuthContext';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { CountrySelector } from './CountrySelector';
-import { CurrencySelector } from './CurrencySelector';
-import MenuItems from './MenuItems';
-import { HiHome, HiBanknotes, HiCurrencyDollar } from 'react-icons/hi2';
+  Avatar,
+} from "@material-tailwind/react";
+import { useAuth } from "../contexts/AuthContext";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { CountrySelector } from "./CountrySelector";
+import { CurrencySelector } from "./CurrencySelector";
+import MenuItems from "./MenuItems";
+import { HiHome, HiBanknotes, HiCurrencyDollar } from "react-icons/hi2";
+import defaultAvatar from "../assets/images/default-avatar.jpg";
 
 const itemsMenu = [
   {
-    route: '/items-to-pay',
-    name: 'Home',
-    icon: <HiHome className="w-7 h-6"  />,
+    route: "/items-to-pay",
+    name: "Home",
+    icon: <HiHome className="w-7 h-6" />,
   },
   {
-    route: '/payment-history',
-    name: 'Consultar pagos',
+    route: "/payment-history",
+    name: "Consultar pagos",
     icon: <HiCurrencyDollar className="w-7 h-6" />,
   },
   {
-    route: '/items-to-pay-management',
-    name: 'Administrar Pagos',
+    route: "/items-to-pay-management",
+    name: "Administrar Pagos",
     isAdminModule: true,
     icon: <HiBanknotes className="w-7 h-6" />,
   },
   {
-    route: '/coupon-management',
-    name: 'Administrar cupones',
+    route: "/coupon-management",
+    name: "Administrar cupones",
     isAdminModule: true,
     icon: <HiBanknotes className="w-7 h-6" />,
   },
@@ -46,9 +48,15 @@ function NavList() {
       <div>
         <List className="flex flex-row mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:p-1 lg:items-center ">
           {itemsMenu.map((item) => {
-            if (!item.isAdminModule || (item.isAdminModule && isAdministrator)) {
+            if (
+              !item.isAdminModule ||
+              (item.isAdminModule && isAdministrator)
+            ) {
               return (
-                <div className='hover:text-blue-gray-900' key={`country-name-${item.name}`}>
+                <div
+                  className="hover:text-blue-gray-900"
+                  key={`country-name-${item.name}`}
+                >
                   <MenuItems
                     name={item.name}
                     icon={item.icon}
@@ -82,6 +90,7 @@ function NavList() {
 
 export const MenuContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { currentUser, isAdministrator } = useAuth();
 
   useEffect(() => {
     function handleResize() {
@@ -90,8 +99,8 @@ export const MenuContainer = () => {
       }
     }
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [isOpen]);
 
   const toggleNav = () => setIsOpen(!isOpen);
@@ -107,7 +116,7 @@ export const MenuContainer = () => {
           variant="text"
           color="white"
           className="lg:hidden"
-          aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+          aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
         >
           {isOpen ? (
             <XMarkIcon className="h-6 w-6" />
@@ -122,6 +131,14 @@ export const MenuContainer = () => {
           <CountrySelector />
           <CurrencySelector />
         </div>
+        {currentUser?.displayName ? (
+          <div className="flex flex-row items-center w-auto gap-2 text-center border rounded-3xl p-2">
+            <Typography variant="small">{currentUser.displayName}</Typography>
+            <Avatar src={defaultAvatar} alt="avatar" />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <Collapse open={isOpen}>
         <NavList />

@@ -29,23 +29,89 @@ export const AuthProvider = ({ children }) => {
       );
       setIsAdministrator(isAdmin);
 
-      // Si no hay usuario o el usuario no es un administrador, realiza la autenticación anónima
-      if (!user || !isAdmin) {
-        handleAnonymousLogin();
+      const userName = localStorage.getItem("userName");
+      if (user && user.isAnonymous && userName) {
+        user.displayName = userName;
       }
+
+      // Si no hay usuario o el usuario no es un administrador, realiza la autenticación anónima
+      // if (!user || (!isAdmin && !user.isAnonymous)) {
+      //   handleAnonymousLogin();
+      // }
     });
 
     return unsubscribe;
   }, []);
 
+  console.log("Usuario anonimo:", userAnonymous);
+  console.log("Usuario autenticado:", currentUser);
+
   const handleAnonymousLogin = async () => {
-    try {
-      const userAnonymous = await signInAnonymously(auth);
-      setUserAnonymous(userAnonymous);
-      console.log(userAnonymous);
-    } catch (error) {
-      console.error("Error al iniciar sesión anónimamente:", error);
+    // Solo intenta autenticar como anónimo si no hay un usuario actual o si el usuario actual no es anónimo
+    if (!currentUser || (currentUser && !currentUser.isAnonymous)) {
+      try {
+        const userCredential = await signInAnonymously(auth);
+        setUserAnonymous(userCredential.user);
+        // Guarda el UID en sessionStorage o localStorage
+        sessionStorage.setItem("userAnonymousUid", userCredential.user.uid);
+        console.log("Usuario anónimo:", userCredential.user);
+        return userCredential.user; // Devuelve el usuario anónimo para su uso posterior
+      } catch (error) {
+        console.error("Error al iniciar sesión anónimamente:", error);
+      }
     }
+    // Si ya existe un usuario anónimo, devuelve ese usuario
+    return currentUser;
+  };
+
+  const setNameForAnonymousUser = async (name) => {
+    const anonymousUser = await handleAnonymousLogin(); // Asegura la autenticación anónima primero
+
+    if (anonymousUser && name && !anonymousUser.displayName) {
+      console.log("Estableciendo nombre para usuario anónimo:", name);
+      console.log(anonymousUser);
+      const db = getFirestore(app);
+      try {
+        const docRef = await addDoc(collection(db, "anonymousUsers"), {
+          uid: anonymousUser.uid, // Usa el uid del usuario anónimo autenticado
+          name: name,
+        });
+        anonymousUser.displayName = name;
+        localStorage.setItem("userName", anonymousUser.displayName);
+        console.log(
+          "Nombre del usuario anónimo guardado en Firestore",
+          docRef.id
+        );
+      } catch (error) {
+        console.error(
+          "Error al guardar el nombre del usuario anónimo en Firestore:",
+          error
+        );
+      }
+    }
+  };
+
+  const getAnonymousUserInfo = async () => {
+    const userAnonymousUid = sessionStorage.getItem("userAnonymousUid");
+    if (userAnonymousUid) {
+      const db = getFirestore(app);
+      const querySnapshot = await getDocs(
+        query(
+          collection(db, "anonymousUsers"),
+          where("uid", "==", userAnonymousUid)
+        )
+      );
+
+      let userName = "";
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+        userName = doc.data().name;
+      });
+
+      console.log("Nombre recuperado del usuario anónimo:", userName);
+      return { uid: userAnonymousUid, name: userName };
+    }
+    return null;
   };
 
   const login = (email, password) => {
@@ -60,10 +126,15 @@ export const AuthProvider = ({ children }) => {
 
   const saveEventData = async (eventData) => {
     const db = getFirestore(app);
-    eventData.userId = currentUser ? currentUser.user.uid : userAnonymous.user.uid;
+    eventData.userId = currentUser
+      ? currentUser.user.uid
+      : userAnonymous.user.uid;
     try {
       const docRef = await addDoc(collection(db, "dataSessions"), eventData);
-      console.log("Información del evento guardada correctamente, ID del documento:", docRef.id);
+      console.log(
+        "Información del evento guardada correctamente, ID del documento:",
+        docRef.id
+      );
     } catch (error) {
       console.error("Error al guardar la información del evento:", error);
     }
@@ -75,6 +146,7 @@ export const AuthProvider = ({ children }) => {
     login,
     logout,
     saveEventData,
+    setNameForAnonymousUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
