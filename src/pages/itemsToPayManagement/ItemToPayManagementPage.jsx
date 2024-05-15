@@ -97,7 +97,7 @@ const ItemToPayManagementPage = () => {
 
   return (
     <div className="w-full h-[calc(100vh-83px)]">
-      <Typography variant="h2" className="text-center py-10 text-primaryText">
+      <Typography variant="h2" className="text-center py-5 text-primaryText">
         Administrador de Pagos
       </Typography>
       <section className="flex flex-col justify-center p-5 gap-y-5 ">
@@ -110,7 +110,8 @@ const ItemToPayManagementPage = () => {
           itemEdit={itemEdit}
           isEditMode={isEditMode}
         />
-        <div className="flex justify-center md:justify-end gap-2 m-0 xl:me-14 my-5">
+        {/* <div className="flex justify-center md:justify-end gap-2 m-0 xl:me-14 my-5"> */}
+        <div className="my-5 flex justify-center gap-2 md:justify-end xl:me-32 ">
           {showItems ? (
             <Button
               size="md"
@@ -123,7 +124,7 @@ const ItemToPayManagementPage = () => {
           <Button
             size="md"
             onClick={() => setShowItems(!showItems)}
-            className=" font-openSans bg-btnPrimary "
+            className=" font-openSans bg-btnPrimary focus:opacity-95 "
           >
             {showItems ? 'Historial de pagos' : 'Ver pagos creados'}
           </Button>
