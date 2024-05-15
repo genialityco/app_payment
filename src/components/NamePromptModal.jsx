@@ -3,7 +3,7 @@ import { Dialog, DialogHeader, DialogBody, DialogFooter, Button, Input } from "@
 import { useAuth } from '../contexts/AuthContext';
 
 function NamePromptModal({ isOpen = true, onSave }) {
-    const { setNameForAnonymousUser } = useAuth();
+    const { handleAnonymousLogin } = useAuth();
   const [name, setName] = useState('');
 
   const handleClose = () => {
@@ -15,7 +15,7 @@ function NamePromptModal({ isOpen = true, onSave }) {
   const handleNameSave = (name) => {
 
     // Llama a la función setNameForAnonymousUser desde el contexto de autenticación
-    setNameForAnonymousUser(name)
+    handleAnonymousLogin(name)
       .then(() => {
         console.log("Nombre establecido para el usuario anónimo", name);
         onSave()

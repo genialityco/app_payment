@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   signInAnonymously,
+  updateProfile,
 } from "firebase/auth";
 import { getFirestore, collection, addDoc, getDoc } from "firebase/firestore";
 const auth = getAuth(app);
@@ -43,16 +44,15 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  console.log("Usuario anonimo:", userAnonymous);
-  console.log("Usuario autenticado:", currentUser);
-
-  const handleAnonymousLogin = async () => {
+  const handleAnonymousLogin = async (name) => {
     // Solo intenta autenticar como anónimo si no hay un usuario actual o si el usuario actual no es anónimo
     if (!currentUser || (currentUser && !currentUser.isAnonymous)) {
       try {
         const userCredential = await signInAnonymously(auth);
         setUserAnonymous(userCredential.user);
+        await updateProfile(userCredential.user, { displayName: name });
         // Guarda el UID en sessionStorage o localStorage
+        localStorage.setItem("userName", name);
         sessionStorage.setItem("userAnonymousUid", userCredential.user.uid);
         console.log("Usuario anónimo:", userCredential.user);
         return userCredential.user; // Devuelve el usuario anónimo para su uso posterior
@@ -70,18 +70,10 @@ export const AuthProvider = ({ children }) => {
     if (anonymousUser && name && !anonymousUser.displayName) {
       console.log("Estableciendo nombre para usuario anónimo:", name);
       console.log(anonymousUser);
-      const db = getFirestore(app);
       try {
-        const docRef = await addDoc(collection(db, "anonymousUsers"), {
-          uid: anonymousUser.uid, // Usa el uid del usuario anónimo autenticado
-          name: name,
-        });
-        anonymousUser.displayName = name;
+        await updateProfile(userAnonymous, { displayName: name });
         localStorage.setItem("userName", anonymousUser.displayName);
-        console.log(
-          "Nombre del usuario anónimo guardado en Firestore",
-          docRef.id
-        );
+        console.log("Nombre del usuario anónimo guardado en Firestore");
       } catch (error) {
         console.error(
           "Error al guardar el nombre del usuario anónimo en Firestore:",
@@ -146,7 +138,7 @@ export const AuthProvider = ({ children }) => {
     login,
     logout,
     saveEventData,
-    setNameForAnonymousUser,
+    handleAnonymousLogin
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

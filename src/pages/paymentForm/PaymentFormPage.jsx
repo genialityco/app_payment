@@ -41,7 +41,7 @@ const PaymentFormPage = () => {
     setConvertedPrice
   );
 
-  const { saveEventData } = useAuth();
+  const { currentUser, saveEventData } = useAuth();
 
   useEffect(() => {
     loadItem();
@@ -90,6 +90,7 @@ const PaymentFormPage = () => {
       country: selectedCountry.countryCode,
       payer: formData,
       description: item.name,
+      uidAnonymous: currentUser.uid,
       success_url: `${window.location.origin}/payment-handle`,
       back_url: `${window.location.origin}/payment/${id}`,
     };
