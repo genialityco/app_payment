@@ -70,6 +70,7 @@ const PaymentFormPage = () => {
       status: payment.status,
       payer: formData,
       description: item.name,
+      uidAnonymous: currentUser.uid,
       redirect_url: payment.redirect_url,
       coupon: couponId != '' ? couponId : null,
     };
