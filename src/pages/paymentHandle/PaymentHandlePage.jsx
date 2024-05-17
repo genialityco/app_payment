@@ -52,7 +52,7 @@ const PaymentHandlePage = () => {
   const downloadPdf = () => {
     const element = document.getElementById("payment-details");
     imagesLoaded(element).then(() => {
-      html2canvas(element, { scale: 2 })
+      html2canvas(element, { scale: 2, useCORS: true })
         .then((canvas) => {
           const imgData = canvas.toDataURL("image/png");
           const pdf = new jsPDF({
@@ -120,13 +120,13 @@ const PaymentHandlePage = () => {
               className="font-openSans font-medium text-secundaryText mt-4"
               dangerouslySetInnerHTML={{ __html: payment.ticketGenerated }}
             />
-            <Button
+            {/* <Button
               size="md"
               className="download-btn-style"
               onClick={downloadPdf}
             >
               Descargar como PDF
-            </Button>
+            </Button> */}
           </div>
         );
       case "PENDING":
