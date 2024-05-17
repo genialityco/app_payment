@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getPaymentByOrderId } from "../../services/paymentDbService";
 import { Link } from "react-router-dom";
 import { List, Button, Card, Typography } from "@material-tailwind/react";
+import html2pdf from "html2pdf.js";
 
 const PaymentHandlePage = () => {
   const [payment, setPayment] = useState(null);
@@ -32,6 +33,24 @@ const PaymentHandlePage = () => {
 
     fetchPayment();
   }, []);
+
+  const downloadPdf = () => {
+    const element = document.getElementById("payment-details");
+    html2pdf()
+      .from(element)
+      .set({
+        margin: 1,
+        filename: `payment-details-${payment.order_id}.pdf`,
+        html2canvas: { scale: 2 },
+        jsPDF: {
+          orientation: "portrait",
+          unit: "in",
+          format: "letter",
+          compressPDF: true,
+        },
+      })
+      .save();
+  };
 
   if (loading)
     return (
@@ -68,23 +87,29 @@ const PaymentHandlePage = () => {
         return (
           <div>
             <p className="font-openSans font-semibold text-secundaryText text-justify">
-              {" "}
               Estimado{" "}
               <span className="font-openSans font-bold italic">
-                {" "}
                 {payment.payer.name}
               </span>
               , el pago de su{" "}
               <span className="font-openSans font-bold italic">
                 {payment.description}
-              </span>{" "}
+              </span>
               ha sido efectuado correctamente, recibirá la información de su
               boleta al correo electrónico registrado al pagar.
             </p>
             <div
+              id="payment-details"
               className="font-openSans font-medium text-secundaryText mt-4"
               dangerouslySetInnerHTML={{ __html: payment.ticketGenerated }}
             />
+            <Button
+              size="md"
+              className="download-btn-style"
+              onClick={downloadPdf}
+            >
+              Descargar como PDF
+            </Button>
           </div>
         );
       case "PENDING":
