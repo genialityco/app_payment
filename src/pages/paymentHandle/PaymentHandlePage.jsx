@@ -36,12 +36,14 @@ const PaymentHandlePage = () => {
 
   const downloadPdf = () => {
     const element = document.getElementById("payment-details");
+
+    // Opción adicional para asegurar que las imágenes se carguen correctamente
     html2pdf()
-      .from(element)
       .set({
-        margin: 1,
-        filename: `payment-details-${payment.order_id}.pdf`,
-        html2canvas: { scale: 2 },
+        html2canvas: {
+          scale: 2, // Ajusta según necesidad para mejorar la calidad del PDF
+          useCORS: true, // Permite cargar imágenes desde servidores externos
+        },
         jsPDF: {
           orientation: "portrait",
           unit: "in",
@@ -49,7 +51,23 @@ const PaymentHandlePage = () => {
           compressPDF: true,
         },
       })
-      .save();
+      .from(element)
+      .toPdf()
+      .get("pdf")
+      .then(function (pdf) {
+        var totalPages = pdf.internal.getNumberOfPages();
+        for (var i = 1; i <= totalPages; i++) {
+          pdf.setPage(i);
+          pdf.setFontSize(10);
+          pdf.setTextColor(150);
+          pdf.text(
+            "Page " + i + " of " + totalPages,
+            0.5,
+            pdf.internal.pageSize.getHeight() - 0.5
+          );
+        }
+      })
+      .save(`payment-details-${payment.order_id}.pdf`);
   };
 
   if (loading)

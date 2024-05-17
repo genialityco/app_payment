@@ -1,24 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { Dialog, DialogHeader, DialogBody, DialogFooter, Button, Input } from "@material-tailwind/react";
-import { useAuth } from '../contexts/AuthContext';
+import React, { useState } from "react";
+import {
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+  Button,
+  Input,
+} from "@material-tailwind/react";
+import { useAuth } from "../contexts/AuthContext";
 
 function NamePromptModal({ isOpen = true, onSave }) {
-    const { handleAnonymousLogin } = useAuth();
-  const [name, setName] = useState('');
+  const { handleAnonymousLogin } = useAuth();
+  const [name, setName] = useState("");
 
-  const handleClose = () => {
-    handleNameSave(name);
-    setName(''); // Resetea el campo de nombre para el próximo uso
+  const handleNameSave = () => {
+    if (name.trim() === "") {
+      alert("Por favor, introduce un nombre.");
+      return;
+    }
 
-  };
-
-  const handleNameSave = (name) => {
-
-    // Llama a la función setNameForAnonymousUser desde el contexto de autenticación
     handleAnonymousLogin(name)
       .then(() => {
         console.log("Nombre establecido para el usuario anónimo", name);
-        onSave()
+        setName(""); // Resetea el campo de nombre para el próximo uso
+        onSave(); // Cierra el modal si es necesario o realiza acciones adicionales
       })
       .catch((error) => {
         console.error(
@@ -29,7 +34,7 @@ function NamePromptModal({ isOpen = true, onSave }) {
   };
 
   return (
-    <Dialog size="md" open={isOpen} handler={handleClose}>
+    <Dialog size="md" open={isOpen}>
       <DialogHeader>Ingresa tu nombre</DialogHeader>
       <DialogBody>
         <Input
@@ -41,11 +46,7 @@ function NamePromptModal({ isOpen = true, onSave }) {
         />
       </DialogBody>
       <DialogFooter>
-        <Button 
-          onClick={handleClose}
-        >
-          Guardar
-        </Button>
+        <Button onClick={handleNameSave}>Guardar</Button>
       </DialogFooter>
     </Dialog>
   );
