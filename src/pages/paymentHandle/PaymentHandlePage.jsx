@@ -14,7 +14,7 @@ const PaymentHandlePage = () => {
         setLoading(true);
         const orderId = sessionStorage.getItem('paymentId');
         const paymentData = await getPaymentByOrderId(orderId);
-        const getTicket = await getTicketByField();
+        // const getTicket = await getTicketByField();
         setPayment(paymentData.data);
 
         // localStorage.removeItem("formData");
