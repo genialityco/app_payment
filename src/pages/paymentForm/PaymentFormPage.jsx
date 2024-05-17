@@ -103,8 +103,8 @@ const PaymentFormPage = () => {
       sessionStorage.setItem('item', JSON.stringify(item));
       await handlePaymentDb(response);
       sessionStorage.setItem('paymentCreated', 'true');
-      // window.location.href = response.redirect_url;
-      window.open(`${response.redirect_url}`);
+      window.location.href = response.redirect_url;
+      // window.open(`${response.redirect_url}`);
     } catch (error) {
       console.error(error);
     }

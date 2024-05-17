@@ -132,7 +132,7 @@ export const MenuContainer = () => {
           <CurrencySelector />
         </div>
         {currentUser?.displayName ? (
-          <div className="flex flex-row items-center w-auto gap-2 text-center border rounded-3xl p-2">
+          <div className="flex flex-row items-center w-auto gap-2 text-center p-2 px-6">
             <Typography variant="small">{currentUser.displayName}</Typography>
             <Avatar src={defaultAvatar} alt="avatar" />
           </div>

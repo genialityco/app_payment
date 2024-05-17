@@ -33,15 +33,23 @@ function App() {
     setIsNameModalOpen(false);
   };
 
+  const backgroundStyle = {
+    backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/magnetic-be10a.appspot.com/o/images%2FLogos.png?alt=media&token=cbb567ba-2851-4df3-a240-54e507d7d908')`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center center",
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed",
+    minHeight: "100vh",
+  };
+
   return (
-    // <div className="bg-[url(/src/assets/wave.png)] bg-no-repeat 2xl:bg-cover">
-    <div className="bg-[url(/src/assets/wave.png)] bg-no-repeat 2xl:bg-[length:100vw_60vh]">
+    <div style={backgroundStyle}>
       <CurrencyProvider setIsLoading={setIsLoading}>
         <AuthProvider>
           <BrowserRouter>
             <NamePromptModal isOpen={isNameModalOpen} onSave={handleNameSave} />
             {isLoading ? (
-              <Spinner className="w-16 m-auto h-screen text-gray-900/50 " />
+              <Spinner className="w-16 m-auto h-screen text-gray-900/50" />
             ) : (
               <>
                 <MenuContainer />
@@ -50,7 +58,6 @@ function App() {
                     path="/"
                     element={<Navigate replace to="/items-to-pay" />}
                   />
-
                   <Route path="/items-to-pay" element={<ItemToPayPage />} />
                   <Route path="/payment/:id" element={<PaymentFormPage />} />
                   <Route

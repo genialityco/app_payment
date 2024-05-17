@@ -14,6 +14,7 @@ const PaymentHandlePage = () => {
         setLoading(true);
         const orderId = sessionStorage.getItem('paymentId');
         const paymentData = await getPaymentByOrderId(orderId);
+        const getTicket = await getTicketByField();
         setPayment(paymentData.data);
 
         // localStorage.removeItem("formData");
@@ -77,7 +78,7 @@ const PaymentHandlePage = () => {
             <span className="font-openSans font-bold italic">
               {payment.description}
             </span>{' '}
-            ha sido efectuado correctamente.
+            ha sido efectuado correctamente, recibirá la información de su boleta al correo electrónico registrado al pagar.
           </p>
         );
       case 'PENDING':

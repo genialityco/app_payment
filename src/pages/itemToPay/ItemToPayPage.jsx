@@ -99,15 +99,24 @@ const ItemToPayPage = () => {
 
   return (
     <main className="w-full">
-      <div>
-        <img src="https://firebasestorage.googleapis.com/v0/b/magnetic-be10a.appspot.com/o/images%2FBanner.png?alt=media&token=b477b334-4660-430c-8cbd-11befe8d7915" />
+      <div className="shadow-lg">
+        <img src="https://firebasestorage.googleapis.com/v0/b/magnetic-be10a.appspot.com/o/images%2FBanner%204mb.png?alt=media&token=5d332619-e0fc-4f9e-bcc1-2a6b977d11f6" />
       </div>
       <Card className="w-11/12 max-w-screen-xl m-auto border-2 p-1 mt-5">
         <CardBody className="overflow-x-auto px-0 md:px-2 md:py-3">
           <Typography variant="h2" className="text-center mb-5 text-black">
             Boletería Yusapi
           </Typography>
-          <Typography className="m-1 mb-5">
+          <Typography variant="paragraph" className="m-1">
+            <strong>Evento:</strong> Que día tan Padre
+          </Typography>
+          <Typography variant="paragraph" className="m-1">
+            <strong>Lugar:</strong> Criadero YUSAPI Vereda la trinidad - Duitama
+          </Typography>
+          <Typography variant="paragraph" className="m-1">
+            <strong>Fecha:</strong> 9 de Junio Horario: 1pm a 5pm
+          </Typography>
+          <Typography variant="paragraph" className="m-1 mb-5">
             La boleta de entrada al evento incluye una comida por boleta.
           </Typography>
           <table className="w-full m-1 min-w-max table-auto text-center">
@@ -124,7 +133,7 @@ const ItemToPayPage = () => {
                     </Typography>
                   </td>
                   <td className="border p-3">
-                     $ {formatPriceByCountry(item.price)} {currency}
+                    $ {formatPriceByCountry(item.price)} {currency}
                   </td>
                   <td className="border p-2 md:p-4">
                     <Button
