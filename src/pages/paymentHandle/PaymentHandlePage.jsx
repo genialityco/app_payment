@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { getPaymentByOrderId } from '../../services/paymentDbService';
-import { Link } from 'react-router-dom';
-import { List, Button, Card, Typography } from '@material-tailwind/react';
+import React, { useState, useEffect } from "react";
+import { getPaymentByOrderId } from "../../services/paymentDbService";
+import { Link } from "react-router-dom";
+import { List, Button, Card, Typography } from "@material-tailwind/react";
 
 const PaymentHandlePage = () => {
   const [payment, setPayment] = useState(null);
@@ -12,9 +12,8 @@ const PaymentHandlePage = () => {
     const fetchPayment = async () => {
       try {
         setLoading(true);
-        const orderId = sessionStorage.getItem('paymentId');
+        const orderId = sessionStorage.getItem("paymentId");
         const paymentData = await getPaymentByOrderId(orderId);
-        // const getTicket = await getTicketByField();
         setPayment(paymentData.data);
 
         // localStorage.removeItem("formData");
@@ -23,7 +22,7 @@ const PaymentHandlePage = () => {
         // localStorage.removeItem("paymentId");
         // localStorage.removeItem("selectedCountryCode");
         // sessionStorage.removeItem("paymentCreated");
-      sessionStorage.clear();
+        sessionStorage.clear();
       } catch (err) {
         setError(err);
       } finally {
@@ -65,34 +64,41 @@ const PaymentHandlePage = () => {
   // Función para determinar el mensaje según el estado del pago
   const paymentStatusMessage = () => {
     switch (payment.status) {
-      case 'PAID':
+      case "PAID":
         return (
-          <p className="font-openSans font-semibold text-secundaryText text-justify">
-            {' '}
-            Estimado{' '}
-            <span className="font-openSans font-bold italic">
-              {' '}
-              {payment.payer.name}
-            </span>
-            , el pago de su{' '}
-            <span className="font-openSans font-bold italic">
-              {payment.description}
-            </span>{' '}
-            ha sido efectuado correctamente, recibirá la información de su boleta al correo electrónico registrado al pagar.
-          </p>
+          <div>
+            <p className="font-openSans font-semibold text-secundaryText text-justify">
+              {" "}
+              Estimado{" "}
+              <span className="font-openSans font-bold italic">
+                {" "}
+                {payment.payer.name}
+              </span>
+              , el pago de su{" "}
+              <span className="font-openSans font-bold italic">
+                {payment.description}
+              </span>{" "}
+              ha sido efectuado correctamente, recibirá la información de su
+              boleta al correo electrónico registrado al pagar.
+            </p>
+            <div
+              className="font-openSans font-medium text-secundaryText mt-4"
+              dangerouslySetInnerHTML={{ __html: payment.ticketGenerated }}
+            />
+          </div>
         );
-      case 'PENDING':
+      case "PENDING":
         return (
           <div className="flex flex-col justify-center items-center gap-y-2.5 lg:text-lg lg:gap-y-3">
             <p className="font-openSans font-semibold text-secundaryText text-justify">
-              Estimado{' '}
+              Estimado{" "}
               <span className="font-openSans font-bold italic">
                 {payment.payer.name},
-              </span>{' '}
-              el pago de su boleta{' '}
+              </span>{" "}
+              el pago de su boleta{" "}
               <span className="font-openSans font-bold italic">
-                {payment.description}{' '}
-              </span>{' '}
+                {payment.description}{" "}
+              </span>{" "}
               se está procesando, por favor valide más tarde o en la sección:
             </p>
             <Button
@@ -103,56 +109,56 @@ const PaymentHandlePage = () => {
             </Button>
           </div>
         );
-      case 'REJECTED':
+      case "REJECTED":
         return (
           <p className="font-openSans font-semibold text-secundaryText text-justify">
-            Estimado{' '}
+            Estimado{" "}
             <span className="font-openSans font-bold italic">
               {payment.payer.name}
-            </span>{' '}
-            , el pago de su{' '}
+            </span>{" "}
+            , el pago de su{" "}
             <span className="font-openSans font-bold italic">
               {payment.description}
-            </span>{' '}
+            </span>{" "}
             $ ha sido rechazado.
           </p>
         );
-      case 'CANCELLED':
+      case "CANCELLED":
         return (
           <p className="font-openSans font-semibold text-secundaryText text-justify">
-            Estimado{' '}
+            Estimado{" "}
             <span className="font-openSans font-bold italic">
-              {' '}
+              {" "}
               {payment.payer.name},
-            </span>{' '}
-            el pago de su{' '}
+            </span>{" "}
+            el pago de su{" "}
             <span className="font-openSans font-bold italic">
               {payment.description}
-            </span>{' '}
+            </span>{" "}
             $ ha sido cancelado.
           </p>
         );
-      case 'EXPIRED':
+      case "EXPIRED":
         return (
           <p className="font-openSans font-semibold text-secundaryText text-justify">
-            Estimado{' '}
+            Estimado{" "}
             <span className="font-openSans font-bold italic">
               ${payment.payer.name},
-            </span>{' '}
+            </span>{" "}
             el pago de su <span>{payment.description}</span> ha expirado.
           </p>
         );
       default:
         return (
           <p className="font-openSans font-semibold text-secundaryText text-justify">
-            Estimado{' '}
+            Estimado{" "}
             <span className="font-openSans font-bold italic">
               {payment.payer.name},
-            </span>{' '}
-            el estado de su pago{' '}
+            </span>{" "}
+            el estado de su pago{" "}
             <span className="font-openSans font-bold italic">
               {payment.status}
-            </span>{' '}
+            </span>{" "}
             es desconocido.
           </p>
         );
@@ -175,7 +181,7 @@ const PaymentHandlePage = () => {
             color="blue-gray"
             className="font-openSans lg:text-xl "
           >
-            Referencia del pago:{' '}
+            Referencia del pago:{" "}
           </Typography>
           <Typography
             variant="small"
@@ -189,7 +195,7 @@ const PaymentHandlePage = () => {
             color="blue-gray"
             className="font-openSans lg:text-xl"
           >
-            Id del pago:{' '}
+            Id del pago:{" "}
           </Typography>
           <Typography
             variant="small"
@@ -203,7 +209,7 @@ const PaymentHandlePage = () => {
             color="blue-gray"
             className="font-openSans lg:text-xl"
           >
-            Total pagado:{' '}
+            Total pagado:{" "}
           </Typography>
           <Typography
             variant="small"
