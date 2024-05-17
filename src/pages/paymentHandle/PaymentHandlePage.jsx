@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { getPaymentByOrderId } from "../../services/paymentDbService";
 import { Link } from "react-router-dom";
 import { List, Button, Card, Typography } from "@material-tailwind/react";
-import html2pdf from "html2pdf.js";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 const PaymentHandlePage = () => {
   const [payment, setPayment] = useState(null);
@@ -37,37 +38,22 @@ const PaymentHandlePage = () => {
   const downloadPdf = () => {
     const element = document.getElementById("payment-details");
 
-    // Opción adicional para asegurar que las imágenes se carguen correctamente
-    html2pdf()
-      .set({
-        html2canvas: {
-          scale: 2, // Ajusta según necesidad para mejorar la calidad del PDF
-          useCORS: true, // Permite cargar imágenes desde servidores externos
-        },
-        jsPDF: {
+    html2canvas(element, { scale: 2 })
+      .then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+
+        const pdf = new jsPDF({
           orientation: "portrait",
-          unit: "in",
-          format: "letter",
-          compressPDF: true,
-        },
+          unit: "px",
+          format: [canvas.width, canvas.height],
+        });
+
+        pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+        pdf.save("payment-details.pdf");
       })
-      .from(element)
-      .toPdf()
-      .get("pdf")
-      .then(function (pdf) {
-        var totalPages = pdf.internal.getNumberOfPages();
-        for (var i = 1; i <= totalPages; i++) {
-          pdf.setPage(i);
-          pdf.setFontSize(10);
-          pdf.setTextColor(150);
-          pdf.text(
-            "Page " + i + " of " + totalPages,
-            0.5,
-            pdf.internal.pageSize.getHeight() - 0.5
-          );
-        }
-      })
-      .save(`payment-details-${payment.order_id}.pdf`);
+      .catch((err) => {
+        console.error("Error al generar el PDF: ", err);
+      });
   };
 
   if (loading)
