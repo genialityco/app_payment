@@ -158,7 +158,7 @@ const PaymentFormPage = () => {
               !formData.name ||
               !formData.document ||
               !formData.email ||
-              !formData.profession ||
+              // !formData.profession ||
               !formData.phone ||
               !formData.country ||
               !formData.prefix

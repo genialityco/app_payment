@@ -71,11 +71,11 @@ const PaymentHandlePage = () => {
             Estimado{' '}
             <span className="font-openSans font-bold italic">
               {' '}
-              ${payment.payer.name}
+              {payment.payer.name}
             </span>
             , el pago de su{' '}
             <span className="font-openSans font-bold italic">
-              ${payment.description}
+              {payment.description}
             </span>{' '}
             ha sido efectuado correctamente.
           </p>
@@ -88,11 +88,11 @@ const PaymentHandlePage = () => {
               <span className="font-openSans font-bold italic">
                 {payment.payer.name},
               </span>{' '}
-              el pago de su membresía{' '}
+              el pago de su boleta{' '}
               <span className="font-openSans font-bold italic">
                 {payment.description}{' '}
               </span>{' '}
-              está procesando, por favor valide más tarde o en la sección:
+              se está procesando, por favor valide más tarde o en la sección:
             </p>
             <Button
               size="md"

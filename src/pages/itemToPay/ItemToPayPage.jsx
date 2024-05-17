@@ -1,22 +1,22 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getItemsToPay } from '../../services/itemToPayService';
-import { useCurrency } from '../../contexts/CurrencyContext';
+import React, { useCallback, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getItemsToPay } from "../../services/itemToPayService";
+import { useCurrency } from "../../contexts/CurrencyContext";
 import {
   Card,
   CardBody,
   Typography,
   Button,
   Spinner,
-} from '@material-tailwind/react';
-import { formatPriceByCountry } from '../../utils/formatPriceByCountry';
+} from "@material-tailwind/react";
+import { formatPriceByCountry } from "../../utils/formatPriceByCountry";
 
 /**
  * Función para convertir entre monedas, según el país o moneda seleccionada.
- * 
- * @param {number} amount 
- * @param {string} fromCurrency 
- * @param {string} toCurrency 
+ *
+ * @param {number} amount
+ * @param {string} fromCurrency
+ * @param {string} toCurrency
  * @returns {amount.<number>}
  */
 
@@ -30,7 +30,7 @@ const convertCurrency = async (amount, fromCurrency, toCurrency) => {
 
     return (amount * rate).toFixed(2);
   } catch (error) {
-    console.error('Error converting currency: ', error);
+    console.error("Error converting currency: ", error);
     return amount;
   }
 };
@@ -53,10 +53,9 @@ const ItemToPayPage = () => {
         items.map(async (item) => {
           const convertedPrice = await convertCurrency(
             item.price,
-            'COP',
+            "COP",
             currency
           );
-         
 
           return {
             ...item,
@@ -81,7 +80,7 @@ const ItemToPayPage = () => {
       navigate(`/payment/${paymentInformation.id}`, {
         state: paymentInformation,
       });
-      sessionStorage.setItem('item', JSON.stringify(paymentInformation));
+      sessionStorage.setItem("item", JSON.stringify(paymentInformation));
     },
     [currency, navigate, selectedCountry.countryCode]
   );
@@ -100,20 +99,23 @@ const ItemToPayPage = () => {
 
   return (
     <main className="w-full">
-      <Typography
-        variant="h2"
-        className="text-center py-2 my-6 text-primaryText"
-      >
-        PRECIOS
-      </Typography>
-      <Card className="w-11/12 max-w-screen-xl m-auto border-2 my-5">
+      <div>
+        <img src="https://firebasestorage.googleapis.com/v0/b/magnetic-be10a.appspot.com/o/images%2FBanner.png?alt=media&token=b477b334-4660-430c-8cbd-11befe8d7915" />
+      </div>
+      <Card className="w-11/12 max-w-screen-xl m-auto border-2 p-1 mt-5">
         <CardBody className="overflow-x-auto px-0 md:px-2 md:py-3">
-          <table className="w-full min-w-max table-auto text-center">
+          <Typography variant="h2" className="text-center mb-5 text-black">
+            Boletería Yusapi
+          </Typography>
+          <Typography className="m-1 mb-5">
+            La boleta de entrada al evento incluye una comida por boleta.
+          </Typography>
+          <table className="w-full m-1 min-w-max table-auto text-center">
             <tbody>
               {convertedItems.map((item) => (
                 <tr key={item._id}>
                   <td className="w-36 md:w-auto border bg-blue-gray-900  p-3">
-                    {' '}
+                    {" "}
                     <Typography
                       variant="h5"
                       className="uppercase font-bold  text-primaryText text-lg text-left "
@@ -122,7 +124,7 @@ const ItemToPayPage = () => {
                     </Typography>
                   </td>
                   <td className="border p-3">
-                    {currency} {formatPriceByCountry(item.price)}
+                     $ {formatPriceByCountry(item.price)} {currency}
                   </td>
                   <td className="border p-2 md:p-4">
                     <Button
@@ -144,5 +146,3 @@ const ItemToPayPage = () => {
 };
 
 export default ItemToPayPage;
-
-

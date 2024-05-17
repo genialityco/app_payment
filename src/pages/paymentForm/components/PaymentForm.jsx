@@ -36,7 +36,7 @@ export const PaymentForm = ({
           className: "before:content-none after:content-none",
         }}
       />
-      <Input
+      {/* <Input
         variant="standard"
         placeholder="Profesión"
         label="Profesión"
@@ -48,7 +48,7 @@ export const PaymentForm = ({
         labelProps={{
           className: "before:content-none after:content-none",
         }}
-      />
+      /> */}
       <Input
         variant="standard"
         label="Correo Electrónico"

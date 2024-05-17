@@ -20,7 +20,7 @@ export const PurchaseSummary = ({ item, currency, price }) => {
         color="blue-gray"
         className="font-openSans font-bold"
       >
-        Total: {currency} {formattedPrice}
+        Total: $ {formattedPrice} {currency}
       </Typography>
     </div>
   );

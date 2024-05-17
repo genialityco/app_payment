@@ -1,4 +1,5 @@
 import { Typography, Chip, Button } from '@material-tailwind/react';
+import { formatPriceByCountry } from '../../../utils/formatPriceByCountry';
 
 const STATUS_COLORS = {
   PENDING: 'blue',
@@ -76,7 +77,7 @@ export const PaymentDetails = ({
         color="blue-gray"
         className="font-openSans  font-semibold"
       >
-        {`${amount} ${currency}`}
+        {`$ ${formatPriceByCountry(amount)} ${currency}`}
       </Typography>
     </td>
     <td className={classes}>
