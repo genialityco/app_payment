@@ -136,13 +136,23 @@ const ItemToPayPage = () => {
                     $ {formatPriceByCountry(item.price)} {currency}
                   </td>
                   <td className="border p-2 md:p-4">
-                    <Button
-                      onClick={() => handlePaymentClick(item)}
-                      size="sm"
-                      className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100  text-primaryText bg-btnPrimary"
-                    >
-                      Pagar
-                    </Button>
+                    {item.purchased != item.limit ? (
+                      <Button
+                        onClick={() => handlePaymentClick(item)}
+                        size="sm"
+                        className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100  text-primaryText bg-btnPrimary"
+                      >
+                        Pagar
+                      </Button>
+                    ) : (
+                      <Button
+                        disabled
+                        size="sm"
+                        className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100  text-primaryText bg-btnPrimary"
+                      >
+                        Agotado
+                      </Button>
+                    )}
                   </td>
                 </tr>
               ))}
