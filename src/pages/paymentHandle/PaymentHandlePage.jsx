@@ -110,7 +110,7 @@ const PaymentHandlePage = () => {
               </span>
               , el pago de su{" "}
               <span className="font-openSans font-bold italic">
-                {payment.description}
+                {payment.description}{" "}
               </span>
               ha sido efectuado correctamente, recibirá la información de su
               boleta al correo electrónico registrado al pagar.
